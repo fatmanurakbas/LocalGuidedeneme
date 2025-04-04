@@ -1,36 +1,32 @@
 # create_new_password.py
 import tkinter as tk
-from tkinter import messagebox
-import subprocess
-import sys
-import os
+from password_changed import show_password_changed_screen  # 👈 Bunu ekle
 
-def go_to_password_changed():
-    messagebox.showinfo("Password Changed", "Şifreniz başarıyla değiştirildi.")
-    root.destroy()
+def create_new_password_screen():
+    root = tk.Tk()
+    root.title("Create New Password")
+    root.geometry("400x400")
+    root.configure(bg="#5CCBF0")
 
-# Pencere oluştur
-root = tk.Tk()python create_new_password.py
-root.title("Create New Password")
-root.geometry("400x500")
-root.configure(bg='#5CCBF0')
+    label = tk.Label(root, text="Create new password!", font=("Helvetica", 24), fg="white", bg="#5CCBF0")
+    label.pack(pady=40)
 
-# Başlık
-title = tk.Label(root, text="Create new\npassword!", bg="#5CCBF0", fg="white", font=("Helvetica", 24, "bold"))
-title.pack(pady=40)
+    tk.Label(root, text="New Password", fg="white", bg="#5CCBF0").pack()
+    password_entry = tk.Entry(root, show="*")
+    password_entry.pack(pady=5)
 
-# Yeni şifre
-tk.Label(root, text="New Password", bg="#5CCBF0", fg="white", font=("Helvetica", 12)).pack()
-new_pass = tk.Entry(root, show="*", font=("Helvetica", 12))
-new_pass.pack(pady=10, ipadx=10, ipady=5)
+    tk.Label(root, text="Confirm Password", fg="white", bg="#5CCBF0").pack()
+    confirm_entry = tk.Entry(root, show="*")
+    confirm_entry.pack(pady=5)
 
-# Şifre tekrar
-tk.Label(root, text="Confirm Password", bg="#5CCBF0", fg="white", font=("Helvetica", 12)).pack()
-confirm_pass = tk.Entry(root, show="*", font=("Helvetica", 12))
-confirm_pass.pack(pady=10, ipadx=10, ipady=5)
+    def submit():
+        if password_entry.get() == confirm_entry.get() and password_entry.get():
+            root.destroy()
+            show_password_changed_screen()  # 👈 Şifre değişince yönlendir
+        else:
+            tk.messagebox.showerror("Error", "Passwords do not match or are empty!")
 
-# Gönder butonu
-tk.Button(root, text="Send", bg="#1B2C49", fg="white", font=("Helvetica", 12, "bold"),
-          command=go_to_password_changed, padx=10, pady=5).pack(pady=30)
+    submit_btn = tk.Button(root, text="Submit", bg="#1B2C49", fg="white", command=submit)
+    submit_btn.pack(pady=30)
 
-root.mainloop()
+    root.mainloop()

@@ -21,10 +21,23 @@ def login():
     subprocess.Popen([sys.executable, script_path])
 
 def forgot_password():
-    messagebox.showinfo("Şifre", "Şifrenizi mi unuttunuz?")
+    root.destroy()
+    if getattr(sys, 'frozen', False):
+        script_path = os.path.join(sys._MEIPASS, 'forgot_password.py')
+    else:
+        script_path = os.path.abspath("forgot_password.py")
+    
+    subprocess.Popen([sys.executable, script_path])
 
 def sign_up():
-    messagebox.showinfo("Kayıt", "Kayıt sayfasına yönlendiriliyorsunuz...")
+    root.destroy()
+    if getattr(sys, 'frozen', False):
+        script_path = os.path.join(sys._MEIPASS, 'create_account.py')
+    else:
+        script_path = os.path.abspath("create_account.py")
+    
+    subprocess.Popen([sys.executable, script_path])
+
 
 # Ana pencere
 root = tk.Tk()

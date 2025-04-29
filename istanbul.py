@@ -1,128 +1,296 @@
 from kivy.lang import Builder
-from kivymd.app import MDApp
-from kivy.uix.screenmanager import Screen
-from kivy.core.window import Window
+from kivymd.uix.screen import MDScreen
 
-# Telefon ekran boyutuna ayarlama
-Window.size = (360, 640)
-
-class IstanbulScreen(Screen):
+class IstanbulScreen(MDScreen):
     pass
 
-KV = """
-ScreenManager:
-    IstanbulScreen:
-
+Builder.load_string("""
 <IstanbulScreen>:
-    name: 'istanbul'
+    name: "istanbul"
 
-    MDFloatLayout:
-        md_bg_color: 0.6, 0.8, 0.9, 1
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0.96, 0.96, 1, 1
 
-        MDBoxLayout:
-            orientation: 'horizontal'
+        MDTopAppBar:
+            title: "İstanbul"
+            elevation: 5
+            left_action_items: [["arrow-left", lambda x: app.go_to('home')]]
+            md_bg_color: 0.2, 0.4, 0.8, 1
             size_hint_y: None
-            height: dp(50)
-            md_bg_color: 0, 0, 0.5, 1
-            pos_hint: {'top': 1}
+            height: dp(56)
 
-            MDIconButton:
-                icon: 'arrow-left'
-                theme_text_color: 'Custom'
-                text_color: 1, 1, 1, 1
-                on_release: app.root.current = 'home'
-
-            MDLabel:
-                text: 'İSTANBUL'
-                halign: 'center'
-                theme_text_color: 'Custom'
-                text_color: 1, 1, 1, 1
-                font_style: 'H6'
-
-        # Butonlar
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint: 0.85, None
-            height: dp(400)
-            spacing: dp(10)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-            MDRaisedButton:
-                text: 'Ünlü Yerler'
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(12)
+                spacing: dp(20)
                 size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'famous_places'
-                pos_hint: {'center_x': 0.5}
+                adaptive_height: True
 
-            MDRaisedButton:
-                text: 'Yemek Mekanları'
-                size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'food_places'
-                pos_hint: {'center_x': 0.5}
+                # 🟦 HAVA DURUMU KARTI
+                MDCard:
+                    orientation: "horizontal"
+                    padding: dp(10)
+                    radius: [16]
+                    elevation: 6
+                    size_hint_y: None
+                    height: dp(140)
+                    md_bg_color: 0.97, 0.97, 1, 1
 
-            MDRaisedButton:
-                text: 'Müzeler'
-                size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'museums'
-                pos_hint: {'center_x': 0.5}
+                    Image:
+                        source: "images/istanbul1.jpg"
+                        size_hint_x: None
+                        width: dp(130)
+                        allow_stretch: True
+                        keep_ratio: False
+                        radius: [12]
 
-            MDRaisedButton:
-                text: 'Kaydedilenler'
-                size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'saved'
-                pos_hint: {'center_x': 0.5}
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        spacing: dp(4)
 
-            MDRaisedButton:
-                text: 'Tarihi Mekanlar'
-                size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'historical_places'
-                pos_hint: {'center_x': 0.5}
+                        MDLabel:
+                            text: "12°C | Çarşamba"
+                            font_style: "H6"
+                            halign: "left"
+                            theme_text_color: "Primary"
 
-            MDRaisedButton:
-                text: 'Etkinlikler'
-                size_hint_y: None
-                height: dp(50)
-                on_release: app.root.current = 'events'
-                pos_hint: {'center_x': 0.5}
+                        MDLabel:
+                            text: "Parçalı Bulutlu"
+                            font_style: "Body2"
+                            theme_text_color: "Secondary"
+                            halign: "left"
 
-        # Alt Navigasyon
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            height: dp(60)
-            md_bg_color: 1, 1, 1, 1
-            pos_hint: {'bottom': 1}
-            spacing: dp(20)  # Butonlar arasındaki mesafe
-            padding: dp(20), 0  # Sol ve sağ kenarlara eşit mesafe
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: dp(6)
+                            size_hint_y: None
+                            height: dp(24)
 
-            MDIconButton:
-                icon: 'home'
-                on_release: app.root.current = 'home'
+                            MDIcon:
+                                icon: "weather-partly-cloudy"
+                                theme_text_color: "Secondary"
+                                size_hint: None, None
+                                size: dp(20), dp(20)
 
-            MDIconButton:
-                icon: 'note-edit'
-                on_release: app.root.current = 'notes'
+                            MDLabel:
+                                text: "Hafif Rüzgar"
+                                font_style: "Caption"
+                                theme_text_color: "Secondary"
+                                halign: "left"
 
-            MDIconButton:
-                icon: 'robot'
-                on_release: app.root.current = 'chat'
+                # 🟩 KATEGORİ KARTLARI
+                MDGridLayout:
+                    cols: 2
+                    spacing: dp(12)
+                    padding: dp(4)
+                    size_hint_y: None
+                    adaptive_height: True
 
-            MDIconButton:
-                icon: 'bookmark'
-                on_release: app.root.current = 'saved'
+                    # 📍 Yemek Mekanları
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+                        on_release: app.go_to('food_places')
 
-            MDIconButton:
-                icon: 'account'
-                on_release: app.root.current = 'profile'
-"""
+                        RelativeLayout:
+                            Image:
+                                source: "images/yemek.png"
+                                allow_stretch: True
+                                keep_ratio: False
 
-class IstanbulApp(MDApp):
-    def build(self):
-        return Builder.load_string(KV)
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
 
-if __name__ == '__main__':
-    IstanbulApp().run()
+                                MDIcon:
+                                    icon: "silverware-fork-knife"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Yemek Mekanları"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
+                    # 🌟 Ünlü Yerler
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/unluyerler.jpg"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "star"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Ünlü Yerler"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
+                    # 🏛️ Müzeler
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/muzeler.jpg"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "bank"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Müzeler"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
+                    # 📌 Kaydedilenler
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/kaydedilenler.jpg"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "bookmark"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Kaydedilenler"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
+                    # 🏰 Tarihi Mekanlar
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/tarihimekanlar.jpg"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "castle"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Tarihi Mekanlar"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
+                    # 📆 Etkinlikler
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/etkinlik.png"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "calendar"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Etkinlikler"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+""")

@@ -1,183 +1,187 @@
+import os
+os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
-import subprocess  # .py dosyalarını açmak için
 
-# Telefon ekran boyutuna ayarlama
+# Ekranları import et
+from istanbul import IstanbulScreen
+from ankara import AnkaraScreen
+from profil import ProfileScreen
+from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
+from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
+
 Window.size = (360, 640)
 
 class HomeScreen(Screen):
     pass
 
-class LocalGuideApp(MDApp):
+KV = '''
+BoxLayout:
+    orientation: "vertical"
 
-    # İstanbul sayfasını subprocess ile açmak
-    def open_istanbul(self):
-        subprocess.run(["python", r"C:\Python\LOCALGUIDE\istanbul.py"])# İstanbul sayfasını açmak için
+    ScreenManager:
+        id: scr_mngr
 
-    # Ankara sayfasını subprocess ile açmak
-    def open_ankara(self):
-        subprocess.run(["python", r"C:\Python\LOCALGUIDE\ankara.py"])  # Ankara sayfasını açmak için
+        HomeScreen:
+        IstanbulScreen:
+        AnkaraScreen:
+        ProfileScreen:
+        FoodPlacesScreen:
+        FoodDetailScreen:
+        FoodPlacesAnkaraScreen:
+        FoodDetailAnkaraScreen:
 
-    # Notlar sayfasını subprocess ile açmak
-    def open_notes(self):
-        subprocess.run(["python", "LOCAL GUIDE/PYTHON/notes.py"])
+    MDBottomNavigation:
+        size_hint_y: None
+        height: dp(60)
+        text_color_active: "blue"
 
-    # Sohbet sayfasını subprocess ile açmak
-    def open_chat(self):
-        subprocess.run(["python", "LOCAL GUIDE/PYTHON/chat.py"])
 
-    # Kaydedilenler sayfasını subprocess ile açmak
-    def open_saved(self):
-        subprocess.run(["python", "LOCAL GUIDE/PYTHON/saved.py"])
+        MDBottomNavigationItem:
+            name: 'home'
+            text: 'Ana Sayfa'
+            icon: 'home'
+            on_tab_press: app.go_to('home')
 
-    # Profil sayfasını subprocess ile açmak
-    def open_profile(self):
-        subprocess.run(["python", "LOCAL GUIDE/PYTHON/profile.py"])
+        MDBottomNavigationItem:
+            name: 'discover'
+            text: 'Planlayıcı'
+            icon: 'compass-outline'
 
-    def build(self):
-        return Builder.load_string(KV)
+        MDBottomNavigationItem:
+            name: 'saved'
+            text: 'Kaydedilenler'
+            icon: 'bookmark-outline'
 
-KV = """
-ScreenManager:
-    HomeScreen:
+        MDBottomNavigationItem:
+            name: 'favorites'
+            text: 'Favoriler'
+            icon: 'heart-outline'
+
+        MDBottomNavigationItem:
+            name: 'profile'
+            text: 'Profil'
+            icon: 'account'
+            on_tab_press: app.go_to('profile')
 
 <HomeScreen>:
-    name: 'home'
-    MDFloatLayout:
-        md_bg_color: 0.6, 0.8, 0.9, 1
+    name: "home"
 
-        MDBoxLayout:
-            orientation: 'horizontal'
+    BoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Local Guide"
+            elevation: 5
+            md_bg_color: 0.2, 0.4, 0.8, 1
             size_hint_y: None
-            height: dp(50)
-            md_bg_color: 0, 0, 0.5, 1
-            pos_hint: {'top': 1}
+            height: dp(56)
 
-            MDIconButton:
-                icon: 'arrow-left'
-                theme_text_color: 'Custom'
-                text_color: 1, 1, 1, 1
-                pos_hint: {'center_y': 0.5}
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(10)
+                spacing: dp(20)
+                size_hint_y: None
+                height: self.minimum_height
 
-            MDLabel:
-                text: 'LOCAL GUIDE'
-                halign: 'center'
-                theme_text_color: 'Custom'
-                text_color: 1, 1, 1, 1
-                font_style: 'H6'
+                MDCard:
+                    size_hint_y: None
+                    height: dp(180)
+                    radius: [20]
+                    elevation: 8
+                    on_release: app.go_to("istanbul")
 
-            MDIconButton:
-                icon: 'information'
-                theme_text_color: 'Custom'
-                text_color: 1, 1, 1, 1
-                pos_hint: {'center_y': 0.5}
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: dp(10)
+                        spacing: dp(10)
 
-        Image:
-            source: 'logo.png'
-            size_hint: None, None
-            size: dp(120), dp(120)
-            pos_hint: {'center_x': 0.5, 'top': 0.84}
+                        Image:
+                            source: "images/istanbul.jpg"
+                            size_hint_x: 0.4
+                            allow_stretch: True
+                            keep_ratio: False
 
-        MDTextField:
-            hint_text: 'Search'
-            size_hint_x: 0.75
-            pos_hint: {'center_x': 0.5, 'top': 0.7}
-            mode: 'rectangle'
-            icon_right: 'magnify'
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: dp(5)
 
-        # İstanbul için bir buton (MDCard)
-        MDCard:
-            size_hint: (None, None)
-            size: dp(300), dp(150)
-            pos_hint: {'center_x': 0.5, 'top': 0.58}
-            elevation: 8
-            radius: [20,]
-            on_release: app.open_istanbul()
+                            MDLabel:
+                                text: "İstanbul"
+                                font_style: "H6"
+                                halign: "left"
 
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, 1
-                Image:
-                    source: 'istanbul.jpg'
-                    size_hint: 1, 1
-                    allow_stretch: True
-                    keep_ratio: True
-                MDLabel:
-                    text: 'İstanbul'
-                    halign: 'center'
-                    theme_text_color: 'Custom'
-                    text_color: 0, 0, 0, 1
-                    font_style: 'H5'
-                    bold: True
-                    size_hint: 1, None
-                    height: dp(30)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            MDLabel:
+                                text: "Asya ve Avrupa'yı birleştiren, zengin tarihi, kültürel çeşitliliği ve hareketli yaşamıyla büyüleyici bir şehir."
+                                font_style: "Caption"
+                                halign: "left"
 
-        # Ankara için bir buton (MDCard)
-        MDCard:
-            size_hint: (None, None)
-            size: dp(300), dp(150)
-            pos_hint: {'center_x': 0.5, 'top': 0.34}
-            elevation: 8
-            radius: [20,]
-            on_release: app.open_ankara()
+                MDCard:
+                    size_hint_y: None
+                    height: dp(180)
+                    radius: [20]
+                    elevation: 8
+                    on_release: app.go_to("ankara")
 
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, 1
-                Image:
-                    source: 'ankara.jpg'
-                    size_hint: 1, 1
-                    allow_stretch: True
-                    keep_ratio: True
-                MDLabel:
-                    text: 'Ankara'
-                    halign: 'center'
-                    theme_text_color: 'Custom'
-                    text_color: 0, 0, 0, 1
-                    font_style: 'H5'
-                    bold: True
-                    size_hint: 1, None
-                    height: dp(30)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: dp(10)
+                        spacing: dp(10)
 
-        # Alt navigasyon butonları
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            height: dp(60)
-            pos_hint: {'bottom': 0}
-            md_bg_color: 1, 1, 1, 1
-            spacing: dp(20)
-            padding: dp(20), 0
+                        Image:
+                            source: "images/ankara.jpg"
+                            size_hint_x: 0.4
+                            allow_stretch: True
+                            keep_ratio: False
 
-            MDIconButton:
-                icon: 'home'
-                theme_text_color: 'Custom'
-                on_release: app.root.current = 'home'
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: dp(5)
 
-            MDIconButton:
-                icon: 'note'
-                theme_text_color: 'Custom'
-                on_release: app.open_notes()
+                            MDLabel:
+                                text: "Ankara"
+                                font_style: "H6"
+                                halign: "left"
 
-            MDIconButton:
-                icon: 'robot'
-                theme_text_color: 'Custom'
-                on_release: app.open_chat()
+                            MDLabel:
+                                text: "Türkiye’nin başkenti olarak sakin, düzenli yapısı, resmi kurumları ve kültürel etkinlikleriyle kendine özgü bir atmosfere sahip."
+                                font_style: "Caption"
+                                halign: "left"
+'''
 
-            MDIconButton:
-                icon: 'bookmark'
-                theme_text_color: 'Custom'
-                on_release: app.open_saved()
+class LocalGuideApp(MDApp):
+    def build(self):
+        self.theme_cls.primary_palette = "Blue"
+        return Builder.load_string(KV)
 
-            MDIconButton:
-                icon: 'account'
-                theme_text_color: 'Custom'
-                on_release: app.open_profile()
-"""
+    def go_to(self, screen_name):
+        self.root.ids.scr_mngr.current = screen_name
 
-if __name__ == '__main__':
+    def go_back(self):
+        self.root.ids.scr_mngr.current = "home"
+
+    def show_info(self):
+        print("Bilgi tuşuna basıldı.")
+
+    def show_food_detail(self, image, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "food_detail"
+        screen = self.root.ids.scr_mngr.get_screen("food_detail")
+        screen.ids.food_image.source = image
+        screen.ids.food_description.text = description
+        screen.ids.food_location.text = location
+        screen.ids.food_hours.text = hours
+
+    def show_food_detail_ankara(self, image, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "food_detail_ankara"
+        screen = self.root.ids.scr_mngr.get_screen("food_detail_ankara")
+        screen.ids.food_image_ankara.source = image
+        screen.ids.food_description_ankara.text = description
+        screen.ids.food_location_ankara.text = location
+        screen.ids.food_hours_ankara.text = hours
+
+if __name__ == "__main__":
     LocalGuideApp().run()

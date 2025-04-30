@@ -66,7 +66,6 @@ BoxLayout:
             text: 'Profil'
             icon: 'account'
             on_tab_press: app.go_to('profile')
-
 <HomeScreen>:
     name: "home"
 
@@ -84,9 +83,24 @@ BoxLayout:
             MDBoxLayout:
                 orientation: "vertical"
                 padding: dp(10)
-                spacing: dp(20)
+                spacing: dp(8)  # spacing azaltıldı
                 size_hint_y: None
                 height: self.minimum_height
+
+                MDTextField:
+                    hint_text: "Ara..."
+                    icon_left: "magnify"
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: dp(40)
+                    mode: "rectangle"
+                    pos_hint: {"center_x": 0.5}
+
+                # Arama kutusuyla İstanbul kartı arasında özel boşluk
+                Widget:
+                    size_hint_y: None
+                    height: dp(4)
+                
 
                 MDCard:
                     size_hint_y: None
@@ -151,6 +165,7 @@ BoxLayout:
                                 text: "Türkiye’nin başkenti olarak sakin, düzenli yapısı, resmi kurumları ve kültürel etkinlikleriyle kendine özgü bir atmosfere sahip."
                                 font_style: "Caption"
                                 halign: "left"
+
 '''
 
 class LocalGuideApp(MDApp):

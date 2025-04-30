@@ -134,7 +134,7 @@ Builder.load_string("""
 
                         RelativeLayout:
                             Image:
-                                source: "images/unluyerler_ankara.jpg"
+                                source: "images/unluyerler.jpg"
                                 allow_stretch: True
                                 keep_ratio: False
 
@@ -169,7 +169,7 @@ Builder.load_string("""
 
                         RelativeLayout:
                             Image:
-                                source: "images/muzeler_ankara.jpg"
+                                source: "images/muzeler.jpg"
                                 allow_stretch: True
                                 keep_ratio: False
 
@@ -193,6 +193,40 @@ Builder.load_string("""
                                     font_style: "Caption"
                                     theme_text_color: "Custom"
                                     text_color: 1, 1, 1, 1
+                    # 📌 Kaydedilenler
+                    MDCard:
+                        radius: [16]
+                        elevation: 4
+                        size_hint_y: None
+                        height: dp(110)
+
+                        RelativeLayout:
+                            Image:
+                                source: "images/kaydedilenler.jpg"
+                                allow_stretch: True
+                                keep_ratio: False
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                padding: dp(8)
+                                spacing: dp(6)
+                                md_bg_color: 0, 0, 0, 0.4
+
+                                MDIcon:
+                                    icon: "bookmark"
+                                    halign: "center"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+                                    size_hint_y: None
+                                    height: dp(24)
+
+                                MDLabel:
+                                    text: "Kaydedilenler"
+                                    halign: "center"
+                                    font_style: "Caption"
+                                    theme_text_color: "Custom"
+                                    text_color: 1, 1, 1, 1
+
 
                     # Tarihi Yerler
                     MDCard:
@@ -204,7 +238,7 @@ Builder.load_string("""
 
                         RelativeLayout:
                             Image:
-                                source: "images/tarihiyerler_ankara.jpg"
+                                source: "images/tarihimekanlarankara.jpg"
                                 allow_stretch: True
                                 keep_ratio: False
 
@@ -239,7 +273,7 @@ Builder.load_string("""
 
                         RelativeLayout:
                             Image:
-                                source: "images/etkinlik_ankara.jpg"
+                                source: "images/etkinlik.png"
                                 allow_stretch: True
                                 keep_ratio: False
 

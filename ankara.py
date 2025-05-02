@@ -233,8 +233,8 @@ Builder.load_string("""
                         radius: [16]
                         elevation: 4
                         size_hint_y: None
-                        height: dp(110)
-                        on_release: app.show_info()
+                        height: dp(110)          
+                        on_release: app.go_to("tarihi_yerler_ankara")  # Updated to link to the new screen
 
                         RelativeLayout:
                             Image:

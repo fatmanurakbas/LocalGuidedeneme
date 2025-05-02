@@ -1,17 +1,22 @@
 import os
-os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+os.environ['KIVY_GL_BACKEND'] = 'sdl2'
+
+from kivy.config import Config
+Config.set('graphics', 'multisamples', '0')
 
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 
-# Ekranları import et
+# Diğer ekranları import et
 from istanbul import IstanbulScreen
 from ankara import AnkaraScreen
 from profil import ProfileScreen
 from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
 from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
+from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen  # Yeni ekledik
+from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen  # Yeni ekledik
 
 Window.size = (360, 640)
 
@@ -33,12 +38,13 @@ BoxLayout:
         FoodDetailScreen:
         FoodPlacesAnkaraScreen:
         FoodDetailAnkaraScreen:
+        TarihiYerlerIstanbulScreen:  # Burada da eklemeyi unutmayın
+        TarihiYerlerAnkaraScreen:  # Burada da eklemeyi unutmayın
 
     MDBottomNavigation:
         size_hint_y: None
         height: dp(60)
         text_color_active: "blue"
-
 
         MDBottomNavigationItem:
             name: 'home'
@@ -66,6 +72,7 @@ BoxLayout:
             text: 'Profil'
             icon: 'account'
             on_tab_press: app.go_to('profile')
+
 <HomeScreen>:
     name: "home"
 
@@ -83,7 +90,7 @@ BoxLayout:
             MDBoxLayout:
                 orientation: "vertical"
                 padding: dp(10)
-                spacing: dp(8)  # spacing azaltıldı
+                spacing: dp(8)
                 size_hint_y: None
                 height: self.minimum_height
 
@@ -96,18 +103,16 @@ BoxLayout:
                     mode: "rectangle"
                     pos_hint: {"center_x": 0.5}
 
-                # Arama kutusuyla İstanbul kartı arasında özel boşluk
                 Widget:
                     size_hint_y: None
                     height: dp(4)
-                
 
                 MDCard:
                     size_hint_y: None
                     height: dp(180)
                     radius: [20]
                     elevation: 8
-                    on_release: app.go_to("istanbul")
+                    on_release: app.go_to("istanbul")  # İstanbul butonuna tıklanacak
 
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -139,7 +144,7 @@ BoxLayout:
                     height: dp(180)
                     radius: [20]
                     elevation: 8
-                    on_release: app.go_to("ankara")
+                    on_release: app.go_to("ankara")  # Ankara butonuna tıklanacak
 
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -179,9 +184,6 @@ class LocalGuideApp(MDApp):
     def go_back(self):
         self.root.ids.scr_mngr.current = "home"
 
-    def show_info(self):
-        print("Bilgi tuşuna basıldı.")
-
     def show_food_detail(self, image, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail"
         screen = self.root.ids.scr_mngr.get_screen("food_detail")
@@ -193,6 +195,22 @@ class LocalGuideApp(MDApp):
     def show_food_detail_ankara(self, image, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail_ankara"
         screen = self.root.ids.scr_mngr.get_screen("food_detail_ankara")
+        screen.ids.food_image_ankara.source = image
+        screen.ids.food_description_ankara.text = description
+        screen.ids.food_location_ankara.text = location
+        screen.ids.food_hours_ankara.text = hours
+
+    def show_tarihi_yerler_istanbul(self, image, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "tarihi_yerler_istanbul"
+        screen = self.root.ids.scr_mngr.get_screen("tarihi_yerler_istanbul")
+        screen.ids.food_image_istanbul.source = image
+        screen.ids.food_description_istanbul.text = description
+        screen.ids.food_location_istanbul.text = location
+        screen.ids.food_hours_istanbul.text = hours
+
+    def show_tarihi_yerler_ankara(self, image, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "tarihi_yerler_ankara"
+        screen = self.root.ids.scr_mngr.get_screen("tarihi_yerler_ankara")
         screen.ids.food_image_ankara.source = image
         screen.ids.food_description_ankara.text = description
         screen.ids.food_location_ankara.text = location

@@ -232,6 +232,7 @@ Builder.load_string("""
                         elevation: 4
                         size_hint_y: None
                         height: dp(110)
+                        on_release: app.go_to("tarihi_yerler_istanbul")  # Updated to link to the new screen
 
                         RelativeLayout:
                             Image:

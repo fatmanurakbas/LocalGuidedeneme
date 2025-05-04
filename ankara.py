@@ -10,10 +10,10 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: 'vertical'
-        md_bg_color: 0.95, 0.95, 1, 1
+        md_bg_color: 0.6, 0.8, 0.9, 1
 
         MDTopAppBar:
-            title: "ANKARA"
+            title: "Ankara"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
             md_bg_color: 0.2, 0.4, 0.8, 1

@@ -16,7 +16,7 @@ Builder.load_string("""
             title: "Tarihi Yerler Ankara"  # Başlığı burada güncelledik
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
-            md_bg_color: 0.1, 0.1, 0.5, 1
+            md_bg_color: 0.2, 0.4, 0.8, 1
             size_hint_y: None
             height: dp(56)
 

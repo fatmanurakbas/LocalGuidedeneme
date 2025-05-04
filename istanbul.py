@@ -10,8 +10,8 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.96, 0.96, 1, 1
-
+        md_bg_color: 0.6, 0.8, 0.9, 1
+                    
         MDTopAppBar:
             title: "İstanbul"
             elevation: 5
@@ -198,6 +198,7 @@ Builder.load_string("""
                         elevation: 4
                         size_hint_y: None
                         height: dp(110)
+                        on_release: app.go_to("kaydedilenler") 
 
                         RelativeLayout:
                             Image:
@@ -267,6 +268,8 @@ Builder.load_string("""
                         elevation: 4
                         size_hint_y: None
                         height: dp(110)
+                        
+                    
 
                         RelativeLayout:
                             Image:

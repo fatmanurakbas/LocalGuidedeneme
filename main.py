@@ -1,8 +1,11 @@
 import os
-os.environ['KIVY_GL_BACKEND'] = 'sdl2'
+os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
 
 from kivy.config import Config
 Config.set('graphics', 'multisamples', '0')
+Config.set('graphics', 'borderless', '0')
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '600')
 
 from kivy.lang import Builder
 from kivymd.app import MDApp
@@ -17,6 +20,7 @@ from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
 from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
 from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen  # Yeni ekledik
 from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen  # Yeni ekledik
+from kaydedilenler import KaydedilenlerScreen  # Kaydedilenler ekranını import ettik
 
 Window.size = (360, 640)
 
@@ -32,16 +36,18 @@ BoxLayout:
 
         HomeScreen:
         IstanbulScreen:
-        AnkaraScreen:
-        ProfileScreen:
+        AnkaraScreen:       
         FoodPlacesScreen:
         FoodDetailScreen:
         FoodPlacesAnkaraScreen:
         FoodDetailAnkaraScreen:
         TarihiYerlerIstanbulScreen:  # Burada da eklemeyi unutmayın
         TarihiYerlerAnkaraScreen:  # Burada da eklemeyi unutmayın
+        ProfileScreen:
+        KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
 
     MDBottomNavigation:
+    
         size_hint_y: None
         height: dp(60)
         text_color_active: "blue"
@@ -59,8 +65,9 @@ BoxLayout:
 
         MDBottomNavigationItem:
             name: 'saved'
-            text: 'Kaydedilenler'
+            text: 'Kaydedilenler'  # Kaydedilenler sekmesini ekledik
             icon: 'bookmark-outline'
+            on_tab_press: app.go_to('kaydedilenler')  # Kaydedilenler ekranına yönlendirme yapılacak
 
         MDBottomNavigationItem:
             name: 'favorites'
@@ -78,6 +85,8 @@ BoxLayout:
 
     BoxLayout:
         orientation: "vertical"
+        
+        
 
         MDTopAppBar:
             title: "Local Guide"
@@ -170,7 +179,6 @@ BoxLayout:
                                 text: "Türkiye’nin başkenti olarak sakin, düzenli yapısı, resmi kurumları ve kültürel etkinlikleriyle kendine özgü bir atmosfere sahip."
                                 font_style: "Caption"
                                 halign: "left"
-
 '''
 
 class LocalGuideApp(MDApp):
@@ -183,6 +191,10 @@ class LocalGuideApp(MDApp):
 
     def go_back(self):
         self.root.ids.scr_mngr.current = "home"
+
+    def show_info(self):
+        print("Bilgi tuşuna basıldı.")
+
 
     def show_food_detail(self, image, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail"
@@ -217,4 +229,5 @@ class LocalGuideApp(MDApp):
         screen.ids.food_hours_ankara.text = hours
 
 if __name__ == "__main__":
+    
     LocalGuideApp().run()

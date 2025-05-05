@@ -130,7 +130,8 @@ Builder.load_string("""
                         elevation: 4
                         size_hint_y: None
                         height: dp(110)
-                        on_release: app.show_info()
+                        on_release: app.go_to("unlu_yerler_ankara")
+
 
                         RelativeLayout:
                             Image:

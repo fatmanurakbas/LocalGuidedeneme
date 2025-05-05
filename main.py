@@ -21,19 +21,14 @@ from ankara import AnkaraScreen
 from profil import ProfileScreen
 from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
 from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
-<<<<<<< HEAD
-from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen
-from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen
-from kaydedilenler import KaydedilenlerScreen
-
-=======
 from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen, TarihiYerDetailScreen  # Yeni ekledik | İstanbul tarihi yer için detay sayfası ekledim
 from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen, TarihiYerDetailAnkaraScreen  # Yeni ekledik | Ankara Tarihi yer için detay sayfası ekledim
 from kaydedilenler import KaydedilenlerScreen  # Kaydedilenler ekranını import ettik
 from unluyerleristanbul import UnluYerlerIstanbulScreen #stanbul için ünlü yerler erkanı
 from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etkinlik İstanbul için
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
->>>>>>> aa20da90eae3db828ad69045cee536a38c69a402
+from unluyerlerankara import UnluYerlerAnkaraScreen, UnluYerlerAnkaraDetailScreen
+
 Window.size = (360, 640)
 
 class HomeScreen(Screen):
@@ -56,9 +51,6 @@ FloatLayout:
         TarihiYerlerIstanbulScreen:
         TarihiYerlerAnkaraScreen:
         ProfileScreen:
-<<<<<<< HEAD
-        KaydedilenlerScreen:
-=======
         KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
         UnluYerlerIstanbulDetailScreen: # ünlü yerler istanbul detay ekranı
         UnluYerlerIstanbulScreen: # ünlü yerler ekranı ekledim
@@ -68,7 +60,9 @@ FloatLayout:
         EventDetailScreen:
         SocialEventsAnkaraScreen:
         EventDetailAnkara:
->>>>>>> aa20da90eae3db828ad69045cee536a38c69a402
+        UnluYerlerAnkaraScreen:
+        UnluYerlerAnkaraDetailScreen:
+
 
     MDBottomNavigation:
         size_hint: 1, None
@@ -218,12 +212,8 @@ class LocalGuideApp(MDApp):
     def show_info(self):
         print("Bilgi tuşuna basıldı.")
 
-<<<<<<< HEAD
-    def show_food_detail(self, image, description, location, hours, *args):
-=======
 
     def show_food_detail(self, image, title, description, location, hours, *args):
->>>>>>> aa20da90eae3db828ad69045cee536a38c69a402
         self.root.ids.scr_mngr.current = "food_detail"
         screen = self.root.ids.scr_mngr.get_screen("food_detail")
         screen.ids.food_image.source = image
@@ -285,6 +275,15 @@ class LocalGuideApp(MDApp):
         screen.ids.unlu_description_istanbul.text = description
         screen.ids.unlu_location_istanbul.text = location
         screen.ids.unlu_hours_istanbul.text = hours
+    
+    def show_unlu_yerler_ankara(self, image, title, description, location, hours, *args):
+       self.root.ids.scr_mngr.current = "unlu_yer_ankara_detail"
+       screen = self.root.ids.scr_mngr.get_screen("unlu_yer_ankara_detail")
+       screen.ids.unlu_image_ankara.source = image
+       screen.ids.unlu_ankara_title.text = title
+       screen.ids.unlu_description_ankara.text = description
+       screen.ids.unlu_location_ankara.text = location
+       screen.ids.unlu_hours_ankara.text = hours
 
 
 if __name__ == "__main__":

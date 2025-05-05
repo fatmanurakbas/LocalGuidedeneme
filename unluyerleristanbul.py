@@ -1,28 +1,28 @@
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen  # Burada kivy.uix.screenmanager'dan import ediyoruz
 
-class TarihiYerlerIstanbulScreen(Screen):
+class UnluYerlerIstanbulScreen(Screen):
     pass
 
-class TarihiYerDetailScreen(Screen):
+class UnluYerlerIstanbulDetailScreen(Screen):
     pass
 
 Builder.load_string("""
-<TarihiYerlerIstanbulScreen>:
-    name: "tarihi_yerler_istanbul"
+<UnluYerlerIstanbulScreen>:
+    name: "unlu_yerler_istanbul"
 
     MDBoxLayout:
         orientation: "vertical"
         md_bg_color: 0.6, 0.8, 0.9, 1
-
+                    
         MDTopAppBar:
-            title: "Tarihi Yerler İstanbul"
+            title: "Ünlü Yerler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            md_bg_color: 0.1, 0.1, 0.5, 1
             size_hint_y: None
             height: dp(56)
-
+                    
         ScrollView:
             MDBoxLayout:
                 orientation: "vertical"
@@ -30,8 +30,8 @@ Builder.load_string("""
                 spacing: dp(16)
                 size_hint_y: None
                 adaptive_height: True
-
-                # 1. Tarihi Yer
+                        
+                # 1. ünlü yer
                 MDCard:
                     orientation: "vertical"
                     padding: dp(10)
@@ -40,16 +40,16 @@ Builder.load_string("""
                     radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_place_detail("images/hagiasophia.jpg", "Ayasofya", "Ayasofya, Bizans İmparatoru I. Justinianus tarafından 537 yılında kilise olarak inşa edilmiştir.", "Sultanahmet, İstanbul", "09:00–18:00")
+                    on_release: app.show_unlu_yerler_istanbul("images/istiklalcaddesi.jpg", "İstiklal Caddesi", "İstikal Caddesi, Türkiye'nin en önemli caddelerinden biridir.", "Beyoğlu/İstanbul", "Her zaman açık")                    
 
                     FitImage:
-                        source: "images/hagiasophia.jpg"
+                        source: "images/istiklalcaddesi.jpg"
                         size_hint_y: None
                         height: dp(200)
                         radius: [12, 12, 0, 0]
 
                     MDLabel:
-                        text: "Ayasofya"
+                        text: "İstiklal Caddesi"
                         font_style: "H6"
                         theme_text_color: "Primary"
                         halign: "left"
@@ -57,14 +57,14 @@ Builder.load_string("""
                         height: self.texture_size[1]
 
                     MDLabel:
-                        text: "Sultanahmet, İstanbul"
+                        text: "Beyoğlu, İstanbul"
                         font_style: "Caption"
                         theme_text_color: "Secondary"
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
 
-                # 2. Tarihi Yer
+                # 2. ünlü yer
                 MDCard:
                     orientation: "vertical"
                     padding: dp(10)
@@ -73,16 +73,16 @@ Builder.load_string("""
                     radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_place_detail("images/topkapi_palace.jpg", "Topkapı Sarayı", "Topkapı Sarayı, Osmanlı İmparatorluğu'na 400 yıl boyunca başkentlik yapmış olan İstanbul'un simgelerinden biridir.", "Sultanahmet, İstanbul", "09:00–18:00")
+                    on_release: app.show_unlu_yerler_istanbul("images/kuzguncuk.jpg", "Kuzguncuk", "Mahalle kültürü, ahşap evleri ve Arnavut kaldırımlı sokaklarıyla İstanbul'un nostaljik noktalarından biridir. ", "Üsküdar/İstanbul", "Her zaman açık")                    
 
                     FitImage:
-                        source: "images/topkapi_palace.jpg"
+                        source: "images/kuzguncuk.jpg"
                         size_hint_y: None
                         height: dp(200)
                         radius: [12, 12, 0, 0]
 
                     MDLabel:
-                        text: "Topkapı Sarayı"
+                        text: "Kuzguncuk"
                         font_style: "H6"
                         theme_text_color: "Primary"
                         halign: "left"
@@ -90,57 +90,24 @@ Builder.load_string("""
                         height: self.texture_size[1]
 
                     MDLabel:
-                        text: "Sultanahmet, İstanbul"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                # 3. Tarihi Yer
-                MDCard:
-                    orientation: "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
-                    size_hint_y: None
-                    height: self.minimum_height
-                    on_release: app.show_place_detail("images/blue_mosque.jpg", "Sultanahmet Camii", "Sultanahmet Camii, İstanbul’un en bilinen tarihi camilerinden biridir ve mavi çinileri ile ünlüdür.", "Sultanahmet, İstanbul", "09:00–18:00")
-
-                    FitImage:
-                        source: "images/blue_mosque.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "Sultanahmet Camii"
-                        font_style: "H6"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                    MDLabel:
-                        text: "Sultanahmet, İstanbul"
+                        text: "Üsküdar, İstanbul"
                         font_style: "Caption"
                         theme_text_color: "Secondary"
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
                     
-<TarihiYerDetailScreen>:
-    name: "tarihi_yer_detail"
+<UnluYerlerIstanbulDetailScreen>:
+    name: "unlu_yer_istanbul_detail"
 
     MDBoxLayout:
         orientation: "vertical"
         md_bg_color: 0.0, 0.2, 0.4, 1
 
         MDTopAppBar:
-            title: "Tarihi Yerler"
+            title: "Ünlü Yerler"
             elevation: 5
-            left_action_items: [["arrow-left", lambda x: app.go_to('tarihi_yerler_istanbul')]]
+            left_action_items: [["arrow-left", lambda x: app.go_to('unlu_yerler_istanbul')]]
             md_bg_color: 0.05, 0.05, 0.3, 1
             size_hint_y: None
             height: dp(56)
@@ -154,7 +121,7 @@ Builder.load_string("""
                 adaptive_height: True
 
                 FitImage:
-                    id: tarihi_yer_image
+                    id: unlu_image_istanbul
                     size_hint_y: None
                     height: dp(220)
                     radius: [16]
@@ -178,8 +145,8 @@ Builder.load_string("""
                         height: self.minimum_height
 
                         MDLabel:
-                            id: tarihi_yer_istanbul_title
-                            text: "Yer Adı"
+                            id: unlu_istanbul_title
+                            text: "ünlü yerler"
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -191,8 +158,8 @@ Builder.load_string("""
                             pos_hint: {"center_y": 0.5}
 
                     MDLabel:
-                        id: tarihi_yer_description
-                        text: "Açıklama"
+                        id: unlu_description_istanbul
+                        text: ""
                         font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
@@ -211,8 +178,8 @@ Builder.load_string("""
                             icon: "map-marker"
                             theme_text_color: "Secondary"
                         MDLabel:
-                            id: tarihi_yer_location
-                            text: "Konum"
+                            id: unlu_location_istanbul
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
@@ -226,9 +193,9 @@ Builder.load_string("""
                             icon: "clock-outline"
                             theme_text_color: "Secondary"
                         MDLabel:
-                            id: tarihi_yer_hours
-                            text: "Çalışma Saatleri"
+                            id: unlu_hours_istanbul
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
-""")
+""")                    

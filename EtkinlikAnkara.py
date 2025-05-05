@@ -1,147 +1,83 @@
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 
-class FoodPlacesScreen(Screen):
+class SocialEventsAnkaraScreen(Screen):
     pass
 
-class FoodDetailScreen(Screen):
+class EventDetailAnkara(Screen):
     pass
 
 Builder.load_string("""
-<FoodPlacesScreen>:
-    name: "food_places"
-
+<SocialEventsAnkaraScreen>:
+    name: "social_events_ankara"
+    
+                
     MDBoxLayout:
         orientation: "vertical"
         md_bg_color: 0.6, 0.8, 0.9, 1
-
+                    
         MDTopAppBar:
-            title: "Yemek Mekanları"
+            title: "Etkinlikler"
             elevation: 5
-            left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            md_bg_color: 0.1, 0.1, 0.5, 1
+            left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
             size_hint_y: None
             height: dp(56)
-
+                    
         ScrollView:
             MDBoxLayout:
                 orientation: "vertical"
-                padding: dp(16)
+                padding: dp(16) 
                 spacing: dp(16)
                 size_hint_y: None
                 adaptive_height: True
 
-                # 1. Mekan
+                    
+                # 1. Etkinlik
                 MDCard:
-                    orientation: "vertical"
+                    orientation : "vertical"
                     padding: dp(10)
                     spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_food_detail("images/sultanahmet.jpg", "Tarihi Sultanahmet Köftecisi", "Tarihi Sultanahmet Köftecisi, 1920 yılında açılmış tarihi bir işletmedir.", "Divan Yolu Cad No:12, Sultanahmet/İstanbul", "11:00–23:00")
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/fantafest.jpg", "Fanta Fest 2025 Ankara", "Gittiği her şehre eğlence götüren Fanta Fest, bu yılda katılımcılarına müzik, eğlence ve birbirinden keyifli aktivitelerle dolu bir festival yaşatacak.", "Atatürk Orman Çiftliği, Yenimahalle / Ankara", "3 Ağustos")
 
-                    FitImage:
-                        source: "images/sultanahmet.jpg"
+                    FitImage: 
+                        source: "images/fantafest.jpg"
                         size_hint_y: None
                         height: dp(200)
                         radius: [12, 12, 0, 0]
 
                     MDLabel:
-                        text: "Tarihi Sultanahmet Köftecisi"
+                        text: "Fanta Fest 2025 Ankara"
                         font_style: "H6"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
-
+                    
                     MDLabel:
-                        text: "Divan Yolu Cad No:12, Sultanahmet/İstanbul"
+                        text: "Atatürk Orman Çiftliği, Yenimahalle / Ankara"
                         font_style: "Caption"
                         theme_text_color: "Secondary"
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
 
-                # 2. Mekan
-                MDCard:
-                    orientation: "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
-                    size_hint_y: None
-                    height: self.minimum_height
-                    on_release: app.show_food_detail("images/hamdi.jpg", "Hamdi Restaurant", "Hamdi Restaurant, geleneksel Türk mutfağını modern sunumla birleştirir.", "Tahmis Cad. Kalçin Sok. No:17 Eminönü/İstanbul", "10:00–22:00")
-
-                    FitImage:
-                        source: "images/hamdi.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "Hamdi Restaurant"
-                        font_style: "H6"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                    MDLabel:
-                        text: "Tahmis Cad. Kalçin Sok. No:17 Eminönü/İstanbul"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                # 3. Mekan
-                MDCard:
-                    orientation: "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
-                    size_hint_y: None
-                    height: self.minimum_height
-                    on_release: app.show_food_detail("images/pandeli.jpg", "Pandeli Lokantası", "Tarihi Mısır Çarşısı’nda bulunan, Osmanlı mutfağından izler taşıyan bir lokanta.", "Mısır Çarşısı No:1 Eminönü/İstanbul", "11:30–21:30")
-
-                    FitImage:
-                        source: "images/pandeli.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "Pandeli Lokantası"
-                        font_style: "H6"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                    MDLabel:
-                        text: "Mısır Çarşısı No:1 Eminönü/İstanbul"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-<FoodDetailScreen>:
-    name: "food_detail"
-
+<EventDetailAnkara>:
+    name: "event_detail_ankara"
+                    
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.6, 0.8, 0.9, 1
-
+        md_bg_color: 0.0, 0.2, 0.4, 1
+                
         MDTopAppBar:
-            title: "Yemek Mekanları"
+            title: "Etkinlikler"
             elevation: 5
-            left_action_items: [["arrow-left", lambda x: app.go_to('food_places')]]
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            left_action_items: [["arrow-left", lambda x: app.go_to('social_events_ankara')]]
+            md_bg_color: 0.05, 0.05, 0.3, 1
             size_hint_y: None
             height: dp(56)
 
@@ -152,9 +88,9 @@ Builder.load_string("""
                 spacing: dp(12)
                 size_hint_y: None
                 adaptive_height: True
-
+                    
                 FitImage:
-                    id: food_image
+                    id: event_image_ankara
                     size_hint_y: None
                     height: dp(220)
                     radius: [16]
@@ -178,7 +114,7 @@ Builder.load_string("""
                         height: self.minimum_height
 
                         MDLabel:
-                            id: food_istanbul_title
+                            id: event_ankara_title
                             text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
@@ -191,7 +127,7 @@ Builder.load_string("""
                             pos_hint: {"center_y": 0.5}
 
                     MDLabel:
-                        id: food_description
+                        id: event_description_ankara
                         text: ""
                         font_style: "Body1"
                         theme_text_color: "Primary"
@@ -211,7 +147,7 @@ Builder.load_string("""
                             icon: "map-marker"
                             theme_text_color: "Secondary"
                         MDLabel:
-                            id: food_location
+                            id: event_location_ankara
                             text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
@@ -226,9 +162,9 @@ Builder.load_string("""
                             icon: "clock-outline"
                             theme_text_color: "Secondary"
                         MDLabel:
-                            id: food_hours
+                            id: event_hours_ankara
                             text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
-""")
+                    """)

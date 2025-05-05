@@ -21,7 +21,7 @@ from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
 from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen  # Yeni ekledik
 from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen  # Yeni ekledik
 from kaydedilenler import KaydedilenlerScreen  # Kaydedilenler ekranını import ettik
-
+from unluyerleristanbul import UnluYerlerIstanbulScreen #stanbul için ünlü yerler erkanı
 Window.size = (360, 640)
 
 class HomeScreen(Screen):
@@ -45,7 +45,7 @@ BoxLayout:
         TarihiYerlerAnkaraScreen:  # Burada da eklemeyi unutmayın
         ProfileScreen:
         KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
-
+        UnluYerlerIstanbulScreen: # ünlü yerler ekranı ekledim
     MDBottomNavigation:
     
         size_hint_y: None
@@ -227,6 +227,15 @@ class LocalGuideApp(MDApp):
         screen.ids.food_description_ankara.text = description
         screen.ids.food_location_ankara.text = location
         screen.ids.food_hours_ankara.text = hours
+
+    def show_unlu_yerler_istanbul(self, image, descripton, location, hours, *args):
+        self.root.ids.scr_mngr.current = "unlu_yerler_istanbul"
+        screen = self.root.ids.scr_mngr.get_screen("unlu_yerler_istanbul")
+        screen.ids.unlu_image_istanbul.source = image
+        screen.ids.unlu_description_istanbul.text = description
+        screen.ids.unlu_location_istanbul.text = location
+        screen.ids.unlu_hours_istanbul.text = hours
+
 
 if __name__ == "__main__":
     

@@ -1,5 +1,8 @@
 import os
-os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+os.environ['KIVY_GL_BACKEND'] = 'sdl2'
+os.environ['KIVY_NO_CONSOLELOG'] = '1'
+os.environ['KIVY_NO_ARGS'] = '1'
+os.environ["KIVY_GL_DISABLE_FBO"] = "1"
 
 from kivy.config import Config
 Config.set('graphics', 'multisamples', '0')
@@ -18,9 +21,9 @@ from ankara import AnkaraScreen
 from profil import ProfileScreen
 from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
 from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
-from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen  # Yeni ekledik
-from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen  # Yeni ekledik
-from kaydedilenler import KaydedilenlerScreen  # Kaydedilenler ekranını import ettik
+from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen
+from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen
+from kaydedilenler import KaydedilenlerScreen
 
 Window.size = (360, 640)
 
@@ -28,28 +31,28 @@ class HomeScreen(Screen):
     pass
 
 KV = '''
-BoxLayout:
-    orientation: "vertical"
+FloatLayout:
 
     ScreenManager:
         id: scr_mngr
+        size_hint: 1, 1
 
         HomeScreen:
         IstanbulScreen:
-        AnkaraScreen:       
+        AnkaraScreen:
         FoodPlacesScreen:
         FoodDetailScreen:
         FoodPlacesAnkaraScreen:
         FoodDetailAnkaraScreen:
-        TarihiYerlerIstanbulScreen:  # Burada da eklemeyi unutmayın
-        TarihiYerlerAnkaraScreen:  # Burada da eklemeyi unutmayın
+        TarihiYerlerIstanbulScreen:
+        TarihiYerlerAnkaraScreen:
         ProfileScreen:
-        KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
+        KaydedilenlerScreen:
 
     MDBottomNavigation:
-    
-        size_hint_y: None
+        size_hint: 1, None
         height: dp(60)
+        pos_hint: {"x": 0, "y": 0}  # Alt köşeye sabitle
         text_color_active: "blue"
 
         MDBottomNavigationItem:
@@ -65,9 +68,9 @@ BoxLayout:
 
         MDBottomNavigationItem:
             name: 'saved'
-            text: 'Kaydedilenler'  # Kaydedilenler sekmesini ekledik
+            text: 'Kaydedilenler'
             icon: 'bookmark-outline'
-            on_tab_press: app.go_to('kaydedilenler')  # Kaydedilenler ekranına yönlendirme yapılacak
+            on_tab_press: app.go_to('kaydedilenler')
 
         MDBottomNavigationItem:
             name: 'favorites'
@@ -85,8 +88,6 @@ BoxLayout:
 
     BoxLayout:
         orientation: "vertical"
-        
-        
 
         MDTopAppBar:
             title: "Local Guide"
@@ -121,7 +122,7 @@ BoxLayout:
                     height: dp(180)
                     radius: [20]
                     elevation: 8
-                    on_release: app.go_to("istanbul")  # İstanbul butonuna tıklanacak
+                    on_release: app.go_to("istanbul")
 
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -153,7 +154,7 @@ BoxLayout:
                     height: dp(180)
                     radius: [20]
                     elevation: 8
-                    on_release: app.go_to("ankara")  # Ankara butonuna tıklanacak
+                    on_release: app.go_to("ankara")
 
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -187,14 +188,14 @@ class LocalGuideApp(MDApp):
         return Builder.load_string(KV)
 
     def go_to(self, screen_name):
-        self.root.ids.scr_mngr.current = screen_name
+        if self.root.ids.scr_mngr.has_screen(screen_name):
+            self.root.ids.scr_mngr.current = screen_name
 
     def go_back(self):
         self.root.ids.scr_mngr.current = "home"
 
     def show_info(self):
         print("Bilgi tuşuna basıldı.")
-
 
     def show_food_detail(self, image, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail"
@@ -229,5 +230,4 @@ class LocalGuideApp(MDApp):
         screen.ids.food_hours_ankara.text = hours
 
 if __name__ == "__main__":
-    
     LocalGuideApp().run()

@@ -13,9 +13,9 @@ def send_verification():
     root.destroy()
     # Verification ekranına yönlendirme
     if getattr(sys, 'frozen', False):
-        script_path = os.path.join(sys._MEIPASS, 'verification.py')
+        script_path = os.path.join(sys._MEIPASS, 'VerificationCode.py')
     else:
-        script_path = os.path.abspath("verification.py")
+        script_path = os.path.abspath("VerificationCode.py")
 
     subprocess.Popen([sys.executable, script_path])
 

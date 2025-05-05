@@ -15,7 +15,7 @@ Builder.load_string("""
         MDTopAppBar:
             title: "Ünlü Yerler"
             elevation: 5
-            left_action_items: [["arrow-left", lambda x: app.go_back()]]
+            left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
             md_bg_color: 0.1, 0.1, 0.5, 1
             size_hint_y: None
             height: dp(56)

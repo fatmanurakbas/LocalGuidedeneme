@@ -178,8 +178,8 @@ Builder.load_string("""
                         height: self.minimum_height
 
                         MDLabel:
-                            id: food_title
-                            text: "Mekan Adı"
+                            id: food_istanbul_title
+                            text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -192,7 +192,7 @@ Builder.load_string("""
 
                     MDLabel:
                         id: food_description
-                        text: "Açıklama"
+                        text: ""
                         font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
@@ -212,7 +212,7 @@ Builder.load_string("""
                             theme_text_color: "Secondary"
                         MDLabel:
                             id: food_location
-                            text: "Konum"
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
@@ -227,7 +227,7 @@ Builder.load_string("""
                             theme_text_color: "Secondary"
                         MDLabel:
                             id: food_hours
-                            text: "Çalışma Saatleri"
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"

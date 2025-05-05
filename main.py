@@ -47,6 +47,7 @@ BoxLayout:
         TarihiYerlerAnkaraScreen:  # Burada da eklemeyi unutmayın
         ProfileScreen:
         KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
+        UnluYerlerIstanbulDetailScreen: # ünlü yerler istanbul detay ekranı
         UnluYerlerIstanbulScreen: # ünlü yerler ekranı ekledim
         TarihiYerDetailScreen: # İstanbul için detay ekranı
         TarihiYerDetailAnkaraScreen: # Ankara için detay ekranı
@@ -205,58 +206,65 @@ class LocalGuideApp(MDApp):
         print("Bilgi tuşuna basıldı.")
 
 
-    def show_food_detail(self, image, description, location, hours, *args):
+    def show_food_detail(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail"
         screen = self.root.ids.scr_mngr.get_screen("food_detail")
         screen.ids.food_image.source = image
+        screen.ids.food_istanbul_title.text = title
         screen.ids.food_description.text = description
         screen.ids.food_location.text = location
         screen.ids.food_hours.text = hours
 
-    def show_food_detail_ankara(self, image, description, location, hours, *args):
+    def show_food_detail_ankara(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail_ankara"
         screen = self.root.ids.scr_mngr.get_screen("food_detail_ankara")
         screen.ids.food_image_ankara.source = image
+        screen.ids.food_ankara_title.text = title
         screen.ids.food_description_ankara.text = description
         screen.ids.food_location_ankara.text = location
         screen.ids.food_hours_ankara.text = hours
 
-    def show_place_detail(self, image, description, location, hours, *args):
+    def show_place_detail(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "tarihi_yer_detail"
         screen = self.root.ids.scr_mngr.get_screen("tarihi_yer_detail")
         screen.ids.tarihi_yer_image.source = image
+        screen.ids.tarihi_yer_istanbul_title.text = title
         screen.ids.tarihi_yer_description.text = description
         screen.ids.tarihi_yer_location.text = location
         screen.ids.tarihi_yer_hours.text = hours
 
-    def show_place_detail_ankara(self, image, description, location, hours, *args):
+    def show_place_detail_ankara(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "tarihi_yer_detail_ankara"
         screen = self.root.ids.scr_mngr.get_screen("tarihi_yer_detail_ankara")
         screen.ids.tarihi_yer_image_ankara.source = image
+        screen.ids.tarihi_yer_ankara_title.text = title
         screen.ids.tarihi_yer_description_ankara.text = description
         screen.ids.tarihi_yer_location_ankara.text = location
         screen.ids.tarihi_yer_hours_ankara.text = hours
     
-    def show_event_detail_istanbul(self, image, description, location, hours, *args):
+    def show_event_detail_istanbul(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "event_detail"
         screen = self.root.ids.scr_mngr.get_screen("event_detail")
         screen.ids.event_image.source = image
+        screen.ids.event_istanbul_title.text = title
         screen.ids.event_description.text = description
         screen.ids.event_location.text = location
         screen.ids.event_hours.text = hours
 
-    def show_event_detail_ankara(self, image, description, location, hours, *args):
+    def show_event_detail_ankara(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "event_detail_ankara"
         screen = self.root.ids.scr_mngr.get_screen("event_detail_ankara")
         screen.ids.event_image_ankara.source = image
+        screen.ids.event_ankara_title.text = title
         screen.ids.event_description_ankara.text = description
         screen.ids.event_location_ankara.text = location
         screen.ids.event_hours_ankara.text = hours
 
-    def show_unlu_yerler_istanbul(self, image, descripton, location, hours, *args):
-        self.root.ids.scr_mngr.current = "unlu_yerler_istanbul"
-        screen = self.root.ids.scr_mngr.get_screen("unlu_yerler_istanbul")
+    def show_unlu_yerler_istanbul(self, image, title, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "unlu_yer_istanbul_detail"
+        screen = self.root.ids.scr_mngr.get_screen("unlu_yer_istanbul_detail")
         screen.ids.unlu_image_istanbul.source = image
+        screen.ids.unlu_istanbul_title.text = title
         screen.ids.unlu_description_istanbul.text = description
         screen.ids.unlu_location_istanbul.text = location
         screen.ids.unlu_hours_istanbul.text = hours

@@ -178,7 +178,7 @@ Builder.load_string("""
                         height: self.minimum_height
 
                         MDLabel:
-                            id: tarihi_yer_title
+                            id: tarihi_yer_istanbul_title
                             text: "Yer Adı"
                             font_style: "H5"
                             theme_text_color: "Primary"

@@ -114,8 +114,8 @@ Builder.load_string("""
                         height: self.minimum_height
 
                         MDLabel:
-                            id: event_title_ankara
-                            text: "Etkinlik Adı"
+                            id: event_ankara_title
+                            text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -128,7 +128,7 @@ Builder.load_string("""
 
                     MDLabel:
                         id: event_description_ankara
-                        text: "Açıklama"
+                        text: ""
                         font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
@@ -148,7 +148,7 @@ Builder.load_string("""
                             theme_text_color: "Secondary"
                         MDLabel:
                             id: event_location_ankara
-                            text: "Konum"
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
@@ -163,7 +163,7 @@ Builder.load_string("""
                             theme_text_color: "Secondary"
                         MDLabel:
                             id: event_hours_ankara
-                            text: "Çalışma Saatleri"
+                            text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"

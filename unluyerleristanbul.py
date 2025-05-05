@@ -37,7 +37,7 @@ Builder.load_string("""
                     radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_unlu_yerler_istanbul("images/istiklalcaddesi.jpg", "İstiklal Caddesi", "İstikal Caddesi, Türkiye'nin en önemli caddelerinden biridir.", "Üsküdar/İstanbul", "Her zaman açık")                    
+                    on_release: app.show_unlu_yerler_istanbul("images/istiklalcaddesi.jpg", "İstiklal Caddesi", "İstikal Caddesi, Türkiye'nin en önemli caddelerinden biridir.", "Beyoğlu/İstanbul", "Her zaman açık")                    
 
                     FitImage:
                         source: "images/istiklalcaddesi.jpg"
@@ -61,7 +61,38 @@ Builder.load_string("""
                         size_hint_y: None
                         height: self.texture_size[1]
 
+                # 2. ünlü yer
+                MDCard:
+                    orientation: "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    elevation: 4
+                    radius: [12]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    on_release: app.show_unlu_yerler_istanbul("images/kuzguncuk.jpg", "Kuzguncuk", "Mahalle kültürü, ahşap evleri ve Arnavut kaldırımlı sokaklarıyla İstanbul'un nostaljik noktalarından biridir. ", "Üsküdar/İstanbul", "Her zaman açık")                    
 
+                    FitImage:
+                        source: "images/kuzguncuk.jpg"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "Kuzguncuk"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        text: "Üsküdar, İstanbul"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
 
 
 """)                    

@@ -24,14 +24,14 @@ from yemekmekanlariistanbul import FoodPlacesScreen, FoodDetailScreen
 from yemekmekanlariankara import FoodPlacesAnkaraScreen, FoodDetailAnkaraScreen
 from TarihiYerlerIstanbul import TarihiYerlerIstanbulScreen, TarihiYerDetailScreen  # Yeni ekledik | İstanbul tarihi yer için detay sayfası ekledim
 from TarihiYerlerAnkara import TarihiYerlerAnkaraScreen, TarihiYerDetailAnkaraScreen  # Yeni ekledik | Ankara Tarihi yer için detay sayfası ekledim
-from kaydedilenler import KaydedilenlerScreen  # Kaydedilenler ekranını import ettik
+from kaydedilenler import KaydedilenlerScreen, KaydedilenlerDetail # Kaydedilenler ekranını import ettik
 from unluyerleristanbul import UnluYerlerIstanbulScreen #stanbul için ünlü yerler erkanı
 from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etkinlik İstanbul için
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from unluyerlerankara import UnluYerlerAnkaraScreen, UnluYerlerAnkaraDetailScreen
 from planlayici import PlanlayiciScreen
-from cafeler_istanbul import CafelerIstanbulScreen
-from cafeler_ankara import CafelerAnkaraScreen
+from cafeler_istanbul import CafelerIstanbulScreen, CafelerDetailIstanbul
+from cafeler_ankara import CafelerAnkaraScreen, CafelerDetailAnkara
 from favoriler import FavorilerScreen
 
 
@@ -59,6 +59,7 @@ FloatLayout:
         TarihiYerlerAnkaraScreen:
         ProfileScreen:
         KaydedilenlerScreen:  # Kaydedilenler ekranını ekledik
+        KaydedilenlerDetail:
         UnluYerlerIstanbulDetailScreen: # ünlü yerler istanbul detay ekranı
         UnluYerlerIstanbulScreen: # ünlü yerler ekranı ekledim
         TarihiYerDetailScreen: # İstanbul için detay ekranı
@@ -73,6 +74,8 @@ FloatLayout:
         CafelerIstanbulScreen:
         CafelerAnkaraScreen:
         FavorilerScreen:
+        CafelerDetailIstanbul:
+        CafelerDetailAnkara:
 
 
 
@@ -301,11 +304,11 @@ class LocalGuideApp(MDApp):
        screen.ids.unlu_location_ankara.text = location
        screen.ids.unlu_hours_ankara.text = hours
     
-    def show_cafe_detail_istanbul(self, image, title, description, location, hours, *args):
+    def show_cafe_detail(self, image, title, description, location, hours, *args):
       self.root.ids.scr_mngr.current = "cafe_detail_istanbul"
       screen = self.root.ids.scr_mngr.get_screen("cafe_detail_istanbul")
       screen.ids.cafe_image_istanbul.source = image
-      screen.ids.cafe_istanbul_title.text = title
+      screen.ids.cafe_title_istanbul.text = title
       screen.ids.cafe_description_istanbul.text = description
       screen.ids.cafe_location_istanbul.text = location
       screen.ids.cafe_hours_istanbul.text = hours
@@ -314,12 +317,19 @@ class LocalGuideApp(MDApp):
       self.root.ids.scr_mngr.current = "cafe_detail_ankara"
       screen = self.root.ids.scr_mngr.get_screen("cafe_detail_ankara")
       screen.ids.cafe_image_ankara.source = image
-      screen.ids.cafe_ankara_title.text = title
+      screen.ids.cafe_title_ankara.text = title
       screen.ids.cafe_description_ankara.text = description
       screen.ids.cafe_location_ankara.text = location
       screen.ids.cafe_hours_ankara.text = hours
  
-
+    def show_kaydedilenler_detail(self, image, title, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "kaydedilenler_detail"
+        screen = self.root.ids.scr_mngr.get_screen("kaydedilenler_detail")
+        screen.ids.saved_image.source = image
+        screen.ids.saved_title.text = title
+        screen.ids.saved_description.text = description
+        screen.ids.saved_location.text = location
+        screen.ids.saved_hours.text = hours
 
 
 

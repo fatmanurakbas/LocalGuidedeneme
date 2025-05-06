@@ -10,6 +10,7 @@ Config.set('graphics', 'borderless', '0')
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 
+
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -28,6 +29,12 @@ from unluyerleristanbul import UnluYerlerIstanbulScreen #stanbul için ünlü ye
 from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etkinlik İstanbul için
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from unluyerlerankara import UnluYerlerAnkaraScreen, UnluYerlerAnkaraDetailScreen
+from planlayici import PlanlayiciScreen
+from cafeler_istanbul import CafelerIstanbulScreen
+from cafeler_ankara import CafelerAnkaraScreen
+from favoriler import FavorilerScreen
+
+
 
 Window.size = (360, 640)
 
@@ -62,6 +69,13 @@ FloatLayout:
         EventDetailAnkara:
         UnluYerlerAnkaraScreen:
         UnluYerlerAnkaraDetailScreen:
+        PlanlayiciScreen:
+        CafelerIstanbulScreen:
+        CafelerAnkaraScreen:
+        FavorilerScreen:
+
+
+
 
 
     MDBottomNavigation:
@@ -77,9 +91,10 @@ FloatLayout:
             on_tab_press: app.go_to('home')
 
         MDBottomNavigationItem:
-            name: 'discover'
+            name: 'planner'
             text: 'Planlayıcı'
-            icon: 'compass-outline'
+            icon: 'calendar-text'
+            on_tab_press: app.go_to('planlayici')
 
         MDBottomNavigationItem:
             name: 'saved'
@@ -91,6 +106,7 @@ FloatLayout:
             name: 'favorites'
             text: 'Favoriler'
             icon: 'heart-outline'
+            on_tab_press: app.go_to('favoriler')
 
         MDBottomNavigationItem:
             name: 'profile'
@@ -284,6 +300,28 @@ class LocalGuideApp(MDApp):
        screen.ids.unlu_description_ankara.text = description
        screen.ids.unlu_location_ankara.text = location
        screen.ids.unlu_hours_ankara.text = hours
+    
+    def show_cafe_detail_istanbul(self, image, title, description, location, hours, *args):
+      self.root.ids.scr_mngr.current = "cafe_detail_istanbul"
+      screen = self.root.ids.scr_mngr.get_screen("cafe_detail_istanbul")
+      screen.ids.cafe_image_istanbul.source = image
+      screen.ids.cafe_istanbul_title.text = title
+      screen.ids.cafe_description_istanbul.text = description
+      screen.ids.cafe_location_istanbul.text = location
+      screen.ids.cafe_hours_istanbul.text = hours
+
+    def show_cafe_detail_ankara(self, image, title, description, location, hours, *args):
+      self.root.ids.scr_mngr.current = "cafe_detail_ankara"
+      screen = self.root.ids.scr_mngr.get_screen("cafe_detail_ankara")
+      screen.ids.cafe_image_ankara.source = image
+      screen.ids.cafe_ankara_title.text = title
+      screen.ids.cafe_description_ankara.text = description
+      screen.ids.cafe_location_ankara.text = location
+      screen.ids.cafe_hours_ankara.text = hours
+ 
+
+
+
 
 
 if __name__ == "__main__":

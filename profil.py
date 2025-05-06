@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import Screen
 class ProfileScreen(Screen):
     pass
 
+
 Builder.load_string('''
 <ProfileScreen>:
     name: "profile"

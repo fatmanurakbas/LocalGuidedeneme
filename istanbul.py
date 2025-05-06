@@ -158,17 +158,20 @@ Builder.load_string("""
                                     font_style: "Caption"
                                     theme_text_color: "Custom"
                                     text_color: 1, 1, 1, 1
+                                    
 
-                    # 🏛️ Müzeler
+                    # ☕ Cafeler
                     MDCard:
                         radius: [16]
                         elevation: 4
                         size_hint_y: None
                         height: dp(110)
+                        on_release: app.go_to("cafeler_istanbul") 
+                    
 
                         RelativeLayout:
                             Image:
-                                source: "images/muzeler.jpg"
+                                source: "images/cafe.jpg"
                                 allow_stretch: True
                                 keep_ratio: False
 
@@ -179,7 +182,7 @@ Builder.load_string("""
                                 md_bg_color: 0, 0, 0, 0.4
 
                                 MDIcon:
-                                    icon: "bank"
+                                    icon: "coffee"
                                     halign: "center"
                                     theme_text_color: "Custom"
                                     text_color: 1, 1, 1, 1
@@ -187,7 +190,7 @@ Builder.load_string("""
                                     height: dp(24)
 
                                 MDLabel:
-                                    text: "Müzeler"
+                                    text: "Cafeler"
                                     halign: "center"
                                     font_style: "Caption"
                                     theme_text_color: "Custom"

@@ -177,9 +177,10 @@ Builder.load_string("""
                         MDIcon:
                             icon: "map-marker"
                             theme_text_color: "Secondary"
-                        MDLabel:
+                        MDTextButton:
                             id: unlu_location_ankara
                             text: ""
+                            on_release: app.konuma_git(self.text)  # Tıklanınca adresi yolla
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"

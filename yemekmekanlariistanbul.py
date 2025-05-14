@@ -211,12 +211,13 @@ Builder.load_string("""
                         MDIcon:
                             icon: "map-marker"
                             theme_text_color: "Secondary"
-                        MDLabel:
+                        MDTextButton:
                             id: food_location
                             text: ""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
+                            on_release: app.konuma_git(self.text)  # Tıklanınca adresi yolla
 
                     MDBoxLayout:
                         spacing: dp(6)

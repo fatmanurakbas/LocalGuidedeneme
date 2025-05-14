@@ -10,7 +10,7 @@ Config.set('graphics', 'borderless', '0')
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 
-
+import webbrowser
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -224,6 +224,13 @@ class LocalGuideApp(MDApp):
     def show_info(self):
         print("Bilgi tuşuna basıldı.")
 
+    def konuma_git(self, adres):
+        url = f"https://www.google.com/maps/dir/?api=1&destination={adres.replace(' ', '+')}"
+        try:
+        # google mapsi varsayılan tarayıcıda açar. 
+            webbrowser.open(url)
+        except Exception as e:
+            print("Harita açılamadı:", e)
 
     def show_food_detail(self, image, title, description, location, hours, *args):
         self.root.ids.scr_mngr.current = "food_detail"

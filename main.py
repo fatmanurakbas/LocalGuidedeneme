@@ -30,8 +30,8 @@ from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etki
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from unluyerlerankara import UnluYerlerAnkaraScreen, UnluYerlerAnkaraDetailScreen
 from planlayici import PlanlayiciScreen
-from cafeler_istanbul import CafelerIstanbulScreen
-from cafeler_ankara import CafelerAnkaraScreen
+from cafeler_istanbul import CafelerIstanbulScreen, CafelerDetailIstanbul
+from cafeler_ankara import CafelerAnkaraScreen, CafelerDetailAnkara
 from favoriler import FavorilerScreen
 
 

@@ -32,7 +32,7 @@ class FoodPlacesAnkaraScreen(Screen):
             near="Ankara, Turkey",
             limit=20
         )
-
+      
         if results and 'results' in results:
             self.restaurants = results['results']
             self.update_ui()

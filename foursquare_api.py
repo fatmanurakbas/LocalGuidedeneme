@@ -4,7 +4,9 @@ import json
 
 CATEGORY_IDS = {
     "restaurant": "13065",
-    "kafe": "13032"
+    "kafe": "13032",
+    "tarihi_yer":"16020",
+    "meydan":'16032'
 }
 
 class FoursquareAPI:

@@ -1,8 +1,110 @@
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.fitimage import FitImage
+from kivymd.app import MDApp
+from foursquare_api import FoursquareAPI
+from kivy.metrics import dp
+from kivy.clock import Clock
+from kivy.properties import ListProperty
+from kivy.uix.boxlayout import BoxLayout
+
+class HistoricCard(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = 'vertical'
+        self.padding = 10
+        self.spacing = 10
 
 class TarihiYerlerAnkaraScreen(Screen):
-    pass
+    tarihi_yerler = ListProperty([])
+
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.api = FoursquareAPI()
+        Clock.schedule_once(self.load_tarihi_yerler)
+
+    def load_tarihi_yerler(self, dt):
+        results = self.api.search_places(
+            query="tarihi_yer",
+            near="Ankara, Turkey",
+            category="tarihi_yer",
+            limit=20
+        )
+        
+        if results and 'results' in results:
+            self.places = results['results']
+            self.update_ui()
+
+    def update_ui(self):
+        container = self.ids.place_container
+        container.clear_widgets()
+        
+        for tarihi_yer in self.places:
+            card = MDCard(
+                orientation="vertical",
+                padding=dp(10),
+                spacing=dp(10),
+                elevation=4,
+                radius=[12],
+                size_hint_y=None,
+                height=dp(250)
+            )
+            
+            # Resim
+            image = FitImage(
+                source=tarihi_yer.get('photos', [{}])[0].get('prefix', '') + 
+                      '300x200' + 
+                      tarihi_yer.get('photos', [{}])[0].get('suffix', ''),
+                size_hint_y=None,
+                height=dp(200),
+                radius=[12, 12, 0, 0]
+            )
+            
+            # İsim
+            name_label = MDLabel(
+                text=tarihi_yer.get('name', ''),
+                font_style="H6",
+                theme_text_color="Primary",
+                halign="left",
+                size_hint_y=None,
+                height=dp(30)
+            )
+            
+            # Adres
+            address_label = MDLabel(
+                text=tarihi_yer.get('location', {}).get('formatted_address', ''),
+                font_style="Caption",
+                theme_text_color="Secondary",
+                halign="left",
+                size_hint_y=None,
+                height=dp(30)
+            )
+            
+            card.add_widget(image)
+            card.add_widget(name_label)
+            card.add_widget(address_label)
+            
+            # Detay sayfasına yönlendirme
+            card.bind(on_release=lambda x, r=tarihi_yer: self.show_tarihi_yer_detail(r))
+            
+            container.add_widget(card)
+
+    def show_tarihi_yer_detail(self, tarihi_yer):
+        app = MDApp.get_running_app()
+        app.show_place_detail_ankara(
+            tarihi_yer.get('photos', [{}])[0].get('prefix', '') + 
+            '800x600' + 
+            tarihi_yer.get('photos', [{}])[0].get('suffix', ''),
+            tarihi_yer.get('name', '') ,
+            tarihi_yer.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            tarihi_yer.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamamıştır.',
+            tarihi_yer.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+        )
+
 
 class TarihiYerDetailAnkaraScreen(Screen):
     pass
@@ -25,6 +127,7 @@ Builder.load_string("""
 
         ScrollView:
             MDBoxLayout:
+                id: place_container
                 orientation: "vertical"
                 padding: dp(16)
                 spacing: dp(16)

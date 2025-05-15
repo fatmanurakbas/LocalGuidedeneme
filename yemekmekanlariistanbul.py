@@ -30,18 +30,19 @@ class FoodPlacesScreen(Screen):
         results = self.api.search_places(
             query="restaurant",
             near="Istanbul, Turkey",
+            category="restaurant",
             limit=20
         )
         
         if results and 'results' in results:
-            self.restaurants = results['results']
+            self.places = results['results']
             self.update_ui()
 
     def update_ui(self):
-        container = self.ids.restaurant_container
+        container = self.ids.place_container
         container.clear_widgets()
         
-        for restaurant in self.restaurants:
+        for restaurant in self.places:
             card = MDCard(
                 orientation="vertical",
                 padding=dp(10),
@@ -124,7 +125,7 @@ Builder.load_string("""
 
         ScrollView:
             MDBoxLayout:
-                id: restaurant_container
+                id: place_container
                 orientation: "vertical"
                 padding: dp(16)
                 spacing: dp(16)

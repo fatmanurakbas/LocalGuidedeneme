@@ -2,13 +2,18 @@ import requests
 from config import FOURSQUARE_API_KEY, FOURSQUARE_API_VERSION
 import json
 
+CATEGORY_IDS = {
+    "restaurant": "13065",
+    "kafe": "13032"
+}
+
 class FoursquareAPI:
     def __init__(self):
         self.api_key = FOURSQUARE_API_KEY
         self.api_version = FOURSQUARE_API_VERSION
         self.base_url = "https://api.foursquare.com/v3"
 
-    def search_places(self, query, near, limit=10):
+    def search_places(self, query, near, category ="restaurant", limit=10):
         """
         Belirli bir konumda mekan araması yapar
         """
@@ -16,12 +21,14 @@ class FoursquareAPI:
             "Accept": "application/json",
             "Authorization": self.api_key
         }
+
+        category_id = CATEGORY_IDS.get(category, "13065")
         
         params = {
             "query": query,
             "near": near,
             "limit": limit,
-            "categories": "13065"  # Restoran kategorisi
+            "categories": category_id  # Restoran kategorisi
         }
         
         try:

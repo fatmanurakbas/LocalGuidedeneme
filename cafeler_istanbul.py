@@ -1,10 +1,111 @@
 from kivy.lang import Builder
-from kivymd.uix.screen import MDScreen
+from kivy.uix.screenmanager import Screen
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.fitimage import FitImage
+from kivymd.app import MDApp
+from foursquare_api import FoursquareAPI
+from kivy.metrics import dp
+from kivy.clock import Clock
+from kivy.properties import ListProperty
+from kivy.uix.boxlayout import BoxLayout
 
-class CafelerIstanbulScreen(MDScreen):
-    pass
+class CafeCard(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = 10
+        self.spacing = 10
+        self.padding = 10
 
-class CafelerDetailIstanbul(MDScreen):
+class CafelerIstanbulScreen(Screen):
+   
+    cafes = ListProperty([])
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.api = FoursquareAPI()
+        Clock.schedule_once(self.load_cafes)
+
+    def load_cafes(self, dt):
+        results = self.api.search_places(
+            query="kafe",
+            near="Istanbul, Turkey",
+            category="kafe",
+            limit=10
+        )
+
+        if results and 'results' in results:
+            self.places = results['results']
+            self.update_ui()
+
+    def update_ui(self):
+        container = self.ids.place_container
+        container.clear_widgets()
+
+        for kafe in self.places:
+            card = MDCard(
+                orientation="vertical",
+                padding=dp(10),
+                spacing=dp(10),
+                elevation=4,
+                radius=[12],
+                size_hint_y=None,
+                height=dp(250)
+            )
+
+            #RESİM
+            image = FitImage(
+                source=kafe.get('photos', [{}])[0].get('prefix', '') + 
+                      '300x200' + 
+                      kafe.get('photos', [{}])[0].get('suffix', ''),
+                size_hint_y=None,
+                height=dp(200),
+                radius=[12, 12, 0, 0]
+            )
+            # İsim
+            name_label = MDLabel(
+                text=kafe.get('name', ''),
+                font_style="H6",
+                theme_text_color="Primary",
+                halign="left",
+                size_hint_y=None,
+                height=dp(30)
+            )
+            
+            # Adres
+            address_label = MDLabel(
+                text=kafe.get('location', {}).get('formatted_address', ''),
+                font_style="Caption",
+                theme_text_color="Secondary",
+                halign="left",
+                size_hint_y=None,
+                height=dp(30)
+            )
+            
+            card.add_widget(image)
+            card.add_widget(name_label)
+            card.add_widget(address_label)
+            
+            # Detay sayfasına yönlendirme
+            card.bind(on_release=lambda x, r=kafe: self.show_kafe_detail(r))
+            
+            container.add_widget(card)
+
+    def show_kafe_detail(self, kafe):
+        app = MDApp.get_running_app()
+        app.show_cafe_detail_istanbul(
+            kafe.get('photos', [{}])[0].get('prefix', '') + 
+            '800x600' + 
+            kafe.get('photos', [{}])[0].get('suffix', ''),
+            kafe.get('name', ''),
+            kafe.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            kafe.get('location', {}).get('formatted_address', ''),
+            kafe.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+        )
+
+
+class CafelerDetailIstanbul(Screen):
     pass
 
 Builder.load_string("""
@@ -25,77 +126,14 @@ Builder.load_string("""
 
         ScrollView:
             MDBoxLayout:
+                id: place_container
                 orientation: "vertical"
                 padding: dp(16)
                 spacing: dp(16)
                 size_hint_y: None
                 adaptive_height: True
 
-                # 1. Kafe
-                MDCard:
-                    orientation: "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
-                    size_hint_y: None
-                    height: self.minimum_height
-                    on_release: app.show_cafe_detail("images/mocistanbul.jpg", "MOC İstanbul", "Kahve severler için modern ve huzurlu bir ortam sunan popüler bir üçüncü nesil kahve dükkanı.", "Teşvikiye, Şakayık Sk. No:4, Şişli/İstanbul", "08:00–22:00")
-
-                    FitImage:
-                        source: "images/mocistanbul.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "MOC İstanbul"
-                        font_style: "H6"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                    MDLabel:
-                        text: "Teşvikiye, Şakayık Sk. No:4, Şişli/İstanbul"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                # 2. Kafe
-                MDCard:
-                    orientation: "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    elevation: 4
-                    radius: [12]
-                    size_hint_y: None
-                    height: self.minimum_height
-                    on_release: app.show_cafe_detail("images/Coffeesapiens.jpg", "Coffee Sapiens", "Karaköy’ün kalbinde taptaze çekirdekler ve özgün kahveler sunan butik bir kahveci.", "Kemankeş Karamustafa Paşa, Kılıç Ali Paşa Mescidi Sk. No:10, Beyoğlu/İstanbul", "09:00–21:00")
-
-                    FitImage:
-                        source: "images/Coffeesapiens.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "Coffee Sapiens"
-                        font_style: "H6"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-
-                    MDLabel:
-                        text: "Kemankeş Karamustafa Paşa, Kılıç Ali Paşa Mescidi Sk. No:10, Beyoğlu/İstanbul"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
+            
 <CafelerDetailIstanbul>:
     name: "cafe_detail_istanbul"
 

@@ -113,8 +113,7 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.6, 0.8, 0.9, 1
-
+        md_bg_color: 0.2, 0.4, 0.8, 1
         MDTopAppBar:
             title: "Yemek Mekanları"
             elevation: 5

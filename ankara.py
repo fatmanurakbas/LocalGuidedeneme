@@ -1,8 +1,51 @@
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
+from datetime import datetime
+from kivy.clock import Clock
+from kivy.metrics import dp
+import requests
+    
 
 class AnkaraScreen(MDScreen):
-    pass
+    def on_enter(self):
+        # Ekran açılır açılmaz hava durumunu çek
+        Clock.schedule_once(lambda dt: self.fetch_weather_data(), 0)
+
+    def fetch_weather_data(self):
+        api_key = "9cfff90aa46036e986416a727bdb45be"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q=Istanbul&appid={api_key}&units=metric&lang=tr"
+        try:
+            response = requests.get(url, timeout=5)
+            data = response.json()
+            if response.status_code == 200:
+                temp = data["main"]["temp"]
+                description = data["weather"][0]["description"].capitalize()
+                wind_speed = data["wind"]["speed"]
+
+                days_tr = {
+                    "Monday": "Pazartesi",
+                    "Tuesday": "Salı",
+                    "Wednesday": "Çarşamba",
+                    "Thursday": "Perşembe",
+                    "Friday": "Cuma",
+                    "Saturday": "Cumartesi",
+                    "Sunday": "Pazar"
+                }
+                day_en = datetime.now().strftime("%A")
+                day_tr = days_tr.get(day_en, day_en)
+
+                self.ids.weather_temp_label.text = f"{temp:.1f}°C | {day_tr}"
+                self.ids.weather_desc_label.text = description
+                self.ids.weather_wind_label.text = f"Rüzgar: {wind_speed} m/s"
+            else:
+                self.ids.weather_temp_label.text = "Hava durumu alınamadı"
+                self.ids.weather_desc_label.text = ""
+                self.ids.weather_wind_label.text = ""
+        except Exception as e:
+            self.ids.weather_temp_label.text = "Hava durumu hatası"
+            self.ids.weather_desc_label.text = ""
+            self.ids.weather_wind_label.text = ""
+            print(f"Weather API error: {e}")
 
 Builder.load_string("""
 <AnkaraScreen>:
@@ -52,13 +95,15 @@ Builder.load_string("""
                         spacing: dp(4)
 
                         MDLabel:
-                            text: "10°C | Perşembe"
+                            id: weather_temp_label
+                            text: " "
                             font_style: "H6"
                             halign: "left"
                             theme_text_color: "Primary"
 
                         MDLabel:
-                            text: "Bulutlu"
+                            id: weather_desc_label
+                            text: " "
                             font_style: "Body2"
                             theme_text_color: "Secondary"
                             halign: "left"
@@ -76,7 +121,8 @@ Builder.load_string("""
                                 size: dp(20), dp(20)
 
                             MDLabel:
-                                text: "Rüzgarlı"
+                                id: weather_wind_label
+                                text: " "
                                 font_style: "Caption"
                                 theme_text_color: "Secondary"
                                 halign: "left"

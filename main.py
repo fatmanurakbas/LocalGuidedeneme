@@ -13,6 +13,9 @@ Config.set('graphics', 'height', '600')
 import webbrowser
 from kivy.lang import Builder
 from kivymd.app import MDApp
+import requests  # Hava durumu API'si için
+from kivy.clock import Clock  # Ekran yüklendiğinde veri çekmek için
+
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 

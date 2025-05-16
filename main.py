@@ -122,94 +122,107 @@ FloatLayout:
         MDTopAppBar:
             title: "Local Guide"
             elevation: 5
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            md_bg_color: "#5C6BC0"  # Soft mavi
             size_hint_y: None
             height: dp(56)
+            title_align: "center"
 
         ScrollView:
             MDBoxLayout:
                 orientation: "vertical"
-                padding: dp(10)
-                spacing: dp(8)
+                padding: dp(12)
+                spacing: dp(14)
                 size_hint_y: None
                 height: self.minimum_height
 
                 MDTextField:
-                    hint_text: "Ara..."
+                    hint_text: "Şehir, etkinlik veya mekan ara..."
                     icon_left: "magnify"
-                    size_hint_x: 1
+                    mode: "fill"
+                    fill_color: "#F2F2F2"
+                    size_hint_x: 0.95
                     size_hint_y: None
-                    height: dp(40)
-                    mode: "rectangle"
+                    height: dp(48)
                     pos_hint: {"center_x": 0.5}
+                    radius: [16, 16, 16, 16]
 
                 Widget:
                     size_hint_y: None
-                    height: dp(4)
+                    height: dp(6)
 
                 MDCard:
                     size_hint_y: None
                     height: dp(180)
-                    radius: [20]
-                    elevation: 8
+                    radius: [24]
+                    elevation: 10
+                    shadow_softness: 3
+                    ripple_behavior: True
                     on_release: app.go_to("istanbul")
 
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: dp(10)
-                        spacing: dp(10)
+                        spacing: dp(12)
 
-                        Image:
+                        FitImage:
                             source: "images/istanbul.jpg"
                             size_hint_x: 0.4
+                            radius: [16]
                             allow_stretch: True
-                            keep_ratio: False
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(5)
+                            spacing: dp(6)
 
                             MDLabel:
                                 text: "İstanbul"
-                                font_style: "H6"
-                                halign: "left"
+                                font_style: "H5"
+                                theme_text_color: "Primary"
+                                bold: True
 
                             MDLabel:
-                                text: "Asya ve Avrupa'yı birleştiren, zengin tarihi, kültürel çeşitliliği ve hareketli yaşamıyla büyüleyici bir şehir."
-                                font_style: "Caption"
-                                halign: "left"
+                                text: "Kültür, tarih ve enerjik yaşam: Asya ile Avrupa'nın keskin karışımı."
+                                font_style: "Body2"
+                                theme_text_color: "Secondary"
+                                shorten: True
+                                max_lines: 3
 
                 MDCard:
                     size_hint_y: None
                     height: dp(180)
-                    radius: [20]
-                    elevation: 8
+                    radius: [24]
+                    elevation: 10
+                    shadow_softness: 3
+                    ripple_behavior: True
                     on_release: app.go_to("ankara")
 
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: dp(10)
-                        spacing: dp(10)
+                        spacing: dp(12)
 
-                        Image:
+                        FitImage:
                             source: "images/ankara.jpg"
                             size_hint_x: 0.4
+                            radius: [16]
                             allow_stretch: True
-                            keep_ratio: False
 
                         MDBoxLayout:
                             orientation: "vertical"
-                            spacing: dp(5)
+                            spacing: dp(6)
 
                             MDLabel:
                                 text: "Ankara"
-                                font_style: "H6"
-                                halign: "left"
+                                font_style: "H5"
+                                theme_text_color: "Primary"
+                                bold: True
 
                             MDLabel:
-                                text: "Türkiye’nin başkenti olarak sakin, düzenli yapısı, resmi kurumları ve kültürel etkinlikleriyle kendine özgü bir atmosfere sahip."
-                                font_style: "Caption"
-                                halign: "left"
+                                text: "Başkentin huzurlu dokusu ve resmi atmosferiyle sürükleyici deneyim."
+                                font_style: "Body2"
+                                theme_text_color: "Secondary"
+                                shorten: True
+                                max_lines: 3
 '''
 
 class LocalGuideApp(MDApp):

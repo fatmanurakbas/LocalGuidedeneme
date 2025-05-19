@@ -1,76 +1,104 @@
-# login.py
-import tkinter as tk
-from tkinter import messagebox
-import subprocess
-import sys
-import os
+from kivy.uix.screenmanager import Screen
+from kivymd.toast import toast
+import pyrebase
+from firebase_config import firebase_config
+from kivy.lang import Builder
 
-def login():
-    email = email_entry.get()
-    password = password_entry.get()
-    # Giriş işlemleri burada yapılabilir
-    messagebox.showinfo("Login", f"Giriş yapıldı:\nEmail: {email}")
-    
-    # Login başarılıysa main.py'yi aç
-    root.destroy()  # Login penceresini kapat
-    if getattr(sys, 'frozen', False):
-        script_path = os.path.join(sys._MEIPASS, 'main.py')
-    else:
-        script_path = os.path.abspath("main.py")
+firebase = pyrebase.initialize_app(firebase_config)
+auth = firebase.auth()
 
-    subprocess.Popen([sys.executable, script_path])
+class LoginScreen(Screen):
+    def login_user(self, email, password):
+        email = email.strip()
+        password = password.strip()
 
-def forgot_password():
-    root.destroy()
-    if getattr(sys, 'frozen', False):
-        script_path = os.path.join(sys._MEIPASS, 'forgot_password.py')
-    else:
-        script_path = os.path.abspath("forgot_password.py")
-    
-    subprocess.Popen([sys.executable, script_path])
+        if not email or not password:
+            toast("Email ve şifre boş olamaz.")
+            return
 
-def sign_up():
-    root.destroy()
-    if getattr(sys, 'frozen', False):
-        script_path = os.path.join(sys._MEIPASS, 'create_account.py')
-    else:
-        script_path = os.path.abspath("create_account.py")
-    
-    subprocess.Popen([sys.executable, script_path])
+        try:
+            auth.sign_in_with_email_and_password(email, password)
+            toast("Giriş başarılı!")
+            self.manager.current = "home"
+        except Exception as e:
+            toast("Giriş başarısız. Bilgileri kontrol edin.")
+            print("Login error:", e)
+
+import re
+
+def is_valid_email(email):
+    regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(regex, email) is not None
+
+def login_user(self, email, password):
+    email = email.strip()
+    password = password.strip()
+
+    if not email or not password:
+        toast("Email ve şifre boş olamaz.")
+        return
+
+    if not is_valid_email(email):
+        toast("Geçerli bir email girin.")
+        return
+
+    try:
+        auth.sign_in_with_email_and_password(email, password)
+        toast("Giriş başarılı!")
+        self.manager.current = "home"
+    except Exception as e:
+        toast("Giriş başarısız. Bilgileri kontrol edin.")
+        print("Login error:", e)
 
 
-# Ana pencere
-root = tk.Tk()
-root.title("Login")
-root.geometry("400x500")
-root.configure(bg='#5CCBF0')
 
-# Başlık
-title = tk.Label(root, text="Welcome back!", bg="#5CCBF0", fg="white", font=("Helvetica", 24, "bold"))
-title.pack(pady=40)
+Builder.load_string("""
+<LoginScreen>:
+    name: "login"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(24)
+        spacing: dp(20)
 
-# Email alanı
-tk.Label(root, text="Email", bg="#5CCBF0", fg="white", font=("Helvetica", 12)).pack()
-email_entry = tk.Entry(root, font=("Helvetica", 12))
-email_entry.pack(pady=10, ipadx=10, ipady=5)
+        MDTopAppBar:
+            title: "Giriş Yap"
+            elevation: 5
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: app.go_to('welcome')]]
+            height: dp(56)
+        
+        Widget:  # Üst boşluk
 
-# Şifre alanı
-tk.Label(root, text="Password", bg="#5CCBF0", fg="white", font=("Helvetica", 12)).pack()
-password_entry = tk.Entry(root, show="*", font=("Helvetica", 12))
-password_entry.pack(pady=10, ipadx=10, ipady=5)
+        MDTextField:
+            id: email
+            hint_text: "E-posta"
+            icon_left: "email"
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {"center_x": 0.5}
+        
+        MDTextField:
+            id: password
+            hint_text: "Şifre"
+            icon_left: "lock"
+            password: True
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {"center_x": 0.5}
 
-# Şifreyi unuttum
-tk.Button(root, text="Forgot password?", bg="#5CCBF0", fg="white", borderwidth=0, command=forgot_password).pack(anchor='e', padx=30)
+        MDRaisedButton:
+            text: "Giriş Yap"
+            pos_hint: {"center_x": 0.5}
+            size_hint_x: 0.7
+            on_release: root.login_user(email.text, password.text)
+                    
+        MDTextButton:
+            text: "Hesabın yok mu? Kayıt ol"
+            on_release: root.manager.current = "signup"
+                    
+        Widget:  # Alt boşluk
+        
+       
 
-# Giriş butonu
-tk.Button(root, text="Log in", bg="#1B2C49", fg="white", font=("Helvetica", 12, "bold"),
-          command=login, padx=10, pady=5).pack(pady=30)
 
-# Kayıt ol bölümü
-footer_frame = tk.Frame(root, bg='#5CCBF0')
-footer_frame.pack(pady=10)
-tk.Label(footer_frame, text="Don't have an account?", bg='#5CCBF0', fg='white').pack(side='left')
-tk.Button(footer_frame, text="Sign up", bg='#5CCBF0', fg='white', font=("Helvetica", 10, "bold"),
-          borderwidth=0, command=sign_up).pack(side='left')
-
-root.mainloop()
+""")

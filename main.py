@@ -18,6 +18,14 @@ from kivy.clock import Clock  # Ekran yüklendiğinde veri çekmek için
 
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
+from kivymd.toast import toast
+
+import pyrebase
+from firebase_config import firebase_config, auth  # Yukarıda oluşturduğumuz dosya
+
+firebase = pyrebase.initialize_app(firebase_config)
+db = firebase.database()
+
 
 # Diğer ekranları import et
 from istanbul import IstanbulScreen
@@ -36,7 +44,9 @@ from planlayici import PlanlayiciScreen
 from cafeler_istanbul import CafelerIstanbulScreen, CafelerDetailIstanbul
 from cafeler_ankara import CafelerAnkaraScreen, CafelerDetailAnkara
 from favoriler import FavorilerScreen
-
+from login import LoginScreen  #login
+from signup import SignUpScreen #kayıt
+from welcome_screen import WelcomeScreen
 
 
 Window.size = (360, 640)
@@ -76,42 +86,10 @@ FloatLayout:
         CafelerIstanbulScreen:
         CafelerAnkaraScreen:
         FavorilerScreen:
+        LoginScreen:
+        SignUpScreen:
+        WelcomeScreen:
 
-    MDBottomNavigation:
-        size_hint: 1, None
-        height: dp(60)
-        pos_hint: {"x": 0, "y": 0}  # Alt köşeye sabitle
-        text_color_active: "blue"
-
-        MDBottomNavigationItem:
-            name: 'home'
-            text: 'Ana Sayfa'
-            icon: 'home'
-            on_tab_press: app.go_to('home')
-
-        MDBottomNavigationItem:
-            name: 'planner'
-            text: 'Planlayıcı'
-            icon: 'calendar-text'
-            on_tab_press: app.go_to('planlayici')
-
-        MDBottomNavigationItem:
-            name: 'saved'
-            text: 'Kaydedilenler'
-            icon: 'bookmark-outline'
-            on_tab_press: app.go_to('kaydedilenler')
-
-        MDBottomNavigationItem:
-            name: 'favorites'
-            text: 'Favoriler'
-            icon: 'heart-outline'
-            on_tab_press: app.go_to('favoriler')
-
-        MDBottomNavigationItem:
-            name: 'profile'
-            text: 'Profil'
-            icon: 'account'
-            on_tab_press: app.go_to('profile')
 
 <HomeScreen>:
     name: "home"
@@ -223,12 +201,51 @@ FloatLayout:
                                 theme_text_color: "Secondary"
                                 shorten: True
                                 max_lines: 3
+
+    MDBottomNavigation:
+        size_hint: 1, None
+        height: dp(60)
+        pos_hint: {"x": 0, "y": 0}  # Alt köşeye sabitle
+        text_color_active: "blue"
+
+        MDBottomNavigationItem:
+            name: 'home'
+            text: 'Ana Sayfa'
+            icon: 'home'
+            on_tab_press: app.go_to('home')
+
+        MDBottomNavigationItem:
+            name: 'planner'
+            text: 'Planlayıcı'
+            icon: 'calendar-text'
+            on_tab_press: app.go_to('planlayici')
+
+        MDBottomNavigationItem:
+            name: 'saved'
+            text: 'Kaydedilenler'
+            icon: 'bookmark-outline'
+            on_tab_press: app.go_to('kaydedilenler')
+
+        MDBottomNavigationItem:
+            name: 'favorites'
+            text: 'Favoriler'
+            icon: 'heart-outline'
+            on_tab_press: app.go_to('favoriler')
+
+        MDBottomNavigationItem:
+            name: 'profile'
+            text: 'Profil'
+            icon: 'account'
+            on_tab_press: app.go_to('profile')
 '''
 
 class LocalGuideApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Blue"
-        return Builder.load_string(KV)
+        root = Builder.load_string(KV)
+        root.ids.scr_mngr.current = "welcome"  # Eklendi: Uygulama login ekranıyla başlasın
+        return root
+
 
     def go_to(self, screen_name):
         if self.root.ids.scr_mngr.has_screen(screen_name):

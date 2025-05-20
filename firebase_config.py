@@ -1,4 +1,5 @@
 import pyrebase
+import os
 
 firebase_config = {
   "apiKey": "AIzaSyABgJnv0DNfzBvevwk6_odkPwPsCbvqDv0",
@@ -13,3 +14,4 @@ firebase_config = {
 
 firebase = pyrebase.initialize_app(firebase_config)
 auth = firebase.auth()
+db = firebase.database()

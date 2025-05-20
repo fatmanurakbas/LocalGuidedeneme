@@ -47,6 +47,7 @@ from favoriler import FavorilerScreen
 from login import LoginScreen  #login
 from signup import SignUpScreen #kayıt
 from welcome_screen import WelcomeScreen
+from forgot_password import ForgotPasswordScreen
 
 
 Window.size = (360, 640)
@@ -89,6 +90,7 @@ FloatLayout:
         LoginScreen:
         SignUpScreen:
         WelcomeScreen:
+        ForgotPasswordScreen:
 
 
 <HomeScreen>:

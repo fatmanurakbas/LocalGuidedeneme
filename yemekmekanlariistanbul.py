@@ -261,4 +261,41 @@ Builder.load_string("""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
+                    
+
+
+        # Alt Menü
+        MDBottomNavigation:
+            size_hint_y: 0.15
+            text_color_active: "blue"
+
+            MDBottomNavigationItem:
+                name: 'home'
+                text: 'Ana Sayfa'
+                icon: 'home'
+                on_tab_press: app.go_to('home')
+
+            MDBottomNavigationItem:
+                name: 'planner'
+                text: 'Planlayıcı'
+                icon: 'calendar-text'
+                on_tab_press: app.go_to('planlayici')
+
+            MDBottomNavigationItem:
+                name: 'saved'
+                text: 'Kaydedilenler'
+                icon: 'bookmark-outline'
+                on_tab_press: app.go_to('kaydedilenler')
+
+            MDBottomNavigationItem:
+                name: 'favorites'
+                text: 'Favoriler'
+                icon: 'heart-outline'
+                on_tab_press: app.go_to('favoriler')
+
+            MDBottomNavigationItem:
+                name: 'profile'
+                text: 'Profil'
+                icon: 'account'
+                on_tab_press: app.go_to('profile')   
 """)

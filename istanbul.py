@@ -4,7 +4,8 @@ from datetime import datetime
 from kivy.clock import Clock
 from kivy.metrics import dp
 import requests
-    
+
+from kivy.uix.screenmanager import Screen
 
 class IstanbulScreen(MDScreen):
     def on_enter(self):
@@ -51,6 +52,7 @@ class IstanbulScreen(MDScreen):
 Builder.load_string("""
 <IstanbulScreen>:
     name: "istanbul"
+    halign: "center"
 
     MDBoxLayout:
         orientation: "vertical"
@@ -350,4 +352,44 @@ Builder.load_string("""
                                     font_style: "Caption"
                                     theme_text_color: "Custom"
                                     text_color: 1, 1, 1, 1
+                    
+
+
+
+
+        # Alt Menü
+        MDBottomNavigation:
+            size_hint_y: 0.15
+            text_color_active: "blue"
+
+            MDBottomNavigationItem:
+                name: 'home'
+                text: 'Ana Sayfa'
+                icon: 'home'
+                on_tab_press: print("Geçiş deneniyor..."); app.go_to('home')
+
+
+            MDBottomNavigationItem:
+                name: 'planner'
+                text: 'Planlayıcı'
+                icon: 'calendar-text'
+                on_tab_press: app.go_to('planlayici')
+
+            MDBottomNavigationItem:
+                name: 'saved'
+                text: 'Kaydedilenler'
+                icon: 'bookmark-outline'
+                on_tab_press: app.go_to('kaydedilenler')
+
+            MDBottomNavigationItem:
+                name: 'favorites'
+                text: 'Favoriler'
+                icon: 'heart-outline'
+                on_tab_press: app.go_to('favoriler')
+
+            MDBottomNavigationItem:
+                name: 'profile'
+                text: 'Profil'
+                icon: 'account'
+                on_tab_press: app.go_to('profile')             
 """)

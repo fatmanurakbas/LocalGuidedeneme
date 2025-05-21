@@ -1,4 +1,6 @@
-from kivy.lang import Builder
+app = None  # main.py dosyasının en üstünde
+
+
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
@@ -8,9 +10,11 @@ from kivy.lang import Builder
 from kivymd.app import MDApp
 import requests  # Hava durumu API'si için
 from kivy.clock import Clock  # Ekran yüklendiğinde veri çekmek için
-# ... önceki importlar ...
-from home import HomeScreen  # ← BUNU BURAYA EKLE
 
+# ... önceki importlar ...
+
+
+from home import HomeScreen  # ← BUNU BURAYA EKLE
 from istanbul import IstanbulScreen
 from ankara import AnkaraScreen
 from profil import ProfileScreen
@@ -43,6 +47,8 @@ class HomeScreen(Screen):
 
 class LocalGuideApp(MDApp):
     def build(self):
+        global app
+        app = self
         Builder.load_file("main_panel.kv")
         sm = ScreenManager()
         
@@ -57,6 +63,7 @@ class LocalGuideApp(MDApp):
         sm.add_widget(KaydedilenlerScreen(name="kaydedilenler"))
         sm.add_widget(KaydedilenlerDetail(name="kaydedilenler_detail"))
         sm.add_widget(FavorilerScreen(name="favoriler"))
+        sm.add_widget(HomeScreen(name="home"))
 
         # İstanbul içerik ekranları
         sm.add_widget(FoodPlacesScreen(name="food_places"))
@@ -93,9 +100,16 @@ class LocalGuideApp(MDApp):
         sm.add_widget(ForgotPasswordScreen(name="forgot_password"))
 
         return sm
+    
 
     def go_to(self, screen_name):
-        self.root.current = screen_name
+        print(f"Ekran geçişi deneniyor: {screen_name}")
+        try:
+           self.root.current = screen_name
+        except Exception as e:
+           print(f"Ekran geçiş hatası: {e}")
+
+
 
 
     def go_back(self):

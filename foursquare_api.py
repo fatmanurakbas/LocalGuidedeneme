@@ -7,7 +7,8 @@ CATEGORY_IDS = {
     "restaurant": "13065",
     "kafe": "13032",
     "tarihi_yer": "16020",
-    "meydan": "16032"
+    "meydan": "16032",
+    "müze": "10027"
 }
 
 PHOTO_CACHE_FILE = "photo_cache.json"

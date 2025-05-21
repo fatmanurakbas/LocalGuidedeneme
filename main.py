@@ -25,13 +25,16 @@ from cafeler_ankara import CafelerAnkaraScreen, CafelerDetailAnkara
 from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etkinlik İstanbul için
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from planlayici import PlanlayiciScreen
-from kaydedilenler import KaydedilenlerScreen
+from kaydedilenler import KaydedilenlerScreen, KaydedilenlerDetail
 from favoriler import FavorilerScreen
 from login import LoginScreen
 from signup import SignUpScreen
 from welcome_screen import WelcomeScreen
 from forgot_password import ForgotPasswordScreen
 from kivy.core.window import Window
+from muze_istanbul import MuseumIstanbulScreen, MuseumIstanbulDetailScreen
+from muze_ankara import MuseumAnkaraScreen, MuseumAnkaraDetailScreen
+
 
 Window.size = (360, 640)  # Telefona uygun boyut  
 
@@ -52,6 +55,7 @@ class LocalGuideApp(MDApp):
         sm.add_widget(ProfileScreen(name="profile"))
         sm.add_widget(PlanlayiciScreen(name="planlayici"))
         sm.add_widget(KaydedilenlerScreen(name="kaydedilenler"))
+        sm.add_widget(KaydedilenlerDetail(name="kaydedilenler_detail"))
         sm.add_widget(FavorilerScreen(name="favoriler"))
 
         # İstanbul içerik ekranları
@@ -65,7 +69,8 @@ class LocalGuideApp(MDApp):
         sm.add_widget(CafelerDetailIstanbul(name="cafe_detail_istanbul"))
         sm.add_widget(SocialEventsIstanbulScreen(name="social_events_ist"))
         sm.add_widget( EventDetailScreen(name="event_detail"))
-
+        sm.add_widget(MuseumIstanbulDetailScreen(name="müze_istanbul_detail"))
+        sm.add_widget(MuseumIstanbulScreen(name="müze_istanbul"))
 
 
         # Ankara içerik ekranları
@@ -79,7 +84,8 @@ class LocalGuideApp(MDApp):
         sm.add_widget(CafelerDetailAnkara(name="cafe_detail_ankara"))
         sm.add_widget(SocialEventsAnkaraScreen(name="social_events_ankara"))
         sm.add_widget(EventDetailAnkara(name="event_detail_ankara"))
-
+        sm.add_widget(MuseumAnkaraDetailScreen(name="müze_ankara_detail"))
+        sm.add_widget(MuseumAnkaraScreen(name="müze_ankara"))
 
         # Auth ekranları
         sm.add_widget(LoginScreen(name="login"))
@@ -197,6 +203,34 @@ class LocalGuideApp(MDApp):
         screen.ids.cafe_description_ankara.text = description
         screen.ids.cafe_location_ankara.text = location
         screen.ids.cafe_hours_ankara.text = hours
+    
+    def show_müze_detail_istanbul(self, image, title, description, location, hours, *args):
+        self.go_to("müze_istanbul_detail")
+        screen = self.root.get_screen("müze_istanbul_detail")
+        screen.ids.müze_image.source = image
+        screen.ids.müze_title.text = title
+        screen.ids.müze_description.text = description
+        screen.ids.müze_location.text = location
+        screen.ids.müze_hours.text = hours
+    
+    def show_müze_detail_ankara(self, image, title, description, location, hours, *args):
+        self.go_to("müze_ankara_detail")
+        screen = self.root.get_screen("müze_ankara_detail")
+        screen.ids.müze_image.source = image
+        screen.ids.müze_title.text = title
+        screen.ids.müze_description.text = description
+        screen.ids.müze_location.text = location
+        screen.ids.müze_hours.text = hours
+
+    def show_kaydedilenler_detail(self, image, title, description, location, hours, *args):
+        self.go_to("kaydedilenler_detail")
+        screen = self.root.get_screen("kaydedilenler_detail")
+        screen.ids.saved_image.source = image
+        screen.ids.saved_title.text = title
+        screen.ids.saved_description.text = description
+        screen.ids.saved_location.text = location
+        screen.ids.saved_hours.text = hours
+
 
 if __name__ == '__main__':
     LocalGuideApp().run()

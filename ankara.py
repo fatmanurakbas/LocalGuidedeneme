@@ -13,7 +13,8 @@ class AnkaraScreen(MDScreen):
 
     def fetch_weather_data(self):
         api_key = "9cfff90aa46036e986416a727bdb45be"
-        url = f"https://api.openweathermap.org/data/2.5/weather?q=Istanbul&appid={api_key}&units=metric&lang=tr"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q=Ankara&appid={api_key}&units=metric&lang=tr"
+
         try:
             response = requests.get(url, timeout=5)
             data = response.json()

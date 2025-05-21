@@ -14,16 +14,16 @@ Builder.load_string("""
                 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.2, 0.4, 0.8, 1
+        md_bg_color: 1, 1, 1, 1
                     
         MDTopAppBar:
             title: "Etkinlikler"
             elevation: 5
-            md_bg_color: 0.1, 0.1, 0.5, 1
+            md_bg_color:"#5C6BC0"
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
             size_hint_y: None
             height: dp(56)
-                    
+
         ScrollView:
             MDBoxLayout:
                 orientation: "vertical"
@@ -71,13 +71,13 @@ Builder.load_string("""
                     
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.0, 0.2, 0.4, 1
+        md_bg_color: 1, 1, 1, 1
                 
         MDTopAppBar:
             title: "Etkinlikler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('social_events_ankara')]]
-            md_bg_color: 0.05, 0.05, 0.3, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
 

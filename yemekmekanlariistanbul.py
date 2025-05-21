@@ -11,6 +11,7 @@ from kivy.clock import Clock
 from kivy.properties import ListProperty
 from kivy.uix.boxlayout import BoxLayout
 
+
 class RestaurantCard(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -218,15 +219,25 @@ Builder.load_string("""
                         MDIconButton:
                             id: save_button
                             icon: "bookmark-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1  # ilk hali siyah
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.save_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
-
+                            on_release: 
+                                app.save_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
+                                self.icon = "bookmark"
+                                self.text_color = (0.1, 0.2, 0.7, 1)  # lacivert
+                    
                         MDIconButton:
                             id: favorite_button
                             icon: "heart-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1  # ilk hali siyah                           
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.favorite_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
-
+                            on_release: 
+                                app.favorite_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
+                                self.icon = "heart"  # ✔️ dolu hale gelir
+                                self.text_color = (1, 0, 0, 1)  # kırmızı
+                    
                     MDLabel:
                         id: food_description
                         text: ""

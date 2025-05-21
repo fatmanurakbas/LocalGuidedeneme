@@ -1,4 +1,4 @@
-app = None  # main.py dosyasının en üstünde
+
 
 
 from kivy.uix.screenmanager import Screen
@@ -43,6 +43,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.fitimage.fitimage import FitImage
 from kivy.metrics import dp
+from kivy.app import App
 
 
 Window.size = (360, 640)  # Telefona uygun boyut  
@@ -52,8 +53,6 @@ class HomeScreen(Screen):
 
 class LocalGuideApp(MDApp):
     def build(self):
-        global app
-        app = self
         Builder.load_file("main_panel.kv")
         sm = ScreenManager()
         
@@ -140,6 +139,11 @@ class LocalGuideApp(MDApp):
         screen.ids.food_description.text = description
         screen.ids.food_location.text = location
         screen.ids.food_hours.text = hours
+        # Butonları sıfırla (her detayda bağımsız çalışsın)
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
     def show_food_detail_ankara(self, image, title, description, location, hours, *args):
         self.go_to("food_detail_ankara")
@@ -149,6 +153,11 @@ class LocalGuideApp(MDApp):
         screen.ids.food_description_ankara.text = description
         screen.ids.food_location_ankara.text = location
         screen.ids.food_hours_ankara.text = hours
+        # 🔁 Butonları sıfırla
+        screen.ids.save_button_ankara.icon = "bookmark-outline"
+        screen.ids.save_button_ankara.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button_ankara.icon = "heart-outline"
+        screen.ids.favorite_button_ankara.text_color = (0, 0, 0, 1)
 
     def show_place_detail(self, image, title, description, location, hours, *args):
         self.go_to("tarihi_yer_detail")
@@ -158,15 +167,36 @@ class LocalGuideApp(MDApp):
         screen.ids.tarihi_yer_description.text = description
         screen.ids.tarihi_yer_location.text = location
         screen.ids.tarihi_yer_hours.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
-    def show_place_detail_ankara(self, image, title, description, location, hours, *args):
-        self.go_to("tarihi_yer_detail_ankara")
-        screen = self.root.get_screen("tarihi_yer_detail_ankara")
-        screen.ids.tarihi_yer_image_ankara.source = image
-        screen.ids.tarihi_yer_ankara_title.text = title
-        screen.ids.tarihi_yer_description_ankara.text = description
-        screen.ids.tarihi_yer_location_ankara.text = location
-        screen.ids.tarihi_yer_hours_ankara.text = hours
+    def show_unlu_yerler_istanbul(self, image, title, description, location, hours, *args):
+        self.go_to("unlu_yer_istanbul_detail")
+        screen = self.root.get_screen("unlu_yer_istanbul_detail")
+        screen.ids.unlu_image_istanbul.source = image
+        screen.ids.unlu_istanbul_title.text = title
+        screen.ids.unlu_description_istanbul.text = description
+        screen.ids.unlu_location_istanbul.text = location
+        screen.ids.unlu_hours_istanbul.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
+
+    def show_cafe_detail_istanbul(self, image, title, description, location, hours, *args):
+        self.go_to("cafe_detail_istanbul")
+        screen = self.root.get_screen("cafe_detail_istanbul")
+        screen.ids.cafe_image_istanbul.source = image
+        screen.ids.cafe_title_istanbul.text = title
+        screen.ids.cafe_description_istanbul.text = description
+        screen.ids.cafe_location_istanbul.text = location
+        screen.ids.cafe_hours_istanbul.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
     def show_event_detail_istanbul(self, image, title, description, location, hours, *args):
         self.go_to("event_detail")
@@ -177,24 +207,32 @@ class LocalGuideApp(MDApp):
         screen.ids.event_location.text = location
         screen.ids.event_hours.text = hours
 
-    def show_event_detail_ankara(self, image, title, description, location, hours, *args):
-        self.root.ids.scr_mngr.current = "event_detail_ankara"
-        screen = self.root.ids.scr_mngr.get_screen("event_detail_ankara")
-        screen.ids.event_image_ankara.source = image
-        screen.ids.event_ankara_title.text = title
-        screen.ids.event_description_ankara.text = description
-        screen.ids.event_location_ankara.text = location
-        screen.ids.event_hours_ankara.text = hours
 
+    def show_müze_detail_istanbul(self, image, title, description, location, hours, *args):
+        self.go_to("müze_istanbul_detail")
+        screen = self.root.get_screen("müze_istanbul_detail")
+        screen.ids.müze_image.source = image
+        screen.ids.müze_title.text = title
+        screen.ids.müze_description.text = description
+        screen.ids.müze_location.text = location
+        screen.ids.müze_hours.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
-    def show_unlu_yerler_istanbul(self, image, title, description, location, hours, *args):
-        self.go_to("unlu_yer_istanbul_detail")
-        screen = self.root.get_screen("unlu_yer_istanbul_detail")
-        screen.ids.unlu_image_istanbul.source = image
-        screen.ids.unlu_istanbul_title.text = title
-        screen.ids.unlu_description_istanbul.text = description
-        screen.ids.unlu_location_istanbul.text = location
-        screen.ids.unlu_hours_istanbul.text = hours
+    def show_place_detail_ankara(self, image, title, description, location, hours, *args):
+        self.go_to("tarihi_yer_detail_ankara")
+        screen = self.root.get_screen("tarihi_yer_detail_ankara")
+        screen.ids.tarihi_yer_image_ankara.source = image
+        screen.ids.tarihi_yer_ankara_title.text = title
+        screen.ids.tarihi_yer_description_ankara.text = description
+        screen.ids.tarihi_yer_location_ankara.text = location
+        screen.ids.tarihi_yer_hours_ankara.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
     def show_unlu_yerler_ankara(self, image, title, description, location, hours, *args):
         self.go_to("unlu_yer_ankara_detail")
@@ -204,16 +242,11 @@ class LocalGuideApp(MDApp):
         screen.ids.unlu_description_ankara.text = description
         screen.ids.unlu_location_ankara.text = location
         screen.ids.unlu_hours_ankara.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
-    def show_cafe_detail_istanbul(self, image, title, description, location, hours, *args):
-        self.go_to("cafe_detail_istanbul")
-        screen = self.root.get_screen("cafe_detail_istanbul")
-        screen.ids.cafe_image_istanbul.source = image
-        screen.ids.cafe_title_istanbul.text = title
-        screen.ids.cafe_description_istanbul.text = description
-        screen.ids.cafe_location_istanbul.text = location
-        screen.ids.cafe_hours_istanbul.text = hours
-        
     def show_cafe_detail_ankara(self, image, title, description, location, hours, *args):
         self.go_to("cafe_detail_ankara")
         screen = self.root.get_screen("cafe_detail_ankara")
@@ -222,16 +255,21 @@ class LocalGuideApp(MDApp):
         screen.ids.cafe_description_ankara.text = description
         screen.ids.cafe_location_ankara.text = location
         screen.ids.cafe_hours_ankara.text = hours
-    
-    def show_müze_detail_istanbul(self, image, title, description, location, hours, *args):
-        self.go_to("müze_istanbul_detail")
-        screen = self.root.get_screen("müze_istanbul_detail")
-        screen.ids.müze_image.source = image
-        screen.ids.müze_title.text = title
-        screen.ids.müze_description.text = description
-        screen.ids.müze_location.text = location
-        screen.ids.müze_hours.text = hours
-    
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
+
+    def show_event_detail_ankara(self, image, title, description, location, hours, *args):
+        self.go_to("event_detail_ankara")
+        screen = self.root.get_screen("event_detail_ankara")
+        screen.ids.event_image_ankara.source = image
+        screen.ids.event_ankara_title.text = title
+        screen.ids.event_description_ankara.text = description
+        screen.ids.event_location_ankara.text = location
+        screen.ids.event_hours_ankara.text = hours
+
+
     def show_müze_detail_ankara(self, image, title, description, location, hours, *args):
         self.go_to("müze_ankara_detail")
         screen = self.root.get_screen("müze_ankara_detail")
@@ -240,6 +278,10 @@ class LocalGuideApp(MDApp):
         screen.ids.müze_description.text = description
         screen.ids.müze_location.text = location
         screen.ids.müze_hours.text = hours
+        screen.ids.save_button.icon = "bookmark-outline"
+        screen.ids.save_button.text_color = (0, 0, 0, 1)
+        screen.ids.favorite_button.icon = "heart-outline"
+        screen.ids.favorite_button.text_color = (0, 0, 0, 1)
 
     def show_kaydedilenler_detail(self, image, title, description, location, hours, *args):
         self.go_to("kaydedilenler_detail")
@@ -250,7 +292,9 @@ class LocalGuideApp(MDApp):
         screen.ids.saved_location.text = location
         screen.ids.saved_hours.text = hours
 
-    def save_place(self, title, description, location, hours, image):
+
+
+    def save_place(self, title, description, location, hours, image,*args):
         """Mekanı kaydedilenlere ekler"""
         screen = self.root.get_screen("kaydedilenler")
         container = screen.ids.place_container
@@ -264,7 +308,7 @@ class LocalGuideApp(MDApp):
             radius=[12],
             size_hint_y=None,
             height=dp(260),
-            on_release=lambda: self.show_kaydedilenler_detail(image, title, description, location, hours)
+            on_release=lambda x: App.get_running_app().show_kaydedilenler_detail(image, title, description, location, hours)
         )
         
         # Kart içeriğini oluştur
@@ -307,7 +351,7 @@ class LocalGuideApp(MDApp):
         # Kartı container'a ekle
         container.add_widget(card)
 
-    def favorite_place(self, title, description, location, hours, image):
+    def favorite_place(self, title, description, location, hours, image, *args):
         """Mekanı favorilere ekler"""
         screen = self.root.get_screen("favoriler")
         container = screen.ids.place_container
@@ -321,7 +365,8 @@ class LocalGuideApp(MDApp):
             radius=[12],
             size_hint_y=None,
             height=dp(260),
-            on_release=lambda: self.show_favoriler_detail(image, title, description, location, hours)
+            on_release=lambda x: App.get_running_app().show_favoriler_detail(image, title, description, location, hours)
+
         )
         
         # Kart içeriğini oluştur

@@ -131,16 +131,16 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.6, 0.8, 0.9, 1
+        md_bg_color: 1,1,1,1
 
         MDTopAppBar:
             title: "Tarihi Yerler Ankara"  # Başlığı burada güncelledik
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
-
+                    
         ScrollView:
             MDBoxLayout:
                 id: place_container
@@ -254,13 +254,13 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.0, 0.2, 0.4, 1
+        md_bg_color: 1,1,1,1
 
         MDTopAppBar:
             title: "Tarihi Yerler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('tarihi_yerler_ankara')]]
-            md_bg_color: 0.05, 0.05, 0.3, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
 
@@ -304,18 +304,27 @@ Builder.load_string("""
                             bold: True
                             halign: "left"
                             size_hint_x: 0.9
+                    
 
                         MDIconButton:
                             id: save_button
                             icon: "bookmark-outline"
-                            pos_hint: {"center_y": 0.5}
-                            on_release: app.save_place(tarihi_yer_ankara_title.text, tarihi_yer_description_ankara.text, tarihi_yer_location_ankara.text, tarihi_yer_hours_ankara.text, tarihi_yer_image_ankara.source)
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            on_release:
+                                app.save_place(tarihi_yer_ankara_title.text, tarihi_yer_description_ankara.text, tarihi_yer_location_ankara.text, tarihi_yer_hours_ankara.text, tarihi_yer_image_ankara.source)
+                                self.icon = "bookmark"
+                                self.text_color = (0.1, 0.2, 0.7, 1)
 
                         MDIconButton:
                             id: favorite_button
                             icon: "heart-outline"
-                            pos_hint: {"center_y": 0.5}
-                            on_release: app.favorite_place(tarihi_yer_ankara_title.text, tarihi_yer_description_ankara.text, tarihi_yer_location_ankara.text, tarihi_yer_hours_ankara.text, tarihi_yer_image_ankara.source)
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            on_release:
+                                app.favorite_place(tarihi_yer_ankara_title.text, tarihi_yer_description_ankara.text, tarihi_yer_location_ankara.text, tarihi_yer_hours_ankara.text, tarihi_yer_image_ankara.source)
+                                self.icon = "heart"
+                                self.text_color = (1, 0, 0, 1)
 
                     MDLabel:
                         id: tarihi_yer_description_ankara

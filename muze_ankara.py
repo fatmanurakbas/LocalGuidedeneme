@@ -315,14 +315,25 @@ Builder.load_string("""
                         MDIconButton:
                             id: save_button
                             icon: "bookmark-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.save_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
+                            on_release:
+                                app.save_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
+                                self.icon = "bookmark"
+                                self.text_color = (0.1, 0.2, 0.7, 1)
 
                         MDIconButton:
                             id: favorite_button
                             icon: "heart-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.favorite_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
+                            on_release:
+                                app.favorite_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
+                                self.icon = "heart"
+                                self.text_color = (1, 0, 0, 1)
+
 
                     
                     Widget:

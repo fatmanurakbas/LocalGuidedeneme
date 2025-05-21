@@ -130,12 +130,12 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.2, 0.4, 0.8, 1
+        md_bg_color: 1, 1, 1, 1
         MDTopAppBar:
             title: "Ünlü Yerler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
-            md_bg_color: 0.1, 0.1, 0.5, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
 
@@ -219,13 +219,13 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: "vertical"
-        md_bg_color: 0.0, 0.2, 0.4, 1
+        md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
             title: "Ünlü Yerler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('unlu_yerler_ankara')]]
-            md_bg_color: 0.05, 0.05, 0.3, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
 
@@ -269,18 +269,29 @@ Builder.load_string("""
                             bold: True
                             halign: "left"
                             size_hint_x: 0.9
-
+                    
                         MDIconButton:
                             id: save_button
                             icon: "bookmark-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.save_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
+                            on_release:
+                                app.save_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
+                                self.icon = "bookmark"
+                                self.text_color = (0.1, 0.2, 0.7, 1)
 
                         MDIconButton:
                             id: favorite_button
                             icon: "heart-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
                             pos_hint: {"center_y": 0.5}
-                            on_release: app.favorite_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
+                            on_release:
+                                app.favorite_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
+                                self.icon = "heart"
+                                self.text_color = (1, 0, 0, 1)
+
 
                     MDLabel:
                         id: unlu_description_ankara

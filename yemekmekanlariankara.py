@@ -135,10 +135,10 @@ Builder.load_string("""
             title: "Yemek Mekanları"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
-            md_bg_color: "#5C6BC0"  # Soft mavi
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
-
+                    
         ScrollView:
             MDBoxLayout:
                 id: restaurant_container
@@ -314,6 +314,7 @@ Builder.load_string("""
                             icon: "heart-outline"
                             pos_hint: {"center_y": 0.5}
                             on_release: app.favorite_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+
 
                     MDLabel:
                         id: food_description_ankara

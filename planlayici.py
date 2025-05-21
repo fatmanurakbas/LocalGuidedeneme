@@ -21,7 +21,7 @@ Builder.load_string("""
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
             right_action_items: [["information-outline", lambda x: app.show_info()]]
-            md_bg_color: 0.2, 0.4, 0.6, 1
+            md_bg_color: "#5C6BC0"
             size_hint_y: None
             height: dp(56)
 

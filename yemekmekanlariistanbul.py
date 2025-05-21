@@ -216,8 +216,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(food_istanbul_title.text, food_description.text, food_location.text, food_hours.text, food_image.source)
 
                     MDLabel:
                         id: food_description

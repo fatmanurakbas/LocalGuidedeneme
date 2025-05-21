@@ -220,7 +220,7 @@ Builder.load_string("""
                     radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_place_detail("images/blue_mosque.jpg", "Sultanahmet Camii", "Sultanahmet Camii, İstanbul’un en bilinen tarihi camilerinden biridir ve mavi çinileri ile ünlüdür.", "Sultanahmet, İstanbul", "09:00–18:00")
+                    on_release: app.show_place_detail("images/blue_mosque.jpg", "Sultanahmet Camii", "Sultanahmet Camii, İstanbul'un en bilinen tarihi camilerinden biridir ve mavi çinileri ile ünlüdür.", "Sultanahmet, İstanbul", "09:00–18:00")
 
                     FitImage:
                         source: "images/blue_mosque.jpg"
@@ -293,7 +293,7 @@ Builder.load_string("""
 
                         MDLabel:
                             id: tarihi_yer_istanbul_title
-                            text: "Yer Adı"
+                            text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -301,8 +301,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(tarihi_yer_istanbul_title.text, tarihi_yer_description.text, tarihi_yer_location.text, tarihi_yer_hours.text, tarihi_yer_image.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(tarihi_yer_istanbul_title.text, tarihi_yer_description.text, tarihi_yer_location.text, tarihi_yer_hours.text, tarihi_yer_image.source)
 
                     MDLabel:
                         id: tarihi_yer_description

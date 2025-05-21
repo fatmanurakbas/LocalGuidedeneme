@@ -304,8 +304,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
 
                     MDLabel:
                         id: food_description_ankara

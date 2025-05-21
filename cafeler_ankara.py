@@ -192,7 +192,7 @@ Builder.load_string("""
                     radius: [12]
                     size_hint_y: None
                     height: self.minimum_height
-                    on_release: app.show_cafe_detail_ankara("images/LivaPastanesi.jpg", "Liva Pastanesi", "Klasikleşmiş tatlıları ve kahveleriyle Ankara’nın en bilinen kafelerinden.", "Kavaklıdere Mah. Bestekar Sok. No:82, Çankaya/Ankara", "08:00–23:00")
+                    on_release: app.show_cafe_detail_ankara("images/LivaPastanesi.jpg", "Liva Pastanesi", "Klasikleşmiş tatlıları ve kahveleriyle Ankara'nın en bilinen kafelerinden.", "Kavaklıdere Mah. Bestekar Sok. No:82, Çankaya/Ankara", "08:00–23:00")
 
                     FitImage:
                         source: "images/LivaPastanesi.jpg"
@@ -272,8 +272,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(cafe_title_ankara.text, cafe_description_ankara.text, cafe_location_ankara.text, cafe_hours_ankara.text, cafe_image_ankara.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(cafe_title_ankara.text, cafe_description_ankara.text, cafe_location_ankara.text, cafe_hours_ankara.text, cafe_image_ankara.source)
 
                     MDLabel:
                         id: cafe_description_ankara

@@ -25,6 +25,7 @@ Builder.load_string("""
 
         ScrollView:
             MDBoxLayout:
+                id: place_container
                 orientation: "vertical"
                 padding: dp(16)
                 spacing: dp(16)

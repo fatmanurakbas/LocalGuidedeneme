@@ -30,7 +30,7 @@ from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etki
 from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from planlayici import PlanlayiciScreen
 from kaydedilenler import KaydedilenlerScreen, KaydedilenlerDetail
-from favoriler import FavorilerScreen
+from favoriler import FavorilerScreen, FavorilerDetail
 from login import LoginScreen
 from signup import SignUpScreen
 from welcome_screen import WelcomeScreen
@@ -38,6 +38,11 @@ from forgot_password import ForgotPasswordScreen
 from kivy.core.window import Window
 from muze_istanbul import MuseumIstanbulScreen, MuseumIstanbulDetailScreen
 from muze_ankara import MuseumAnkaraScreen, MuseumAnkaraDetailScreen
+from kivymd.uix.card import MDCard
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.label import MDLabel
+from kivymd.uix.fitimage.fitimage import FitImage
+from kivy.metrics import dp
 
 
 Window.size = (360, 640)  # Telefona uygun boyut  
@@ -63,7 +68,7 @@ class LocalGuideApp(MDApp):
         sm.add_widget(KaydedilenlerScreen(name="kaydedilenler"))
         sm.add_widget(KaydedilenlerDetail(name="kaydedilenler_detail"))
         sm.add_widget(FavorilerScreen(name="favoriler"))
-        sm.add_widget(HomeScreen(name="home"))
+        sm.add_widget(FavorilerDetail(name="favoriler_detail"))
 
         # İstanbul içerik ekranları
         sm.add_widget(FoodPlacesScreen(name="food_places"))
@@ -164,8 +169,8 @@ class LocalGuideApp(MDApp):
         screen.ids.tarihi_yer_hours_ankara.text = hours
 
     def show_event_detail_istanbul(self, image, title, description, location, hours, *args):
-        self.root.ids.scr_mngr.current = "event_detail"
-        screen = self.root.ids.scr_mngr.get_screen("event_detail")
+        self.go_to("event_detail")
+        screen = self.root.get_screen("event_detail")
         screen.ids.event_image.source = image
         screen.ids.event_istanbul_title.text = title
         screen.ids.event_description.text = description
@@ -204,16 +209,16 @@ class LocalGuideApp(MDApp):
         self.go_to("cafe_detail_istanbul")
         screen = self.root.get_screen("cafe_detail_istanbul")
         screen.ids.cafe_image_istanbul.source = image
-        screen.ids.cafe_istanbul_title.text = title
+        screen.ids.cafe_title_istanbul.text = title
         screen.ids.cafe_description_istanbul.text = description
         screen.ids.cafe_location_istanbul.text = location
         screen.ids.cafe_hours_istanbul.text = hours
-
+        
     def show_cafe_detail_ankara(self, image, title, description, location, hours, *args):
         self.go_to("cafe_detail_ankara")
         screen = self.root.get_screen("cafe_detail_ankara")
         screen.ids.cafe_image_ankara.source = image
-        screen.ids.cafe_ankara_title.text = title
+        screen.ids.cafe_title_ankara.text = title
         screen.ids.cafe_description_ankara.text = description
         screen.ids.cafe_location_ankara.text = location
         screen.ids.cafe_hours_ankara.text = hours
@@ -244,6 +249,130 @@ class LocalGuideApp(MDApp):
         screen.ids.saved_description.text = description
         screen.ids.saved_location.text = location
         screen.ids.saved_hours.text = hours
+
+    def save_place(self, title, description, location, hours, image):
+        """Mekanı kaydedilenlere ekler"""
+        screen = self.root.get_screen("kaydedilenler")
+        container = screen.ids.place_container
+        
+        # Yeni kart oluştur
+        card = MDCard(
+            orientation="vertical",
+            padding=dp(10),
+            spacing=dp(10),
+            elevation=4,
+            radius=[12],
+            size_hint_y=None,
+            height=dp(260),
+            on_release=lambda: self.show_kaydedilenler_detail(image, title, description, location, hours)
+        )
+        
+        # Kart içeriğini oluştur
+        card_content = MDBoxLayout(orientation="vertical")
+        
+        # Resim
+        image_widget = FitImage(
+            source=image,
+            size_hint_y=None,
+            height=dp(180),
+            radius=[12, 12, 0, 0]
+        )
+        
+        # Başlık
+        title_label = MDLabel(
+            text=title,
+            font_style="H6",
+            theme_text_color="Primary",
+            halign="left",
+            size_hint_y=None,
+            height=dp(40)
+        )
+        
+        # Konum
+        location_label = MDLabel(
+            text=location,
+            font_style="Caption",
+            theme_text_color="Secondary",
+            halign="left",
+            size_hint_y=None,
+            height=dp(20)
+        )
+        
+        # Widget'ları karta ekle
+        card_content.add_widget(image_widget)
+        card_content.add_widget(title_label)
+        card_content.add_widget(location_label)
+        card.add_widget(card_content)
+        
+        # Kartı container'a ekle
+        container.add_widget(card)
+
+    def favorite_place(self, title, description, location, hours, image):
+        """Mekanı favorilere ekler"""
+        screen = self.root.get_screen("favoriler")
+        container = screen.ids.place_container
+        
+        # Yeni kart oluştur
+        card = MDCard(
+            orientation="vertical",
+            padding=dp(10),
+            spacing=dp(10),
+            elevation=4,
+            radius=[12],
+            size_hint_y=None,
+            height=dp(260),
+            on_release=lambda: self.show_favoriler_detail(image, title, description, location, hours)
+        )
+        
+        # Kart içeriğini oluştur
+        card_content = MDBoxLayout(orientation="vertical")
+        
+        # Resim
+        image_widget = FitImage(
+            source=image,
+            size_hint_y=None,
+            height=dp(180),
+            radius=[12, 12, 0, 0]
+        )
+        
+        # Başlık
+        title_label = MDLabel(
+            text=title,
+            font_style="H6",
+            theme_text_color="Primary",
+            halign="left",
+            size_hint_y=None,
+            height=dp(40)
+        )
+        
+        # Konum
+        location_label = MDLabel(
+            text=location,
+            font_style="Caption",
+            theme_text_color="Secondary",
+            halign="left",
+            size_hint_y=None,
+            height=dp(20)
+        )
+        
+        # Widget'ları karta ekle
+        card_content.add_widget(image_widget)
+        card_content.add_widget(title_label)
+        card_content.add_widget(location_label)
+        card.add_widget(card_content)
+        
+        # Kartı container'a ekle
+        container.add_widget(card)
+
+    def show_favoriler_detail(self, image, title, description, location, hours, *args):
+        """Favoriler detay sayfasını gösterir"""
+        self.go_to("favoriler_detail")
+        screen = self.root.get_screen("favoriler_detail")
+        screen.ids.fav_image.source = image
+        screen.ids.fav_title.text = title
+        screen.ids.fav_description.text = description
+        screen.ids.fav_location.text = location
+        screen.ids.fav_hours.text = hours
 
 
 if __name__ == '__main__':

@@ -304,7 +304,7 @@ Builder.load_string("""
 
                         MDLabel:
                             id: müze_title
-                            text: "Yer Adı"
+                            text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -312,9 +312,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
-                    
+                            on_release: app.save_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(müze_title.text, müze_description.text, müze_location.text, müze_hours.text, müze_image.source)
 
                     Widget:
                         size_hint_y: None

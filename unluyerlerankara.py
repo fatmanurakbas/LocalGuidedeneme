@@ -263,7 +263,7 @@ Builder.load_string("""
 
                         MDLabel:
                             id: unlu_ankara_title
-                            text: "ünlü yerler"
+                            text: ""
                             font_style: "H5"
                             theme_text_color: "Primary"
                             bold: True
@@ -271,8 +271,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(unlu_ankara_title.text, unlu_description_ankara.text, unlu_location_ankara.text, unlu_hours_ankara.text, unlu_image_ankara.source)
 
                     MDLabel:
                         id: unlu_description_ankara

@@ -207,8 +207,16 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
+                            id: save_button
                             icon: "bookmark-outline"
                             pos_hint: {"center_y": 0.5}
+                            on_release: app.save_place(cafe_title_istanbul.text, cafe_description_istanbul.text, cafe_location_istanbul.text, cafe_hours_istanbul.text, cafe_image_istanbul.source)
+
+                        MDIconButton:
+                            id: favorite_button
+                            icon: "heart-outline"
+                            pos_hint: {"center_y": 0.5}
+                            on_release: app.favorite_place(cafe_title_istanbul.text, cafe_description_istanbul.text, cafe_location_istanbul.text, cafe_hours_istanbul.text, cafe_image_istanbul.source)
 
                     MDLabel:
                         id: cafe_description_istanbul

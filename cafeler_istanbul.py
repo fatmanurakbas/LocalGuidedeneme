@@ -14,12 +14,11 @@ from kivy.uix.boxlayout import BoxLayout
 class CafeCard(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.orientation = 10
+        self.orientation = 'vertical'
         self.spacing = 10
         self.padding = 10
 
 class CafelerIstanbulScreen(Screen):
-   
     cafes = ListProperty([])
 
     def __init__(self, **kwargs):
@@ -44,66 +43,83 @@ class CafelerIstanbulScreen(Screen):
         container.clear_widgets()
 
         for kafe in self.places:
+            fsq_id = kafe.get('fsq_id')
+            name = kafe.get('name', '')
+            address = kafe.get('location', {}).get('formatted_address', '')
+
+            photo_urls = self.api.get_place_photos(fsq_id)
+            photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/300"
+
+
+            # Kart oluştur
+
+
             card = MDCard(
                 orientation="vertical",
-                padding=dp(10),
-                spacing=dp(10),
+                padding=0,  # padding kaldırıldı
+                spacing=dp(0),
                 elevation=4,
                 radius=[12],
                 size_hint_y=None,
-                height=dp(250)
+                height=dp(290),  # daha büyük kart yüksekliği
+                md_bg_color=(1, 1, 1, 1)
+            ) 
+
+            # Görsel
+            image = FitImage(
+               source=photo_url,
+               size_hint_y=None,
+               height=dp(240),
+               radius=[12, 12, 0, 0],
+               allow_stretch=True,
+               keep_ratio=True,
+               pos_hint={"center_x": 0.5}
             )
 
-            #RESİM
-            image = FitImage(
-                source=kafe.get('photos', [{}])[0].get('prefix', '') + 
-                      '300x200' + 
-                      kafe.get('photos', [{}])[0].get('suffix', ''),
-                size_hint_y=None,
-                height=dp(200),
-                radius=[12, 12, 0, 0]
-            )
-            # İsim
+            # İsim ve adres
             name_label = MDLabel(
-                text=kafe.get('name', ''),
+                text=name,
                 font_style="H6",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(30),
+                padding=(0, dp(5))
             )
-            
-            # Adres
+
             address_label = MDLabel(
-                text=kafe.get('location', {}).get('formatted_address', ''),
+                text=address,
                 font_style="Caption",
                 theme_text_color="Secondary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(24),
+                padding=(dp(12), 0)
             )
-            
+
             card.add_widget(image)
             card.add_widget(name_label)
             card.add_widget(address_label)
-            
-            # Detay sayfasına yönlendirme
+
             card.bind(on_release=lambda x, r=kafe: self.show_kafe_detail(r))
-            
             container.add_widget(card)
 
     def show_kafe_detail(self, kafe):
         app = MDApp.get_running_app()
-        app.show_cafe_detail_istanbul(
-            kafe.get('photos', [{}])[0].get('prefix', '') + 
-            '800x600' + 
-            kafe.get('photos', [{}])[0].get('suffix', ''),
-            kafe.get('name', ''),
-            kafe.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
-            kafe.get('location', {}).get('formatted_address', ''),
-            kafe.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
-        )
+        fsq_id = kafe.get('fsq_id')
+        photo_urls = self.api.get_place_photos(fsq_id)
+        photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/800"
 
+        if hasattr(app, 'show_cafe_detail_istanbul'):
+            app.show_cafe_detail_istanbul(
+                photo_url,
+                kafe.get('name', ''),
+                kafe.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+                kafe.get('location', {}).get('formatted_address', ''),
+                kafe.get('hours', {}).get('display', 'Calisma saatleri bilgisi mevcut degil.')
+            )
+        else:
+            print("Hata: show_cafe_detail_istanbul fonksiyonu uygulama dosyasında tanımlı değil.")
 
 class CafelerDetailIstanbul(Screen):
     pass

@@ -8,7 +8,6 @@ from kivymd.app import MDApp
 from foursquare_api import FoursquareAPI
 from kivy.metrics import dp
 from kivy.clock import Clock
-from kivy.properties import ListProperty
 from kivy.uix.boxlayout import BoxLayout
 
 class HistoricCard(BoxLayout):
@@ -18,7 +17,6 @@ class HistoricCard(BoxLayout):
         self.padding = 10
         self.spacing = 10
 
-
 class TarihiYerlerIstanbulScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -27,12 +25,12 @@ class TarihiYerlerIstanbulScreen(Screen):
 
     def load_tarihi_yerler(self, dt):
         results = self.api.search_places(
-            query="tarihi_yer",
+            query="tarihi yer",
             near="İstanbul, Turkey",
             category="tarihi_yer",
-            limit=20
+            limit=10
         )
-        
+
         if results and 'results' in results:
             self.places = results['results']
             self.update_ui()
@@ -40,71 +38,87 @@ class TarihiYerlerIstanbulScreen(Screen):
     def update_ui(self):
         container = self.ids.place_container
         container.clear_widgets()
-        
+
         for tarihi_yer in self.places:
+            fsq_id = tarihi_yer.get("fsq_id")
+            name = tarihi_yer.get("name", "")
+            address = tarihi_yer.get("location", {}).get("formatted_address", "")
+
+            # Fotoğraf API'den veya cache'ten
+            photo_urls = self.api.get_place_photos(fsq_id)
+            photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/300"
+
+
+            # Kart oluştur
+
+
             card = MDCard(
                 orientation="vertical",
-                padding=dp(10),
-                spacing=dp(10),
+                padding=0,  # padding kaldırıldı
+                spacing=dp(0),
                 elevation=4,
                 radius=[12],
                 size_hint_y=None,
-                height=dp(250)
-            )
-            
-            # Resim
+                height=dp(290),  # daha büyük kart yüksekliği
+                md_bg_color=(1, 1, 1, 1)
+            ) 
+
+            # Görsel
             image = FitImage(
-                source=tarihi_yer.get('photos', [{}])[0].get('prefix', '') + 
-                      '300x200' + 
-                      tarihi_yer.get('photos', [{}])[0].get('suffix', ''),
-                size_hint_y=None,
-                height=dp(200),
-                radius=[12, 12, 0, 0]
+               source=photo_url,
+               size_hint_y=None,
+               height=dp(240),
+               radius=[12, 12, 0, 0],
+               allow_stretch=True,
+               keep_ratio=True,
+               pos_hint={"center_x": 0.5}
             )
-            
-            # İsim
+
+            # İsim ve adres
             name_label = MDLabel(
-                text=tarihi_yer.get('name', ''),
+                text=name,
                 font_style="H6",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(30),
+                padding=(0, dp(5))
             )
-            
-            # Adres
+
             address_label = MDLabel(
-                text=tarihi_yer.get('location', {}).get('formatted_address', ''),
+                text=address,
                 font_style="Caption",
                 theme_text_color="Secondary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(24),
+                padding=(dp(12), 0)
             )
-            
+
             card.add_widget(image)
             card.add_widget(name_label)
             card.add_widget(address_label)
-            
-            # Detay sayfasına yönlendirme
+
             card.bind(on_release=lambda x, r=tarihi_yer: self.show_tarihi_yer_detail(r))
-            
             container.add_widget(card)
 
     def show_tarihi_yer_detail(self, tarihi_yer):
         app = MDApp.get_running_app()
+        fsq_id = tarihi_yer.get('fsq_id')
+        photo_urls = self.api.get_place_photos(fsq_id)
+        photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/800"
+
         app.show_place_detail(
-            tarihi_yer.get('photos', [{}])[0].get('prefix', '') + 
-            '800x600' + 
-            tarihi_yer.get('photos', [{}])[0].get('suffix', ''),
-            tarihi_yer.get('name', '') ,
+            photo_url,
+            tarihi_yer.get('name', ''),
             tarihi_yer.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
-            tarihi_yer.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamamıştır.',
+            tarihi_yer.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
             tarihi_yer.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
         )
 
 class TarihiYerDetailScreen(Screen):
     pass
+
 
 Builder.load_string("""
 <TarihiYerlerIstanbulScreen>:

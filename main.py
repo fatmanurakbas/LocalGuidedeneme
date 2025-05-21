@@ -83,7 +83,7 @@ class LocalGuideApp(MDApp):
         self.root.current = screen_name
 
 
-    def go_back(self):
+    def go_back(self, *args):
         self.root.ids.scr_mngr.current = "home"
 
     def show_info(self):

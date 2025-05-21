@@ -54,13 +54,13 @@ Builder.load_string("""
 
     MDBoxLayout:
         orientation: 'vertical'
-        md_bg_color: 0.2, 0.4, 0.8, 1
+        md_bg_color: 1,1,1,1
 
         MDTopAppBar:
             title: "Ankara"
             elevation: 5
-            left_action_items: [["arrow-left", lambda x: app.go_back()]]
-            md_bg_color: 0.2, 0.4, 0.8, 1
+            left_action_items: [["arrow-left", lambda x: app.go_to('home')]]
+            md_bg_color: "#5C6BC0"  # Soft mavi
             size_hint_y: None
             height: dp(56)
 

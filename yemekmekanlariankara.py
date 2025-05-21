@@ -25,14 +25,13 @@ class FoodPlacesAnkaraScreen(Screen):
         super().__init__(**kwargs)
         self.api = FoursquareAPI()
         Clock.schedule_once(self.load_restaurants)
-    
+
     def load_restaurants(self, dt):
         results = self.api.search_places(
             query="restaurant",
             near="Ankara, Turkey",
-            limit=20
+            limit=10
         )
-      
         if results and 'results' in results:
             self.restaurants = results['results']
             self.update_ui()
@@ -42,59 +41,78 @@ class FoodPlacesAnkaraScreen(Screen):
         container.clear_widgets()
 
         for restaurant in self.restaurants:
+            fsq_id = restaurant.get('fsq_id')
+            name = restaurant.get('name', '')
+            address = restaurant.get('location', {}).get('formatted_address', '')
+
+            # Fotoğraf URL'si (önce cache kontrol edilir)
+            photo_urls = self.api.get_place_photos(fsq_id)
+            photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/300"
+
+
+            # Kart oluştur
+
+
             card = MDCard(
                 orientation="vertical",
-                padding=dp(10),
-                spacing=dp(10),
+                padding=0,  # padding kaldırıldı
+                spacing=dp(0),
                 elevation=4,
                 radius=[12],
                 size_hint_y=None,
-                height=dp(250)
-            )
+                height=dp(290),  # daha büyük kart yüksekliği
+                md_bg_color=(1, 1, 1, 1)
+            ) 
 
+            # Görsel
             image = FitImage(
-                source=restaurant.get('photos', [{}])[0].get('prefix', '') + 
-                      '300x200' + 
-                      restaurant.get('photos', [{}])[0].get('suffix', ''),
-                size_hint_y=None,
-                height=dp(200),
-                radius=[12, 12, 0, 0]
+               source=photo_url,
+               size_hint_y=None,
+               height=dp(240),
+               radius=[12, 12, 0, 0],
+               allow_stretch=True,
+               keep_ratio=True,
+               pos_hint={"center_x": 0.5}
             )
 
+            # İsim ve adres
             name_label = MDLabel(
-                text=restaurant.get('name', ''),
+                text=name,
                 font_style="H6",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(30),
+                padding=(0, dp(5))
             )
-             
 
             address_label = MDLabel(
-                text=restaurant.get('location', {}).get('formatted_address', ''),
+                text=address,
                 font_style="Caption",
                 theme_text_color="Secondary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(24),
+                padding=(dp(12), 0)
             )
 
             card.add_widget(image)
             card.add_widget(name_label)
             card.add_widget(address_label)
-            
-            # Detay sayfasına yönlendirme
+
+            # Detay ekranına yönlendirme
             card.bind(on_release=lambda x, r=restaurant: self.show_restaurant_detail_ankara(r))
-            
+
             container.add_widget(card)
 
     def show_restaurant_detail_ankara(self, restaurant):
         app = MDApp.get_running_app()
+        fsq_id = restaurant.get('fsq_id')
+        photo_urls = self.api.get_place_photos(fsq_id)
+        photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/800"
+
         app.show_food_detail_ankara(
-            restaurant.get('photos', [{}])[0].get('prefix', '') + 
-            '800x600' + 
-            restaurant.get('photos', [{}])[0].get('suffix', ''),
+            photo_url,
             restaurant.get('name', ''),
             restaurant.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
             restaurant.get('location', {}).get('formatted_address', ''),

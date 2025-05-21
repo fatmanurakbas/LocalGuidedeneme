@@ -1,5 +1,5 @@
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen # Burada kivy.uix.screenmanager'dan import ediyoruz
+from kivy.uix.screenmanager import Screen
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -18,11 +18,9 @@ class PlazaCard(BoxLayout):
         self.padding = 10
         self.spacing = 10
 
-
 class UnluYerlerIstanbulScreen(Screen):
     meydanlar = ListProperty([])
 
-    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.api = FoursquareAPI()
@@ -33,9 +31,9 @@ class UnluYerlerIstanbulScreen(Screen):
             query="meydan",
             near="İstanbul, Turkey",
             category="meydan",
-            limit=20
+            limit=10
         )
-        
+
         if results and 'results' in results:
             self.places = results['results']
             self.update_ui()
@@ -43,71 +41,87 @@ class UnluYerlerIstanbulScreen(Screen):
     def update_ui(self):
         container = self.ids.place_container
         container.clear_widgets()
-        
+
         for meydan in self.places:
+            fsq_id = meydan.get('fsq_id')
+            name = meydan.get('name', '')
+            address = meydan.get('location', {}).get('formatted_address', '')
+
+            # Fotoğrafı API'den veya cache'ten al
+            photo_urls = self.api.get_place_photos(fsq_id)
+            photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/300"
+
+
+            # Kart oluştur
+
+
             card = MDCard(
                 orientation="vertical",
-                padding=dp(10),
-                spacing=dp(10),
+                padding=0,  # padding kaldırıldı
+                spacing=dp(0),
                 elevation=4,
                 radius=[12],
                 size_hint_y=None,
-                height=dp(250)
-            )
-            
-            # Resim
+                height=dp(290),  # daha büyük kart yüksekliği
+                md_bg_color=(1, 1, 1, 1)
+            ) 
+
+            # Görsel
             image = FitImage(
-                source=meydan.get('photos', [{}])[0].get('prefix', '') + 
-                      '300x200' + 
-                      meydan.get('photos', [{}])[0].get('suffix', ''),
-                size_hint_y=None,
-                height=dp(200),
-                radius=[12, 12, 0, 0]
+               source=photo_url,
+               size_hint_y=None,
+               height=dp(240),
+               radius=[12, 12, 0, 0],
+               allow_stretch=True,
+               keep_ratio=True,
+               pos_hint={"center_x": 0.5}
             )
-            
-            # İsim
+
+            # İsim ve adres
             name_label = MDLabel(
-                text=meydan.get('name', ''),
+                text=name,
                 font_style="H6",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(30),
+                padding=(0, dp(5))
             )
-            
-            # Adres
+
             address_label = MDLabel(
-                text=meydan.get('location', {}).get('formatted_address', ''),
+                text=address,
                 font_style="Caption",
                 theme_text_color="Secondary",
                 halign="left",
                 size_hint_y=None,
-                height=dp(30)
+                height=dp(24),
+                padding=(dp(12), 0)
             )
-            
+
             card.add_widget(image)
             card.add_widget(name_label)
             card.add_widget(address_label)
-            
-            # Detay sayfasına yönlendirme
+
             card.bind(on_release=lambda x, r=meydan: self.show_unlu_yer_detail(r))
-            
             container.add_widget(card)
 
     def show_unlu_yer_detail(self, meydan):
         app = MDApp.get_running_app()
+        fsq_id = meydan.get('fsq_id')
+        photo_urls = self.api.get_place_photos(fsq_id)
+        photo_url = photo_urls[0] if photo_urls else "https://via.placeholder.com/800"
+
         app.show_unlu_yerler_istanbul(
-            meydan.get('photos', [{}])[0].get('prefix', '') + 
-            '800x600' + 
-            meydan.get('photos', [{}])[0].get('suffix', ''),
-            meydan.get('name', '') ,
+            photo_url,
+            meydan.get('name', ''),
             meydan.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
-            meydan.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamamıştır.',
+            meydan.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
             meydan.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
         )
 
 class UnluYerlerIstanbulDetailScreen(Screen):
     pass
+
 
 Builder.load_string("""
 <UnluYerlerIstanbulScreen>:

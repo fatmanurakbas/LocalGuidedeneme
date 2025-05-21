@@ -19,7 +19,7 @@ Builder.load_string("""
             title: "Kaydedilenler"
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
-           md_bg_color: "#5C6BC0"  # Soft mavi
+            md_bg_color: "#5C6BC0"  # Soft mavi
             size_hint_y: None
             height: dp(56) 
 

@@ -22,6 +22,8 @@ from unluyerleristanbul import UnluYerlerIstanbulScreen, UnluYerlerIstanbulDetai
 from unluyerlerankara import UnluYerlerAnkaraScreen, UnluYerlerAnkaraDetailScreen
 from cafeler_istanbul import CafelerIstanbulScreen, CafelerDetailIstanbul
 from cafeler_ankara import CafelerAnkaraScreen, CafelerDetailAnkara
+from EtkinlikIstanbul import SocialEventsIstanbulScreen, EventDetailScreen #Etkinlik İstanbul için
+from EtkinlikAnkara import SocialEventsAnkaraScreen, EventDetailAnkara # Etkinlik Ankara için
 from planlayici import PlanlayiciScreen
 from kaydedilenler import KaydedilenlerScreen
 from favoriler import FavorilerScreen
@@ -61,6 +63,10 @@ class LocalGuideApp(MDApp):
         sm.add_widget(UnluYerlerIstanbulDetailScreen(name="unlu_yer_istanbul_detail"))
         sm.add_widget(CafelerIstanbulScreen(name="cafeler_istanbul"))
         sm.add_widget(CafelerDetailIstanbul(name="cafe_detail_istanbul"))
+        sm.add_widget(SocialEventsIstanbulScreen(name="social_events_ist"))
+        sm.add_widget( EventDetailScreen(name="event_detail"))
+
+
 
         # Ankara içerik ekranları
         sm.add_widget(FoodPlacesAnkaraScreen(name="food_places_ankara"))
@@ -71,6 +77,9 @@ class LocalGuideApp(MDApp):
         sm.add_widget(UnluYerlerAnkaraDetailScreen(name="unlu_yer_ankara_detail"))
         sm.add_widget(CafelerAnkaraScreen(name="cafeler_ankara"))
         sm.add_widget(CafelerDetailAnkara(name="cafe_detail_ankara"))
+        sm.add_widget(SocialEventsAnkaraScreen(name="social_events_ankara"))
+        sm.add_widget(EventDetailAnkara(name="event_detail_ankara"))
+
 
         # Auth ekranları
         sm.add_widget(LoginScreen(name="login"))
@@ -84,7 +93,7 @@ class LocalGuideApp(MDApp):
 
 
     def go_back(self):
-        self.root.ids.scr_mngr.current = "home"
+        self.root.current = "home"
 
     def show_info(self):
         print("Bilgi tuşuna basıldı.")
@@ -132,6 +141,25 @@ class LocalGuideApp(MDApp):
         screen.ids.tarihi_yer_description_ankara.text = description
         screen.ids.tarihi_yer_location_ankara.text = location
         screen.ids.tarihi_yer_hours_ankara.text = hours
+
+    def show_event_detail_istanbul(self, image, title, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "event_detail"
+        screen = self.root.ids.scr_mngr.get_screen("event_detail")
+        screen.ids.event_image.source = image
+        screen.ids.event_istanbul_title.text = title
+        screen.ids.event_description.text = description
+        screen.ids.event_location.text = location
+        screen.ids.event_hours.text = hours
+
+    def show_event_detail_ankara(self, image, title, description, location, hours, *args):
+        self.root.ids.scr_mngr.current = "event_detail_ankara"
+        screen = self.root.ids.scr_mngr.get_screen("event_detail_ankara")
+        screen.ids.event_image_ankara.source = image
+        screen.ids.event_ankara_title.text = title
+        screen.ids.event_description_ankara.text = description
+        screen.ids.event_location_ankara.text = location
+        screen.ids.event_hours_ankara.text = hours
+
 
     def show_unlu_yerler_istanbul(self, image, title, description, location, hours, *args):
         self.go_to("unlu_yer_istanbul_detail")

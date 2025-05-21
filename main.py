@@ -2,6 +2,12 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
+
+import webbrowser
+from kivy.lang import Builder
+from kivymd.app import MDApp
+import requests  # Hava durumu API'si için
+from kivy.clock import Clock  # Ekran yüklendiğinde veri çekmek için
 # ... önceki importlar ...
 from home import HomeScreen  # ← BUNU BURAYA EKLE
 
@@ -75,6 +81,21 @@ class LocalGuideApp(MDApp):
 
     def go_to(self, screen_name):
         self.root.current = screen_name
+
+
+    def go_back(self):
+        self.root.ids.scr_mngr.current = "home"
+
+    def show_info(self):
+        print("Bilgi tuşuna basıldı.")
+
+    def konuma_git(self, adres):
+        url = f"https://www.google.com/maps/dir/?api=1&destination={adres.replace(' ', '+')}"
+        try:
+        # google mapsi varsayılan tarayıcıda açar. 
+            webbrowser.open(url)
+        except Exception as e:
+            print("Harita açılamadı:", e)    
 
     def show_food_detail(self, image, title, description, location, hours, *args):
         self.go_to("food_detail")

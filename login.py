@@ -85,7 +85,7 @@ Builder.load_string("""
         MDTopAppBar:
             title: "Giriş Yap            "
             elevation: 1
-            md_bg_color: get_color_from_hex("#474ED7")  # Koyu mavi
+            md_bg_color: get_color_from_hex("#5C6BC0")  # Koyu mavi
             specific_text_color: "white"
             left_action_items: [["arrow-left", lambda x: app.go_to('welcome')]]
             height: dp(56)
@@ -176,7 +176,7 @@ Builder.load_string("""
                     font_size: theme.FONT_SIZE_BUTTON
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 1
-                    md_bg_color: get_color_from_hex(theme.PRIMARY_COLOR)
+                    md_bg_color: "#5C6BC0"
                     on_release: root.login_user(email.text, password.text)
                     
                 Widget:

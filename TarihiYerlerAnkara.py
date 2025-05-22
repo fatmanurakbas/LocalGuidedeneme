@@ -42,7 +42,7 @@ class TarihiYerlerAnkaraScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
 
-        for tarihi_yer in self.places:
+        for tarihi_yer in self.places[1:]:
             fsq_id = tarihi_yer.get('fsq_id')
             name = tarihi_yer.get('name', '')
             address = tarihi_yer.get('location', {}).get('formatted_address', '')

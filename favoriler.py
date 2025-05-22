@@ -41,7 +41,7 @@ Builder.load_string("""
                     height: dp(260)
                     padding: dp(10)
                     spacing: dp(10)
-                    on_release: app.show_food_detail("images/sultanahmet.jpg", "Tarihi Sultanahmet Köftecisi", "1920'den bu yana lezzet sunan tarihi mekan.", "Divan Yolu Cad. No:12, Sultanahmet/İstanbul", "11:00–23:00")
+                    on_release: app.show_favoriler_detail("images/sultanahmet.jpg", "Tarihi Sultanahmet Köftecisi", "1920'den bu yana lezzet sunan tarihi mekan.", "Divan Yolu Cad. No:12, Sultanahmet/İstanbul", "11:00–23:00")
 
                     FitImage:
                         source: "images/sultanahmet.jpg"
@@ -74,7 +74,7 @@ Builder.load_string("""
                     height: dp(260)
                     padding: dp(10)
                     spacing: dp(10)
-                    on_release: app.show_food_detail_ankara("images/LivaPastanesi.jpg", "Liva Pastanesi", "Tatlıları ve şık atmosferiyle ünlü Ankara mekanı.", "Bestekar Sok. No:82, Çankaya/Ankara", "08:00–23:00")
+                    on_release: app.show_favoriler_detail("images/LivaPastanesi.jpg", "Liva Pastanesi", "Tatlıları ve şık atmosferiyle ünlü Ankara mekanı.", "Bestekar Sok. No:82, Çankaya/Ankara", "08:00–23:00")
 
                     FitImage:
                         source: "images/LivaPastanesi.jpg"

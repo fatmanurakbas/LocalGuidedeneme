@@ -304,16 +304,24 @@ Builder.load_string("""
                             size_hint_x: 0.9
 
                         MDIconButton:
-                            id: save_button
+                            id: save_button_ankara
                             icon: "bookmark-outline"
-                            pos_hint: {"center_y": 0.5}
-                            on_release: app.save_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            on_release:
+                                app.save_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+                                self.icon = "bookmark"
+                                self.text_color = (0.1, 0.2, 0.7, 1)
 
                         MDIconButton:
-                            id: favorite_button
+                            id: favorite_button_ankara
                             icon: "heart-outline"
-                            pos_hint: {"center_y": 0.5}
-                            on_release: app.favorite_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            on_release:
+                                app.favorite_place(food_ankara_title.text, food_description_ankara.text, food_location_ankara.text, food_hours_ankara.text, food_image_ankara.source)
+                                self.icon = "heart"
+                                self.text_color = (1, 0, 0, 1)
 
 
                     MDLabel:

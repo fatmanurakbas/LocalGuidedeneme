@@ -42,7 +42,7 @@ class UnluYerlerAnkaraScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
 
-        for meydan in self.places:
+        for meydan in self.places[2:]:
             fsq_id = meydan.get('fsq_id')
             name = meydan.get('name', '')
             address = meydan.get('location', {}).get('formatted_address', '')

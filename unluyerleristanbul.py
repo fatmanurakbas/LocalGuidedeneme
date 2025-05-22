@@ -80,12 +80,14 @@ class UnluYerlerIstanbulScreen(Screen):
             # İsim ve adres
             name_label = MDLabel(
                 text=name,
-                font_style="H6",
+                font_style="Body1",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
                 height=dp(30),
-                padding=(0, dp(5))
+                padding=(dp(12), dp(5)),
+                shorten=True,
+                shorten_from='right'                
             )
 
             address_label = MDLabel(
@@ -95,7 +97,9 @@ class UnluYerlerIstanbulScreen(Screen):
                 halign="left",
                 size_hint_y=None,
                 height=dp(24),
-                padding=(dp(12), 0)
+                padding=(dp(12), 0),
+                shorten=True,
+                shorten_from='right'                
             )
 
             card.add_widget(image)
@@ -263,7 +267,7 @@ Builder.load_string("""
                         MDLabel:
                             id: unlu_istanbul_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -306,10 +310,11 @@ Builder.load_string("""
                     MDSeparator:
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
-
+                        padding: [dp(11.5), 0, 0, 0]  # Sola 16dp boşluk ekledik, bu sayede içerik sağa kayar
+                    
                         MDIcon:
                             icon: "map-marker"
                             theme_text_color: "Secondary"

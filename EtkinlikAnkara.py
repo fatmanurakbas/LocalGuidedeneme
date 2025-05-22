@@ -65,6 +65,173 @@ Builder.load_string("""
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
+                    
+                # 2. Etkinlik
+                MDCard:
+                    orientation: "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/bale.png", "The Imperial Russian Ballet Company Swan Lake-Kuğu Gölü Balesi", "Swan Lake-Kuğu Gölü Balesi'nde aşk, ihanet ve dönüşüm temalarını işleyen bir hikaye anlatılır.", "Oran Açık Hava Sahnesi, Oran, Kudüs Cd. 26 - 1, 6550 Çankaya/Ankara", "21 Haziran 2025 Cumartesi, 21:00")
+
+                    FitImage: 
+                        source: "images/bale.png"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "The Imperial Russian Ballet Company / Swan Lake-Kuğu Gölü Balesi"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    MDLabel:
+                        text: "Oran Açık Hava Sahnesi, Oran, Kudüs Cd. 26 - 1, 06550 Çankaya/Ankara"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                # 3. Etkinlik
+                MDCard:
+                    orientation : "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/dans.jpg", "Aleksandrov Rus Kızılordu Korosu ve Dans Topluluğu", "Dünyanın en eski ve en büyük korolarından biri olan Aleksandrov Rus Kızılordu Korosu büyüleyici Rus, Türk müzikleri ile dansın ritmiyle buluşacak benzersiz performansıyla, izleyenlere eşsiz bir deneyim yaşatmaya hazırlanıyor.", "Oran Açık Hava Sahnesi, Oran, Kudüs Cd. 26 - 1, 06550 Çankaya/Ankara", "28 Mayıs Çarşamba, 20:30")
+
+                    FitImage: 
+                        source: "images/dans.jpg"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "Aleksandrov Rus Kızılordu Korosu ve Dans Topluluğu"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    MDLabel:
+                        text: "Oran Açık Hava Sahnesi, Oran, Kudüs Cd. 26 - 1, 06550 Çankaya/Ankara"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                # 4. Etkinlik
+                MDCard:
+                    orientation : "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/hande.jpg", "Hande Yener Konseri", "Hande Yener, muhteşem sahne performansı ve hit şarkılarıyla Jolly Joker sahnesinde!", "Jolly Joker Ankara,  Kavaklıdere, Kızılırmak Cd. No:14, 06420 Çankaya/Ankara", "30 Mayıs Cuma, 21:00")
+
+                    FitImage: 
+                        source: "images/hande.jpg"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "Hande Yener Konseri"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    MDLabel:
+                        text: "Jolly Joker Ankara,  Kavaklıdere, Kızılırmak Cd. No:14, 06420 Çankaya/Ankara"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                # 5.Etkinlik
+                MDCard:
+                    orientation : "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/frida.jpg", "Kökler ve İzler - Frida Kahlo", "Kökler ve İzler, Frida Kahlo’nun yalnızca tablolarında değil, onu besleyen köklerde saklı izlerini takip eden sürükleyici bir deneyimdir.", "FLOW Digital Theatre", "23 Mayıs Cuma, 14:00")
+
+                    FitImage: 
+                        source: "images/frida.jpg"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "Kökler ve İzler - Frida Kahlo"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    MDLabel:
+                        text: "FLOW Digital Theatre"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                # 6. Etkinlik
+                MDCard:
+                    orientation : "vertical"
+                    padding: dp(10)
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [12]
+                    elevation: 4
+                    on_release: app.show_event_detail_ankara("images/fantafest.jpg", "Fanta Fest 2025 Ankara", "Gittiği her şehre eğlence götüren Fanta Fest, bu yılda katılımcılarına müzik, eğlence ve birbirinden keyifli aktivitelerle dolu bir festival yaşatacak.", "Atatürk Orman Çiftliği, Yenimahalle / Ankara", "3 Ağustos")
+
+                    FitImage: 
+                        source: "images/fantafest.jpg"
+                        size_hint_y: None
+                        height: dp(200)
+                        radius: [12, 12, 0, 0]
+
+                    MDLabel:
+                        text: "Fanta Fest 2025 Ankara"
+                        font_style: "H6"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    MDLabel:
+                        text: "Atatürk Orman Çiftliği, Yenimahalle / Ankara"
+                        font_style: "Caption"
+                        theme_text_color: "Secondary"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                
 
 <EventDetailAnkara>:
     name: "event_detail_ankara"

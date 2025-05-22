@@ -1,6 +1,3 @@
-
-
-
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
@@ -153,7 +150,7 @@ class LocalGuideApp(MDApp):
         screen.ids.food_description_ankara.text = description
         screen.ids.food_location_ankara.text = location
         screen.ids.food_hours_ankara.text = hours
-        # 🔁 Butonları sıfırla
+        # Butonları sıfırla
         screen.ids.save_button_ankara.icon = "bookmark-outline"
         screen.ids.save_button_ankara.text_color = (0, 0, 0, 1)
         screen.ids.favorite_button_ankara.icon = "heart-outline"
@@ -291,6 +288,15 @@ class LocalGuideApp(MDApp):
         screen.ids.saved_description.text = description
         screen.ids.saved_location.text = location
         screen.ids.saved_hours.text = hours
+
+    def show_favoriler_detail(self, image, title, description, location, hours, *args):
+        self.go_to("favoriler_detail")
+        screen = self.root.get_screen("favoriler_detail")
+        screen.ids.fav_image.source = image
+        screen.ids.fav_title.text = title
+        screen.ids.fav_description.text = description
+        screen.ids.fav_location.text = location
+        screen.ids.fav_hours.text = hours
 
 
 

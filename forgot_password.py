@@ -76,9 +76,9 @@ Builder.load_string("""
         padding: 0
         
         MDTopAppBar:
-            title: "Şifremi Unuttum"
+            title: "Parola Sıfırla  "
             elevation: 1
-            md_bg_color: get_color_from_hex(theme.PRIMARY_COLOR)
+            md_bg_color: "#5C6BC0"
             specific_text_color: "white"
             left_action_items: [["arrow-left", lambda x: app.go_to('login')]]
             shadow_softness: 8
@@ -108,7 +108,7 @@ Builder.load_string("""
                     padding: [0, 0, 0, dp(20)]
                     
                     MDLabel:
-                        text: "Şifremi Unuttum"
+                        text: "Parola Sıfırla"
                         font_style: "H5"
                         halign: "center"
                         size_hint_y: None
@@ -135,7 +135,9 @@ Builder.load_string("""
                     line_color_focus: get_color_from_hex(theme.PRIMARY_COLOR)
                     helper_text_mode: "on_error"
                     helper_text: "Geçerli bir email adresi girin"
+
                 
+                    
                 MDBoxLayout:
                     orientation: "vertical"
                     spacing: dp(20)
@@ -143,7 +145,7 @@ Builder.load_string("""
                     
                     Widget:
                         size_hint_y: None
-                        height: dp(20)
+                        height: dp(100)
 
                     MDFillRoundFlatButton:
                         id: reset_button
@@ -151,7 +153,7 @@ Builder.load_string("""
                         font_size: theme.FONT_SIZE_BUTTON
                         pos_hint: {"center_x": 0.5}
                         size_hint_x: 1
-                        md_bg_color: get_color_from_hex(theme.PRIMARY_COLOR)
+                        md_bg_color: "#5C6BC0"
                         on_release: root.send_verification(email.text)
                     
                     MDTextButton:
@@ -160,7 +162,8 @@ Builder.load_string("""
                         font_style: "Body2"
                         pos_hint: {"center_x": 0.5}
                         on_release: root.manager.current = "login"
-                
+                    
+                    
                 MDSpinner:
                     id: reset_spinner
                     size_hint: None, None

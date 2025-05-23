@@ -118,9 +118,9 @@ class UnluYerlerIstanbulScreen(Screen):
         app.show_unlu_yerler_istanbul(
             photo_url,
             meydan.get('name', ''),
-            meydan.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            meydan.get('description', '') or 'Tarihi ve kültürel önemiyle öne çıkan, şehrin en çok ziyaret edilen ve simgesel noktalarındandır.',
             meydan.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
-            meydan.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            meydan.get('hours', {}).get('display', 'Her zaman açıktır.')
         )
 
 class UnluYerlerIstanbulDetailScreen(Screen):

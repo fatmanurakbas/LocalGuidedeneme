@@ -86,7 +86,7 @@ Builder.load_string('''
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Profilim"
+            title: "Profilim        "
             elevation: 5
             md_bg_color: "#5C6BC0"
             left_action_items: [["arrow-left", lambda x: app.go_back()]]

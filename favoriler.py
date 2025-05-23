@@ -16,7 +16,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Favoriler"
+            title: "Favoriler       "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
             md_bg_color: "#5C6BC0"
@@ -106,7 +106,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Favoriler"
+            title: "Favoriler       "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('favoriler')]]
             md_bg_color: "#5C6BC0"

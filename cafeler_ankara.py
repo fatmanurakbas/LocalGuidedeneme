@@ -114,9 +114,9 @@ class CafelerAnkaraScreen(Screen):
             app.show_cafe_detail_ankara(
                 photo_url,
                 kafe.get('name', ''),
-                kafe.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+                kafe.get('description', '') or 'Sıcak bir atmosferde kahvenizi yudumlamak için sizleri bekliyoruz.',
                 kafe.get('location', {}).get('formatted_address', ''),
-                kafe.get('hours', {}).get('display', 'Calisma saatleri bilgisi mevcut degil.')
+                kafe.get('hours', {}).get('display', '') or 'Her gün sabah 08:00\'den akşam 22:00\'ye kadar hizmet vermektedir.'
             )
         else:
             print("Hata: app.show_cafe_detail_ankara fonksiyonu bulunamadı. Uygulama ana dosyasında bu fonksiyon tanımlanmalı.")

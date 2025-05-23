@@ -115,11 +115,10 @@ class UnluYerlerAnkaraScreen(Screen):
         app.show_unlu_yerler_ankara(
             photo_url,
             meydan.get('name', ''),
-            meydan.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
-            meydan.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
-            meydan.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            meydan.get('description', '') or 'Ankara’nın tarihi ve kültürel dokusunu keşfetmeniz için bu noktayı ziyaret edebilirsiniz.',
+            meydan.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bilgisi mevcut değildir.',
+            meydan.get('hours', {}).get('display', '') or 'Ziyaret saatleriyle ilgili detaylı bilgiye ilgili kaynaklardan ulaşabilirsiniz.'
         )
-
 class UnluYerlerAnkaraDetailScreen(Screen):
     pass
 

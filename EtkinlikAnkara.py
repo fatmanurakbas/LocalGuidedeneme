@@ -52,7 +52,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "Fanta Fest 2025 Ankara"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -85,7 +85,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "The Imperial Russian Ballet Company / Swan Lake-Kuğu Gölü Balesi"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -118,7 +118,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "Aleksandrov Rus Kızılordu Korosu ve Dans Topluluğu"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -151,7 +151,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "Hande Yener Konseri"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -184,7 +184,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "Kökler ve İzler - Frida Kahlo"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -217,7 +217,7 @@ Builder.load_string("""
 
                     MDLabel:
                         text: "Fanta Fest 2025 Ankara"
-                        font_style: "H6"
+                        font_style: "Body1"
                         theme_text_color: "Primary"
                         halign: "left"
                         size_hint_y: None
@@ -241,7 +241,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
                 
         MDTopAppBar:
-            title: "Etkinlikler"
+            title: "Etkinlikler    "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('social_events_ankara')]]
             md_bg_color: "#5C6BC0"
@@ -283,7 +283,7 @@ Builder.load_string("""
                         MDLabel:
                             id: event_ankara_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Body1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -306,9 +306,10 @@ Builder.load_string("""
                     MDSeparator:
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
+                        padding: [dp(11.5), 0, 0, 0]
 
                         MDIcon:
                             icon: "map-marker"

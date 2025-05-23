@@ -20,9 +20,14 @@ class WelcomeScreen(Screen):
         Clock.schedule_once(self.animate_elements, 0.2)
     
     def animate_elements(self, dt):
+
+        # animate logo image
+        logo_img_anim = Animation(opacity=1, duration=1, t='out_cubic')
+        logo_img_anim.start(self.ids.logo_image)
+
         # Animate logo
-        logo_anim = Animation(opacity=1, size_hint_y=0.2, duration=0.8, t='out_cubic')
-        logo_anim.start(self.ids.logo_label)
+        """logo_anim = Animation(opacity=1, size_hint_y=0.2, duration=0.8, t='out_cubic')
+        logo_anim.start(self.ids.logo_label)"""
         
         # Animate title
         title_anim = Animation(opacity=1, size_hint_y=0.1, duration=0.8, t='out_cubic')
@@ -77,18 +82,19 @@ Builder.load_string("""
         Widget:
             size_hint_y: 0.1
             
-        MDLabel:
-            id: logo_label
-            text: "LOCAL GUIDE"
-            font_style: "H3"
-            halign: "center"
-            theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1
-            bold: True
-            size_hint_y: 0.15
+                    
+        Image:
+            id: logo_image
+            source: "images/logo6.png"
+            size_hint: None, None
+            size: dp(200), dp(200)  # dilediğin gibi değiştirilebilir
+            pos_hint: {"center_x": 0.5}
             opacity: 0
-            font_name: "MyFont1"
-            font_size: "32sp"
+            allow_stretch: True
+            keep_ratio: True
+
+
+        
             
         MDLabel:
             id: title_label

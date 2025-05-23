@@ -80,12 +80,14 @@ class TarihiYerlerAnkaraScreen(Screen):
             # İsim ve adres
             name_label = MDLabel(
                 text=name,
-                font_style="H6",
+                font_style="Body1",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
                 height=dp(30),
-                padding=(0, dp(5))
+                padding=(0, dp(5)),
+                shorten=True,
+                shorten_from='right'
             )
 
             address_label = MDLabel(
@@ -95,7 +97,10 @@ class TarihiYerlerAnkaraScreen(Screen):
                 halign="left",
                 size_hint_y=None,
                 height=dp(24),
-                padding=(dp(12), 0)
+                padding=(dp(12), 0),
+                shorten=True,
+                shorten_from='right'
+
             )
 
             card.add_widget(image)

@@ -52,5 +52,32 @@
             "sa",
             "sa"
         ]
+    },
+    {
+        "tarih": "6/6/2025",
+        "notlar": "h",
+        "yapilacaklar": [
+            "hh",
+            "h",
+            "h"
+        ]
+    },
+    {
+        "tarih": "7/7/2025",
+        "notlar": "hh",
+        "yapilacaklar": [
+            "hh",
+            "hh",
+            "hh"
+        ]
+    },
+    {
+        "tarih": "23/05/2025",
+        "notlar": "h",
+        "yapilacaklar": [
+            "h",
+            "h",
+            "h"
+        ]
     }
 ]

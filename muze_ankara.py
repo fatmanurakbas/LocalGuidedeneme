@@ -80,7 +80,7 @@ class MuseumAnkaraScreen(Screen):
             # İsim ve adres
             name_label = MDLabel(
                 text=name,
-                font_style="H6",
+                font_style="Body1",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
@@ -306,7 +306,7 @@ Builder.load_string("""
                         MDLabel:
                             id: müze_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -353,10 +353,11 @@ Builder.load_string("""
 
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
-
+                        padding: [dp(11.5), 0, 0, 0]
+                    
                         MDIcon:
                             icon: "map-marker"
                             theme_text_color: "Secondary"
@@ -367,6 +368,8 @@ Builder.load_string("""
                             font_style: "Caption"
                             theme_text_color: "Secondary"
                             halign: "left"
+                            shorten: True
+                            shorten_from: 'right'
 
                     MDBoxLayout:
                         spacing: dp(6)

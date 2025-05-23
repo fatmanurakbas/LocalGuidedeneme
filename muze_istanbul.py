@@ -305,7 +305,7 @@ Builder.load_string("""
                         MDLabel:
                             id: müze_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -353,9 +353,10 @@ Builder.load_string("""
                     
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
+                        padding: [dp(11.5), 0, 0, 0]
 
                         MDIcon:
                             icon: "map-marker"

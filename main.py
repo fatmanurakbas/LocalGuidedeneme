@@ -35,6 +35,10 @@ from forgot_password import ForgotPasswordScreen
 from kivy.core.window import Window
 from muze_istanbul import MuseumIstanbulScreen, MuseumIstanbulDetailScreen
 from muze_ankara import MuseumAnkaraScreen, MuseumAnkaraDetailScreen
+from edit_profile import EditProfileScreen
+from notification_settings import NotificationSettingsScreen
+from theme_settings import ThemeSettingsScreen
+from account_security import AccountSecurityScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
@@ -65,6 +69,12 @@ class LocalGuideApp(MDApp):
         sm.add_widget(KaydedilenlerDetail(name="kaydedilenler_detail"))
         sm.add_widget(FavorilerScreen(name="favoriler"))
         sm.add_widget(FavorilerDetail(name="favoriler_detail"))
+        sm.add_widget(ProfileScreen(name="profile"))
+        sm.add_widget(ForgotPasswordScreen(name="forgot_password"))
+        sm.add_widget(EditProfileScreen(name="edit_profile"))
+        sm.add_widget(NotificationSettingsScreen(name="notification_settings"))
+        sm.add_widget(ThemeSettingsScreen(name="theme_settings"))
+        sm.add_widget(AccountSecurityScreen(name="account_security"))
 
         # İstanbul içerik ekranları
         sm.add_widget(FoodPlacesScreen(name="food_places"))

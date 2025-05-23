@@ -4,13 +4,46 @@ from kivy.uix.screenmanager import Screen
 from firebase_config import auth, db
 from kivymd.toast import toast
 from kivy.metrics import dp
+from kivymd.uix.screen import MDScreen
+from kivy.uix.filechooser import FileChooserIconView
+from kivy.uix.popup import Popup
+
 
 # Dialog sınıfını kaldırıyoruz çünkü artık kullanmıyoruz
 
 class ProfileScreen(Screen):
-    
     def on_enter(self, *args):
         self.load_user_data()
+
+
+    def select_profile_image(self):
+        content = FileChooserIconView()
+        popup = Popup(title="Fotoğraf Seç", content=content, size_hint=(0.9, 0.9))
+
+        def on_file_selected(instance, selection):
+            if selection:
+                selected_file = selection[0]
+                self.ids.profile_image.source = selected_file
+                popup.dismiss()
+        
+        content.bind(on_selection=on_file_selected)
+        popup.open()
+
+    def go_to_edit_profile(self):
+        self.manager.transition.direction = "left"
+        self.manager.current = "edit_profile"
+
+    def go_to_notification_settings(self):
+        self.manager.transition.direction = "left"
+        self.manager.current = "notification_settings"
+
+    def go_to_theme_settings(self):
+        self.manager.transition.direction = "left"
+        self.manager.current = "theme_settings"
+
+    def go_to_account_security(self):
+        self.manager.transition.direction = "left"
+        self.manager.current = "account_security"
     
     def load_user_data(self):
         try:
@@ -67,20 +100,31 @@ Builder.load_string('''
                 spacing: dp(20)
                 size_hint_y: None
                 adaptive_height: True
-
-                MDCard:
-                    size_hint: None, None
-                    size: dp(120), dp(120)
-                    pos_hint: {'center_x': 0.5}
-                    radius: [60]
-                    md_bg_color: 0.8, 0.8, 0.8, 1
-                    elevation: 5
                     
-                    MDIcon:
-                        icon: "account"
-                        pos_hint: {"center_x": .5, "center_y": .5}
-                        font_size: dp(80)
-                        color: 0.5, 0.5, 0.5, 1
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    size_hint: None, None
+                    size: dp(130), dp(130)
+                    pos_hint: {"center_x": 0.5}
+                    on_touch_down:
+                        if self.collide_point(*args[1].pos): root.select_profile_image()
+
+                    Image:
+                        id: profile_image
+                        source: "default_profile.png"
+                        size_hint: 1, 1
+                        allow_stretch: True
+                        keep_ratio: True
+                        canvas.before:
+                            Color:
+                                rgba: 0.8, 0.8, 0.8, 1
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [100]
+    
+
 
                 MDLabel:
                     id: profile_name
@@ -140,6 +184,7 @@ Builder.load_string('''
                         height: dp(48)
                         md_bg_color: "#5C6BC0"
                         elevation: 2
+                        on_release: root.go_to_edit_profile()
                         
                     MDRaisedButton:
                         text: "Parola Değiştir"
@@ -170,6 +215,7 @@ Builder.load_string('''
                         height: dp(48)
                         md_bg_color: "#5C6BC0"
                         elevation: 2
+                        on_release: root.go_to_notification_settings()
 
                     MDRaisedButton:
                         text: "Tema Ayarları"
@@ -177,6 +223,7 @@ Builder.load_string('''
                         height: dp(48)
                         md_bg_color: "#5C6BC0"
                         elevation: 2
+                        on_release: root.go_to_theme_settings()
                 
                 MDCard:
                     orientation: "vertical"
@@ -200,6 +247,7 @@ Builder.load_string('''
                         md_bg_color: "#FF5252"
                         text_color: 1, 1, 1, 1
                         elevation: 2
+                        on_release: root.go_to_account_security()
 
                     MDRaisedButton:
                         text: "Çıkış Yap"

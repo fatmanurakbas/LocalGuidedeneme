@@ -181,7 +181,7 @@ Builder.load_string("""
                         MDLabel:
                             id: saved_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Body1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"

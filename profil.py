@@ -150,6 +150,13 @@ Builder.load_string('''
                     halign: "center"
                     font_style: "Body2"
 
+                MDLabel:
+                    id: profile_bio
+                    text: ""
+                    halign: "center"
+                    font_style: "Body2"
+                    theme_text_color: "Secondary"
+
                 MDBoxLayout:
                     orientation: 'horizontal'
                     spacing: dp(10)

@@ -31,8 +31,25 @@ class EditProfileScreen(MDScreen):
         surname = self.ids.surname_field.text
         bio = self.ids.bio_field.text
         photo_path = self.ids.profile_image.source
+
+        # Profili güncelleyen ekranı bul
+        profile_screen = self.manager.get_screen("profile")
+ 
+        # 1. Ad-Soyad güncelle
+        profile_screen.ids.profile_name.text = f"{name} {surname}"
+    
+        # 2. Kullanıcı adı (küçük harf ve @ ile)
+        profile_screen.ids.profile_username.text = f"@{name.lower()}{surname.lower()}"
+    
+        # 3. Profil resmi güncelle
+        if photo_path:
+            profile_screen.ids.profile_image.source = photo_path
+
         print("Profil Bilgileri:", name, surname, bio, photo_path)
         toast("Profil kaydedildi.")
+        self.manager.current = "profile"  # Profill ekranına geri dön
+
+
 
     kv_string = '''
 <EditProfileScreen>:

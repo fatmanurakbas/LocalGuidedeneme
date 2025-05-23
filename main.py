@@ -47,7 +47,9 @@ from kivy.metrics import dp
 from kivy.app import App
 
 
-Window.size = (360, 640)  # Telefona uygun boyut  
+Window.size = (360, 640)  # Telefona uygun boyut 
+# 💡 TAM BU NOKTADA yaz:
+Builder.load_string(EditProfileScreen.kv_string) 
 
 class HomeScreen(Screen):
     pass

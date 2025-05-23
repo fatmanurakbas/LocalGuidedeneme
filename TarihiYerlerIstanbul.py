@@ -133,7 +133,7 @@ Builder.load_string("""
         md_bg_color:1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler "
+            title: "Tarihi Yerler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -256,7 +256,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler"
+            title: "Tarihi Yerler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('tarihi_yerler_istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -298,7 +298,7 @@ Builder.load_string("""
                         MDLabel:
                             id: tarihi_yer_istanbul_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"

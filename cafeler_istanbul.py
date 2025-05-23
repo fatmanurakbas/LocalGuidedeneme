@@ -137,7 +137,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
                     
         MDTopAppBar:
-            title: "Kafeler     "
+            title: "Kafeler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -162,7 +162,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Cafeler - İstanbul"
+            title: "Kafeler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('cafeler_istanbul')]]
             md_bg_color: "#5C6BC0"

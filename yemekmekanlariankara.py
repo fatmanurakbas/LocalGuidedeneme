@@ -115,11 +115,10 @@ class FoodPlacesAnkaraScreen(Screen):
         app.show_food_detail_ankara(
             photo_url,
             restaurant.get('name', ''),
-            restaurant.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            restaurant.get('description', '') or 'Ankara\'nın enfes tatlarını deneyimlemeniz için sizleri bekliyoruz.',
             restaurant.get('location', {}).get('formatted_address', ''),
-            restaurant.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
-        )
-
+            restaurant.get('hours', {}).get('display', '') or 'Her gün sabah 08:00\'den akşam 22:00\'ye kadar hizmet vermektedir.'
+)
 class FoodDetailAnkaraScreen(Screen):
     pass
 

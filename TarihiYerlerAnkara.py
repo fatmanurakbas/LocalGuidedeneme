@@ -121,11 +121,10 @@ class TarihiYerlerAnkaraScreen(Screen):
         app.show_place_detail_ankara(
             photo_url,
             tarihi_yer.get('name', ''),
-            tarihi_yer.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            tarihi_yer.get('description', '') or 'Ankara’nın tarihini ve kültürel mirasını yakından tanımak için bu özel mekânı ziyaret edebilirsiniz.',
             tarihi_yer.get('location', {}).get('formatted_address', '') or 'Adres bilgisi bulunamadı.',
-            tarihi_yer.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            tarihi_yer.get('hours', {}).get('display', '') or 'Ziyaret saatleri: 09:00 - 17:30'
         )
-
 class TarihiYerDetailAnkaraScreen(Screen):
     pass
 

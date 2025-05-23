@@ -118,9 +118,9 @@ class MuseumAnkaraScreen(Screen):
         app.show_müze_detail_ankara(
             photo_url,
             müze.get('name', ''),
-            müze.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            müze.get('description', '') or 'Sanatın, tarihin ve bilimin izinde keyifli bir yolculuk için bu müzeyi ziyaret edebilirsiniz.',
             müze.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
-            müze.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            müze.get('hours', {}).get('display', '') or 'Ziyaret saatleri: 09:00 - 17:30'
         )
 
 class MuseumAnkaraDetailScreen(Screen):

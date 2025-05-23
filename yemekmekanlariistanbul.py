@@ -43,7 +43,7 @@ class FoodPlacesScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
         
-        for restaurant in self.places:
+        for restaurant in self.places[1:]:
             fsq_id = restaurant.get('fsq_id')
             name = restaurant.get('name', '')
             address = restaurant.get('location', {}).get('formatted_address', '')
@@ -129,9 +129,9 @@ class FoodPlacesScreen(Screen):
         app.show_food_detail(
             photo_url,
             restaurant.get('name', ''),
-            restaurant.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            restaurant.get('description', '') or 'Her damak tadına hitap eden menüsüyle, lezzetli yemekler sunan keyifli bir buluşma noktasıdır.',
             restaurant.get('location', {}).get('formatted_address', ''),
-            restaurant.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            restaurant.get('hours', {}).get('display', 'Her gün 9.00-22.00')
         )
 
 class FoodDetailScreen(Screen):

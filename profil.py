@@ -7,6 +7,8 @@ from kivy.metrics import dp
 from kivymd.uix.screen import MDScreen
 from kivy.uix.filechooser import FileChooserIconView
 from kivy.uix.popup import Popup
+from os.path import expanduser
+
 
 
 # Dialog sınıfını kaldırıyoruz çünkü artık kullanmıyoruz
@@ -15,19 +17,23 @@ class ProfileScreen(Screen):
     def on_enter(self, *args):
         self.load_user_data()
 
-
     def select_profile_image(self):
-        content = FileChooserIconView()
+        content = FileChooserIconView(filters=["*.png", "*.jpg", "*.jpeg"])
+        home = expanduser("~")
+        content.path = f"{home}/Pictures"
+
+
         popup = Popup(title="Fotoğraf Seç", content=content, size_hint=(0.9, 0.9))
 
         def on_file_selected(instance, selection):
-            if selection:
-                selected_file = selection[0]
-                self.ids.profile_image.source = selected_file
-                popup.dismiss()
-        
-        content.bind(on_selection=on_file_selected)
+           if selection:
+               selected_file = selection[0]
+               self.ids.profile_image.source = selected_file
+               popup.dismiss()
+
+        content.bind(on_submit=lambda instance, selection, touch: on_file_selected(instance, selection))
         popup.open()
+
 
     def go_to_edit_profile(self):
         self.manager.transition.direction = "left"

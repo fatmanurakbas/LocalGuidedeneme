@@ -59,7 +59,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
                     
         MDTopAppBar:
-            title: "İSTANBUL"
+            title: "İSTANBUL        "
             anchor_title: "center"
             title_font_style: "H2"
             elevation: 5

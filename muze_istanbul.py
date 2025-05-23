@@ -115,9 +115,9 @@ class MuseumIstanbulScreen(Screen):
         app.show_müze_detail_istanbul(
             photo_url,
             müze.get('name', ''),
-            müze.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            müze.get('description', '') or 'Zamanın derinliklerinden gelen eserlerle ziyaretçilerini geçmişe taşıyan bir kültür hazinesidir.',
             müze.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
-            müze.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            müze.get('hours', {}).get('display', '09.00 - 17.00')
         )
 
 class MuseumIstanbulDetailScreen(Screen):

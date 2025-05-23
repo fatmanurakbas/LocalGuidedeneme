@@ -80,12 +80,14 @@ class CafelerAnkaraScreen(Screen):
             # İsim ve adres
             name_label = MDLabel(
                 text=name,
-                font_style="H6",
+                font_style="Body1",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
                 height=dp(30),
-                padding=(0, dp(5))
+                padding=(dp(12), dp(5)),
+                shorten=True,
+                shorten_from='right'
             )
 
             address_label = MDLabel(
@@ -95,7 +97,9 @@ class CafelerAnkaraScreen(Screen):
                 halign="left",
                 size_hint_y=None,
                 height=dp(24),
-                padding=(dp(12), 0)
+                padding=(dp(12), 0),
+                shorten=True,
+                shorten_from='right'
             )
             card.add_widget(image)
             card.add_widget(name_label)
@@ -134,7 +138,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Kafeler - Ankara"
+            title: "Kafeler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
             md_bg_color: "#5C6BC0"
@@ -223,7 +227,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Cafeler - Ankara"
+            title: "Kafeler         "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('cafeler_ankara')]]
             md_bg_color: "#5C6BC0"
@@ -265,7 +269,7 @@ Builder.load_string("""
                         MDLabel:
                             id: cafe_title_ankara
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -306,9 +310,10 @@ Builder.load_string("""
                     MDSeparator:
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
+                        padding: [dp(11.5), 0, 0, 0]
 
                         MDIcon:
                             icon: "map-marker"

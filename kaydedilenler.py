@@ -16,7 +16,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
                     
         MDTopAppBar:
-            title: "Kaydedilenler"
+            title: "Kaydedilenler       "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_back()]]
             md_bg_color: "#5C6BC0"  # Soft mavi
@@ -139,7 +139,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Kaydedilenler"
+            title: "Kaydedilenler       "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('kaydedilenler')]]
             md_bg_color: "#5C6BC0"
@@ -181,7 +181,7 @@ Builder.load_string("""
                         MDLabel:
                             id: saved_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Body1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"

@@ -17,7 +17,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
                     
         MDTopAppBar:
-            title: "Etkinlikler"
+            title: "Etkinlikler        "
             elevation: 5
             md_bg_color:"#5C6BC0"
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
@@ -197,40 +197,7 @@ Builder.load_string("""
                         halign: "left"
                         size_hint_y: None
                         height: self.texture_size[1]
-                    
-                # 6. Etkinlik
-                MDCard:
-                    orientation : "vertical"
-                    padding: dp(10)
-                    spacing: dp(10)
-                    size_hint_y: None
-                    height: self.minimum_height
-                    radius: [12]
-                    elevation: 4
-                    on_release: app.show_event_detail_ankara("images/fantafest.jpg", "Fanta Fest 2025 Ankara", "Gittiği her şehre eğlence götüren Fanta Fest, bu yılda katılımcılarına müzik, eğlence ve birbirinden keyifli aktivitelerle dolu bir festival yaşatacak.", "Atatürk Orman Çiftliği, Yenimahalle / Ankara", "3 Ağustos")
-
-                    FitImage: 
-                        source: "images/fantafest.jpg"
-                        size_hint_y: None
-                        height: dp(200)
-                        radius: [12, 12, 0, 0]
-
-                    MDLabel:
-                        text: "Fanta Fest 2025 Ankara"
-                        font_style: "Body1"
-                        theme_text_color: "Primary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-                    
-                    MDLabel:
-                        text: "Atatürk Orman Çiftliği, Yenimahalle / Ankara"
-                        font_style: "Caption"
-                        theme_text_color: "Secondary"
-                        halign: "left"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-                    
+                
                 
 
 <EventDetailAnkara>:
@@ -241,7 +208,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
                 
         MDTopAppBar:
-            title: "Etkinlikler    "
+            title: "Etkinlikler         "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('social_events_ankara')]]
             md_bg_color: "#5C6BC0"

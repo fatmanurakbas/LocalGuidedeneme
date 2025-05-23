@@ -79,12 +79,14 @@ class FoodPlacesAnkaraScreen(Screen):
             # İsim ve adres
             name_label = MDLabel(
                 text=name,
-                font_style="H6",
+                font_style="Body1",
                 theme_text_color="Primary",
                 halign="left",
                 size_hint_y=None,
                 height=dp(30),
-                padding=(0, dp(5))
+                padding=(dp(12), dp(5)),
+                shorten=True,
+                shorten_from='right'
             )
 
             address_label = MDLabel(
@@ -94,7 +96,9 @@ class FoodPlacesAnkaraScreen(Screen):
                 halign="left",
                 size_hint_y=None,
                 height=dp(24),
-                padding=(dp(12), 0)
+                padding=(dp(12), 0),
+                shorten=True,
+                shorten_from='right'
             )
 
             card.add_widget(image)
@@ -131,7 +135,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Yemek Mekanları"
+            title: "Yemek Mekanları         "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
             md_bg_color: "#5C6BC0"
@@ -254,7 +258,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Yemek Mekanları"
+            title: "Yemek Mekanları         "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('food_places_ankara')]]
             md_bg_color: "#5C6BC0"  # Soft mavi
@@ -296,7 +300,7 @@ Builder.load_string("""
                         MDLabel:
                             id: food_ankara_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -336,9 +340,11 @@ Builder.load_string("""
                     MDSeparator:
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
+                        padding: [dp(11.5), 0, 0, 0]
+                    
 
                         MDIcon:
                             icon: "map-marker"

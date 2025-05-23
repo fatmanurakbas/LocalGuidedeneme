@@ -351,6 +351,7 @@ Builder.load_string("""
                         text_size: self.width, None
                         height: self.texture_size[1]
 
+                    MDSeparator:
 
                     MDBoxLayout:
                         spacing: dp(19)

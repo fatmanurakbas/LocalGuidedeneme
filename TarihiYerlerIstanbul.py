@@ -39,7 +39,7 @@ class TarihiYerlerIstanbulScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
 
-        for tarihi_yer in self.places[2:]:
+        for tarihi_yer in self.places[4:]:
             fsq_id = tarihi_yer.get("fsq_id")
             name = tarihi_yer.get("name", "")
             address = tarihi_yer.get("location", {}).get("formatted_address", "")
@@ -115,9 +115,9 @@ class TarihiYerlerIstanbulScreen(Screen):
         app.show_place_detail(
             photo_url,
             tarihi_yer.get('name', ''),
-            tarihi_yer.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+            tarihi_yer.get('description', '') or 'Mimarisinde saklı hikâyelerle ziyaretçilerini zamanda bir yolculuğa çıkarır.',
             tarihi_yer.get('location', {}).get('formatted_address', '') or 'Bu mekan için adres bulunamadı.',
-            tarihi_yer.get('hours', {}).get('display', 'Çalışma saatleri bilgisi mevcut değil.')
+            tarihi_yer.get('hours', {}).get('display', '09.00 - 22.00')
         )
 
 class TarihiYerDetailScreen(Screen):
@@ -133,7 +133,7 @@ Builder.load_string("""
         md_bg_color:1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler "
+            title: "Tarihi Yerler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -256,7 +256,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler"
+            title: "Tarihi Yerler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('tarihi_yerler_istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -298,7 +298,7 @@ Builder.load_string("""
                         MDLabel:
                             id: tarihi_yer_istanbul_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"

@@ -42,7 +42,7 @@ class TarihiYerlerAnkaraScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
 
-        for tarihi_yer in self.places[1:]:
+        for tarihi_yer in self.places[4:]:
             fsq_id = tarihi_yer.get('fsq_id')
             name = tarihi_yer.get('name', '')
             address = tarihi_yer.get('location', {}).get('formatted_address', '')
@@ -85,7 +85,7 @@ class TarihiYerlerAnkaraScreen(Screen):
                 halign="left",
                 size_hint_y=None,
                 height=dp(30),
-                padding=(0, dp(5)),
+                padding=((12), dp(5)),
                 shorten=True,
                 shorten_from='right'
             )
@@ -138,7 +138,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler Ankara"  # Başlığı burada güncelledik
+            title: "Tarihi Yerler         "  # Başlığı burada güncelledik
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('ankara')]]
             md_bg_color: "#5C6BC0"
@@ -261,7 +261,7 @@ Builder.load_string("""
         md_bg_color: 1,1,1,1
 
         MDTopAppBar:
-            title: "Tarihi Yerler"
+            title: "Tarihi Yerler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('tarihi_yerler_ankara')]]
             md_bg_color: "#5C6BC0"
@@ -303,7 +303,7 @@ Builder.load_string("""
                         MDLabel:
                             id: tarihi_yer_ankara_title
                             text: ""
-                            font_style: "H5"
+                            font_style: "Subtitle1"
                             theme_text_color: "Primary"
                             bold: True
                             halign: "left"
@@ -343,10 +343,11 @@ Builder.load_string("""
                     MDSeparator:
 
                     MDBoxLayout:
-                        spacing: dp(6)
+                        spacing: dp(19)
                         size_hint_y: None
                         height: dp(24)
-
+                        padding: [dp(11.5), 0, 0, 0]
+                    
                         MDIcon:
                             icon: "map-marker"
                             theme_text_color: "Secondary"

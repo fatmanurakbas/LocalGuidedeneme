@@ -42,7 +42,7 @@ class CafelerIstanbulScreen(Screen):
         container = self.ids.place_container
         container.clear_widgets()
 
-        for kafe in self.places:
+        for kafe in self.places[2:]:
             fsq_id = kafe.get('fsq_id')
             name = kafe.get('name', '')
             address = kafe.get('location', {}).get('formatted_address', '')
@@ -118,9 +118,9 @@ class CafelerIstanbulScreen(Screen):
             app.show_cafe_detail_istanbul(
                 photo_url,
                 kafe.get('name', ''),
-                kafe.get('description', '') or 'Detaylı bilgi için mekanı ziyaret edin.',
+                kafe.get('description', '') or 'Tatlı bir kaçamak, güzel sohbetler ve mis gibi kahve burada sizi bekliyor.',
                 kafe.get('location', {}).get('formatted_address', ''),
-                kafe.get('hours', {}).get('display', 'Calisma saatleri bilgisi mevcut degil.')
+                kafe.get('hours', {}).get('display', '09.00 - 23.00')
             )
         else:
             print("Hata: show_cafe_detail_istanbul fonksiyonu uygulama dosyasında tanımlı değil.")
@@ -137,7 +137,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
                     
         MDTopAppBar:
-            title: "Kafeler - İstanbul"
+            title: "Kafeler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('istanbul')]]
             md_bg_color: "#5C6BC0"
@@ -162,7 +162,7 @@ Builder.load_string("""
         md_bg_color: 1, 1, 1, 1
 
         MDTopAppBar:
-            title: "Cafeler - İstanbul"
+            title: "Kafeler          "
             elevation: 5
             left_action_items: [["arrow-left", lambda x: app.go_to('cafeler_istanbul')]]
             md_bg_color: "#5C6BC0"
